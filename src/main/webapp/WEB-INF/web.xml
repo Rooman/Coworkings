@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app>
+    <servlet>
+        <servlet-name>HelloProducts</servlet-name>
+        <servlet-class>com.javastudy.coworkings.web.servlet.HelloServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HelloProducts</servlet-name>
+        <url-pattern>/</url-pattern>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+</web-app>
