@@ -8,11 +8,8 @@ import java.sql.SQLException;
 
 public class UserMapper {
 
-    public User rowMap(ResultSet resultSet) {
+    public User mapRow(ResultSet resultSet) {
         try {
-            //Not sure if we need to separate getting values from ResultSet and assigning
-            //them via builder. If needed, I can refactor like this: setId(resultSet.getLong("id")
-
             Long id = resultSet.getLong("id");
             String username = resultSet.getString("username");
             String password = resultSet.getString("password");
