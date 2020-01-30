@@ -10,7 +10,7 @@ public class User {
     private String fullName;
     private UserRole role;
     // Not Sure if phone number should an int. Maybe it should be string?
-    private int tel;
+    private String tel;
     private String email;
     private String city;
     private String sole;
@@ -58,11 +58,11 @@ public class User {
         this.role = role;
     }
 
-    public int getTel() {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(int tel) {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 
@@ -124,7 +124,7 @@ public class User {
             return this;
         }
 
-        public UserBuilder setTel(int tel) {
+        public UserBuilder setTel(String tel) {
             User.this.tel = tel;
             return this;
         }
