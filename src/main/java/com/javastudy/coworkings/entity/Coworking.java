@@ -2,7 +2,7 @@ package com.javastudy.coworkings.entity;
 
 public class Coworking {
     private long id;
-    private String coworkingName;
+    private String name;
     private String mainImage;
     private String overview;
     private String location;
@@ -31,8 +31,8 @@ public class Coworking {
             return this;
         }
 
-        public CoworkingBuilder setCoworkingName(String coworkingName) {
-            Coworking.this.coworkingName = coworkingName;
+        public CoworkingBuilder setName(String name) {
+            Coworking.this.name = name;
             return this;
         }
 
@@ -117,12 +117,12 @@ public class Coworking {
         this.id = id;
     }
 
-    public String getCoworkingName() {
-        return coworkingName;
+    public String getName() {
+        return name;
     }
 
-    public void setCoworkingName(String coworkingName) {
-        this.coworkingName = coworkingName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getMainImage() {
