@@ -1,15 +1,11 @@
 package com.javastudy.coworkings.entity;
 
-
-// Since Builder was added, do I need to keep setter methods User.class?
-// Or better to remove them?
 public class User {
     private long id;
     private String username;
     private String password;
     private String fullName;
     private UserRole role;
-    // Not Sure if phone number should an int. Maybe it should be string?
     private String tel;
     private String email;
     private String city;

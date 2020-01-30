@@ -30,7 +30,7 @@ class UserMapperTest {
         when(resultSetMock.getString("sole")).thenReturn("testVeryLongSole");
 
         //when
-        User actual = userMapper.rowMap(resultSetMock);
+        User actual = userMapper.mapRow(resultSetMock);
 
         //then
         assertEquals(1L, actual.getId());
