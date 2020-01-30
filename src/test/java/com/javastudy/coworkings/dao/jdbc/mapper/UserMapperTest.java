@@ -24,7 +24,7 @@ class UserMapperTest {
         when(resultSetMock.getString("password")).thenReturn("testPassword");
         when(resultSetMock.getString("fullName")).thenReturn("Name Surname");
         when(resultSetMock.getString("role")).thenReturn("USER");
-        when(resultSetMock.getInt("tel")).thenReturn(95332222);
+        when(resultSetMock.getString("tel")).thenReturn("095332222");
         when(resultSetMock.getString("email")).thenReturn("email@mailbox.net");
         when(resultSetMock.getString("city")).thenReturn("Kyiv");
         when(resultSetMock.getString("sole")).thenReturn("testVeryLongSole");
@@ -38,7 +38,7 @@ class UserMapperTest {
         assertEquals("testPassword", actual.getPassword());
         assertEquals("Name Surname", actual.getFullName());
         assertEquals(UserRole.USER, actual.getRole());
-        assertEquals(95332222, actual.getTel());
+        assertEquals("095332222", actual.getTel());
         assertEquals("email@mailbox.net", actual.getEmail());
         assertEquals("Kyiv", actual.getCity());
         assertEquals("testVeryLongSole", actual.getSole());

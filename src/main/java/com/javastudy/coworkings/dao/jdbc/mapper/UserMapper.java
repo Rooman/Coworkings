@@ -18,7 +18,7 @@ public class UserMapper {
             String password = resultSet.getString("password");
             String fullName = resultSet.getString("fullName");
             UserRole userRole = UserRole.getByName(resultSet.getString("role"));
-            int tel = resultSet.getInt("tel");
+            String tel = resultSet.getString("tel");
             String email = resultSet.getString("email");
             String city = resultSet.getString("city");
             String sole = resultSet.getString("sole");
