@@ -28,7 +28,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
     @Override
     public Coworking getById(long id) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_COWORKINGS_BY_NAME)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_COWORKING_BY_ID)) {
             preparedStatement.setLong(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (!resultSet.next()) {
@@ -48,7 +48,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
     @Override
     public List<Coworking> searchByName(String name) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(GET_COWORKING_BY_ID)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_COWORKINGS_BY_NAME)) {
             List<Coworking> listOfCoworkings = new ArrayList<>();
             preparedStatement.setString(1, "%" + name + "%");
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
