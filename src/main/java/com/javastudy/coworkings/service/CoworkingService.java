@@ -1,11 +1,9 @@
-package com.javastudy.coworkings.dao;
+package com.javastudy.coworkings.service;
 
 import com.javastudy.coworkings.entity.Coworking;
 
 import java.util.List;
 
-public interface CoworkingDao {
-    public Coworking getById(long id);
-
+public interface CoworkingService {
     public List<Coworking> searchByName(String name);
 }
