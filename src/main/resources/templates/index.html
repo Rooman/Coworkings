@@ -1,26 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Istok+Web:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
   <title>Coworking</title>
 </head>
 <body>
-  <div class="container">
     <div class="home-bg-img">
       <nav class="navbar navbar-block navbar-expand-lg navbar-light ">
         <a class="navbar-brand" href="#"> <img src="img/logo.png" alt=""> </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav menu-align">
             <li class="nav-item nav-item-align">
-              <a class="nav-link link-menu" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link link-menu" href="#">home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item nav-item-align dropdown">
               <a class="nav-link link-menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Cities
+                cities
               </a>
               <div class="dropdown-menu dropdown-wrapper transparent" aria-labelledby="navbarDropdown">
                 <div class="dropdown-menu-item dropdown-city"><a class="nav-link link-dropdown" href="#">Kyiv</a></div>
@@ -29,46 +25,39 @@
               </div>
             </li>
             <li class="nav-item nav-item-align">
-              <a class="nav-link link-menu disabled" href="#" tabindex="-1" aria-disabled="true">Login</a>
+              <a class="nav-link link-menu" href="#" tabindex="-1" aria-disabled="true">login</a>
             </li>
           </ul>
-        </div>
       </nav>
 
       <div class="home-search">
-        <h1>A new look at the workspace</h1>
-        <p>If you already have an established business, or you have just begun to develop your project,
-          discover work spaces that can inspire your employees to work fruitfully.</p>
-        <div class="input-group mb-3">
-          <p class="find-text">Find workspace</p>
-          <div class="search-input-block">
-            <input type="search" class="form-control search-input" placeholder="&#xf002;Type name">
-          </div>
-          <div class="search-button-block">
+        <div class="search-title">A new look at the workspace</div>
+        <div class="search-paragraph">If you already have an established business, or you have just begun to develop your project,
+          discover work spaces that can inspire your employees to work fruitfully.</div>
+        <form>
+          <fieldset>
+            <legend class="search-legend">Find workspace</legend>
+            <input type="search" class="form-control search-input search-input-block" placeholder="&#xf002;Type name">
+            <div class="search-button-block">
             <button class="btn button" type="button" id="button-addon2">Search</button>
           </div>
-        </div>
+        </fieldset>
+        </form>
       </div>
     </div>
   <main>
     <div class="cities">
-      <div class="cities-item">
-        <h1>Kyiv</h1>
-      </div>
-      <div class="cities-item">
-        <h1>Dnipro</h1>
-      </div>
-      <div class="cities-item">
-        <h1>Lviv</h1>
-      </div>
+      <img class="cities-item" src="img/Kyiv.jpg" alt="">
+      <img class="cities-item" src="img/Dnipro.jpg" alt="">
+      <img class="cities-item" src="img/Lviv.jpg" alt="">
     </div>
 
     <div class="top-coworkings">
-      <h3 class="highest-rated">highest <span class="rated-word-color">rated</span></h3>
-      <div class="top-coworkings-row">
+      <div class="highest-rated">highest <span class="rated-word-color">rated</span></div>
+      <div class="top-coworkings-items">
         <div class="top-coworkings-item">
           <div class="top-coworking-img-item">
-            <p class="top-coworkings-price">uah 150/day</p>
+            <p class="top-coworkings-price">UAH 150/day</p>
             <img class="top-coworkings-img" src="img/coworking-img.png" alt="">
           </div>
           <div class="top-coworkings-overview">
@@ -85,7 +74,7 @@
 
         <div class="top-coworkings-item">
           <div class="top-coworking-img-item">
-            <p class="top-coworkings-price">uah 150/day</p>
+            <p class="top-coworkings-price">UAH 150/day</p>
             <img class="top-coworkings-img" src="img/coworking-img.png" alt="">
           </div>
           <div class="top-coworkings-overview">
@@ -102,7 +91,7 @@
 
         <div class="top-coworkings-item">
           <div class="top-coworking-img-item">
-            <p class="top-coworkings-price">uah 150/day</p>
+            <p class="top-coworkings-price">UAH 150/day</p>
             <img class="top-coworkings-img" src="img/coworking-img.png" alt="">
           </div>
           <div class="top-coworkings-overview">
@@ -119,7 +108,7 @@
 
         <div class="top-coworkings-item">
           <div class="top-coworking-img-item">
-            <p class="top-coworkings-price">uah 150/day</p>
+            <p class="top-coworkings-price">UAH 150/day</p>
             <img class="top-coworkings-img" src="img/coworking-img.png" alt="">
           </div>
           <div class="top-coworkings-overview">
@@ -135,29 +124,12 @@
         </div>
 
 
-      </div>
 
-      <div class="top-coworkings-row">
-        <div class="top-coworkings-item">
-          <div class="top-coworking-img-item">
-            <p class="top-coworkings-price">uah 150/day</p>
-            <img class="top-coworkings-img" src="img/coworking-img.png" alt="">
-          </div>
-          <div class="top-coworkings-overview">
-            <p class="top-coworkings-name">Ronda Coworking-<br> Recoleta</p>
-            <p class="top-coworkings-adress"><i class="fas fa-map-marker-alt"></i> 54 Petliury, Kyiv</p>
-            <p class="top-coworkings-reviews"><i class="fas fa-star star-color"></i>
-              <i class="fas fa-star star-color"></i>
-              <i class="fas fa-star star-color"></i>
-              <i class="fas fa-star star-color"></i>
-              <i class="fas fa-star star-color"></i> 156 Reviews</p>
-            <p class="top-coworkings-verify"><i class="far fa-check-circle"></i> Verify</p>
-          </div>
-        </div>
+
 
         <div class="top-coworkings-item">
           <div class="top-coworking-img-item">
-            <p class="top-coworkings-price">uah 150/day</p>
+            <p class="top-coworkings-price">UAH 150/day</p>
             <img class="top-coworkings-img" src="img/coworking-img.png" alt="">
           </div>
           <div class="top-coworkings-overview">
@@ -174,7 +146,7 @@
 
         <div class="top-coworkings-item">
           <div class="top-coworking-img-item">
-            <p class="top-coworkings-price">uah 150/day</p>
+            <p class="top-coworkings-price">UAH 150/day</p>
             <img class="top-coworkings-img" src="img/coworking-img.png" alt="">
           </div>
           <div class="top-coworkings-overview">
@@ -191,7 +163,24 @@
 
         <div class="top-coworkings-item">
           <div class="top-coworking-img-item">
-            <p class="top-coworkings-price">uah 150/day</p>
+            <p class="top-coworkings-price">UAH 150/day</p>
+            <img class="top-coworkings-img" src="img/coworking-img.png" alt="">
+          </div>
+          <div class="top-coworkings-overview">
+            <p class="top-coworkings-name">Ronda Coworking-<br> Recoleta</p>
+            <p class="top-coworkings-adress"><i class="fas fa-map-marker-alt"></i> 54 Petliury, Kyiv</p>
+            <p class="top-coworkings-reviews"><i class="fas fa-star star-color"></i>
+              <i class="fas fa-star star-color"></i>
+              <i class="fas fa-star star-color"></i>
+              <i class="fas fa-star star-color"></i>
+              <i class="fas fa-star star-color"></i> 156 Reviews</p>
+            <p class="top-coworkings-verify"><i class="far fa-check-circle"></i> Verify</p>
+          </div>
+        </div>
+
+        <div class="top-coworkings-item">
+          <div class="top-coworking-img-item">
+            <p class="top-coworkings-price">UAH 150/day</p>
             <img class="top-coworkings-img" src="img/coworking-img.png" alt="">
           </div>
           <div class="top-coworkings-overview">
@@ -207,7 +196,7 @@
         </div>
 
 
-      </div>
+
 
 
     </div>
@@ -217,7 +206,7 @@
   <footer class="footer">
 
   </footer>
-    </div>
+
   <script src="https://kit.fontawesome.com/5d1afe754b.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
