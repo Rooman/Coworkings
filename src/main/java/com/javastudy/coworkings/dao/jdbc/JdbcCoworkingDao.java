@@ -1,22 +1,36 @@
 package com.javastudy.coworkings.dao.jdbc;
 
-import com.javastudy.coworkings.ServiceLocator;
 import com.javastudy.coworkings.dao.CoworkingDao;
 import com.javastudy.coworkings.dao.jdbc.mapper.CoworkingRowMapper;
 import com.javastudy.coworkings.entity.Coworking;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JdbcCoworkingDao implements CoworkingDao {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private DataSource dataSource;
+
+    public JdbcCoworkingDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     private static final String GET_COWORKING_BY_ID = "SELECT id, name, mainimage, overview," +
-            "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours" +
-            "containsdesk, containsoffice, containsmeetingroom FROM Coworcings WHERE id=?;";
+            "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
+            "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE id=?;";
+
+    private static final String SEARCH_COWORKINGS_BY_NAME = "SELECT id, name, mainimage, overview," +
+            "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
+            "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE lower(name) like lower(?);";
+
     private CoworkingRowMapper coworkingRowMapper = new CoworkingRowMapper();
-    private DataSource dataSource = ServiceLocator.getService(DataSource.class);
 
     @Override
     public Coworking getById(long id) {
@@ -35,6 +49,31 @@ public class JdbcCoworkingDao implements CoworkingDao {
             }
         } catch (SQLException e) {
             throw new RuntimeException("Coworking with id: " + id + "isn't found", e);
+        }
+    }
+
+    @Override
+    public List<Coworking> searchByName(String name) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_COWORKINGS_BY_NAME)) {
+            List<Coworking> listOfCoworkings = new ArrayList<>();
+            preparedStatement.setString(1, "%" + name + "%");
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
+                while (resultSet.next()) {
+                    Coworking coworking = coworkingRowMapper.rowMap(resultSet);
+                    listOfCoworkings.add(coworking);
+                }
+                if (listOfCoworkings.size() == 0) {
+                    logger.warn("No co-workings are found by following name of part of name \"{}\"", name);
+                } else {
+                    logger.info("{} coworkings were found by name of part of name \"{}\"", listOfCoworkings.size(), name);
+                }
+                return listOfCoworkings;
+            }
+        } catch (SQLException e) {
+            logger.error("Error occurred during SQL: {}", SEARCH_COWORKINGS_BY_NAME);
+            throw new RuntimeException("Connection to database is not available . It is not possible to search users by name" + name, e);
         }
     }
 }
