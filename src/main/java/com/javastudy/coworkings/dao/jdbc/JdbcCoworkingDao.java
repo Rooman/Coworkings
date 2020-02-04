@@ -16,6 +16,7 @@ import java.util.List;
 
 public class JdbcCoworkingDao implements CoworkingDao {
     private final Logger logger = LoggerFactory.getLogger(getClass());
+    private CoworkingRowMapper coworkingRowMapper = new CoworkingRowMapper();
     private DataSource dataSource;
 
     public JdbcCoworkingDao(DataSource dataSource) {
@@ -25,12 +26,14 @@ public class JdbcCoworkingDao implements CoworkingDao {
     private static final String GET_COWORKING_BY_ID = "SELECT id, name, mainimage, overview," +
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
             "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE id=?;";
+            
+    private static final String GET_TOP_EIGHT = "SELECT id, name, mainimage, overview, location, reviewscount, " +
+            "city, dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, " +
+            "containsmeetingroom FROM coworkings ORDER BY rating DESC FETCH FIRST 8 ROWS ONLY;";
 
     private static final String SEARCH_COWORKINGS_BY_NAME = "SELECT id, name, mainimage, overview," +
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
             "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE lower(name) like lower(?);";
-
-    private CoworkingRowMapper coworkingRowMapper = new CoworkingRowMapper();
 
     @Override
     public Coworking getById(long id) {
@@ -52,7 +55,26 @@ public class JdbcCoworkingDao implements CoworkingDao {
         }
     }
 
-    @Override
+    public List<Coworking> getTopEight() {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_TOP_EIGHT)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (!resultSet.next()) {
+                    logger.info("Error happened while getting top-rated Coworkings. Do not have expected data in the ResultSet.");
+                }
+
+                List<Coworking> topEight = new ArrayList<>();
+
+                while (resultSet.next()) {
+                    Coworking coworking = coworkingRowMapper.rowMap(resultSet);
+                    topEight.add(coworking);
+                }
+                return topEight;
+            }
+        } catch (SQLException e) {
+            logger.error("Error occured while connecting to DB with this query: {}", GET_TOP_EIGHT);
+            throw new RuntimeException("Error happened while getting eight top-rated Coworkings: " + e);
+          
     public List<Coworking> searchByName(String name) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_COWORKINGS_BY_NAME)) {

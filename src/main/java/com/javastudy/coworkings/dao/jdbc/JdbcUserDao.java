@@ -29,7 +29,7 @@ public class JdbcUserDao implements UserDao {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (!resultSet.next()) {
-                    return null;
+                    throw new RuntimeException("Error happened while tried to get User with id: " + id);
                 }
 
                 User user = USER_MAPPER.mapRow(resultSet);
