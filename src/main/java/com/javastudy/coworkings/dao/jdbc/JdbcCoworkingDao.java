@@ -12,8 +12,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class JdbcCoworkingDao implements CoworkingDao {
+    private static final Logger logger = Logger.getLogger(JdbcCoworkingDao.class.getName());
+
     private static final String GET_COWORKING_BY_ID = "SELECT id, name, mainimage, overview," +
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours" +
             "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE id=?;";
@@ -50,7 +53,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
              PreparedStatement statement = connection.prepareStatement(GET_TOP_EIGHT)) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (!resultSet.next()) {
-                    throw new RuntimeException("Error happened while getting eight top-rated Coworkings");
+                    logger.info("Error happened while getting top-rated Coworkings. Do not have expected data in the ResultSet.");
                 }
 
                 List<Coworking> topEight = new ArrayList<>();
@@ -62,7 +65,11 @@ public class JdbcCoworkingDao implements CoworkingDao {
                 return topEight;
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error happened while tried to get eight top-rated Coworkings;");
+            logger.info("Error happened while getting eight top-rated Coworkings: " + e);
+
+            // If I don't throw an exception here, idea warns error about not having return statement here.
+            // Should I return null, for example?
+            throw new RuntimeException("Error happened while getting eight top-rated Coworkings: " + e);
         }
     }
 }
