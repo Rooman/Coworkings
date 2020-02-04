@@ -10,7 +10,6 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
-
     <!--<filter>
         <filter-name>UserRoleFilter</filter-name>
         <filter-class>com.nomarch.onlineshop.web.filter.UserSecurityFilter</filter-class>

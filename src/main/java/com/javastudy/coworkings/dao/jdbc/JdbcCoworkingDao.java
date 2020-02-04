@@ -54,15 +54,10 @@ public class JdbcCoworkingDao implements CoworkingDao {
                 }
 
                 List<Coworking> topEight = new ArrayList<>();
-                int i = 0;
 
                 while (resultSet.next()) {
                     Coworking coworking = coworkingRowMapper.rowMap(resultSet);
                     topEight.add(coworking);
-                    i++;
-                    if (i >= 8) {
-                        throw new RuntimeException("Found more than eight results of top-rated Coworkings, error happened;");
-                    }
                 }
                 return topEight;
             }
