@@ -4,6 +4,8 @@ import com.javastudy.coworkings.ServiceLocator;
 import com.javastudy.coworkings.dao.CoworkingDao;
 import com.javastudy.coworkings.dao.jdbc.mapper.CoworkingRowMapper;
 import com.javastudy.coworkings.entity.Coworking;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -24,6 +26,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
 
     private CoworkingRowMapper coworkingRowMapper = new CoworkingRowMapper();
     private DataSource dataSource = ServiceLocator.getService(ConnectionFactory.class);
+    private final static Logger logger = LoggerFactory.getLogger(JdbcCoworkingDao.class);
 
     @Override
     public Coworking getById(long id) {
@@ -57,14 +60,15 @@ public class JdbcCoworkingDao implements CoworkingDao {
                     Coworking coworking = coworkingRowMapper.rowMap(resultSet);
                     listOfCoworkings.add(coworking);
                 }
-                //change to logging todo
                 if (listOfCoworkings.size() == 0) {
-                    throw new RuntimeException("No co-workings are found by following name of part of name: " + name);
+                    logger.warn("No co-workings are found by following name of part of name \"{}\"", name);
+                } else {
+                    logger.info("{} coworkings were found by name of part of name \"{}\"", listOfCoworkings.size(), name);
                 }
                 return listOfCoworkings;
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Connection to database is not available . It is not possible to search users by name " + name, e);
+            throw new RuntimeException("Connection to database is not available . It is not possible to search users by name" + name, e);
         }
     }
 }
