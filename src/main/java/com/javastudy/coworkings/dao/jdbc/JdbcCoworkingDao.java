@@ -72,7 +72,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
                 return topEight;
             }
         } catch (SQLException e) {
-            logger.error("Error occured while connecting to DB with this query: {}" + GET_TOP_EIGHT);
+            logger.error("Error occured while connecting to DB with this query: {}", GET_TOP_EIGHT);
             throw new RuntimeException("Error happened while getting eight top-rated Coworkings: " + e);
           
     public List<Coworking> searchByName(String name) {
