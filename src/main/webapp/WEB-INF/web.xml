@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <web-app>
+    <listener>
+        <listener-class>com.javastudy.coworkings.listener.ThymeleafInitializerListener</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>com.javastudy.coworkings.web.servlet.security.LoginServlet</servlet-class>
