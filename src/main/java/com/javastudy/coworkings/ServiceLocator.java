@@ -4,6 +4,7 @@ import com.javastudy.coworkings.dao.CoworkingDao;
 import com.javastudy.coworkings.dao.jdbc.ConnectionFactory;
 import com.javastudy.coworkings.dao.jdbc.JdbcCoworkingDao;
 import com.javastudy.coworkings.util.PropertyReader;
+import org.apache.commons.dbcp.BasicDataSource;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -14,14 +15,11 @@ public class ServiceLocator {
     private static final Map<Class<?>, Object> SERVICES = new HashMap<>();
 
     static {
-
         PropertyReader propertyReader = new PropertyReader("src/main/resources/application.properties");
         Properties applicationProperties = propertyReader.getProperties();
-        DataSource myDataSource = new ConnectionFactory(applicationProperties);
-        register(myDataSource.getClass(), myDataSource);
+        DataSource myDataSource = ConnectionFactory.getDataSource(applicationProperties);
 
-
-        CoworkingDao coworkingDao = new JdbcCoworkingDao();
+        CoworkingDao coworkingDao = new JdbcCoworkingDao(myDataSource);
         register(coworkingDao.getClass(), coworkingDao);
     }
     public static void register(Class<?> serviceClass, Object service){
