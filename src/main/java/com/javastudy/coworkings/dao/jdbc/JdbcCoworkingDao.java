@@ -15,15 +15,15 @@ import java.util.List;
 
 public class JdbcCoworkingDao implements CoworkingDao {
     private static final String GET_COWORKING_BY_ID = "SELECT id, name, mainimage, overview," +
-            "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours" +
+            "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
             "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE id=?;";
 
     private static final String SEARCH_COWORKINGS_BY_NAME = "SELECT id, name, mainimage, overview," +
-            "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours" +
+            "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
             "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE lower(name) like lower(?);";
 
     private CoworkingRowMapper coworkingRowMapper = new CoworkingRowMapper();
-    private DataSource dataSource = ServiceLocator.getService(DataSource.class);
+    private DataSource dataSource = ServiceLocator.getService(ConnectionFactory.class);
 
     @Override
     public Coworking getById(long id) {
@@ -52,12 +52,14 @@ public class JdbcCoworkingDao implements CoworkingDao {
             List<Coworking> listOfCoworkings = new ArrayList<>();
             preparedStatement.setString(1, "%" + name + "%");
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (!resultSet.next()) {
-                    throw new RuntimeException("No co-workings are found by following name of part of name: " + name);
-                }
+
                 while (resultSet.next()) {
                     Coworking coworking = coworkingRowMapper.rowMap(resultSet);
                     listOfCoworkings.add(coworking);
+                }
+                //change to logging todo
+                if (listOfCoworkings.size() == 0) {
+                    throw new RuntimeException("No co-workings are found by following name of part of name: " + name);
                 }
                 return listOfCoworkings;
             }
