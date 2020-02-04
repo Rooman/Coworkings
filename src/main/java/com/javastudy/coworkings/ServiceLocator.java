@@ -6,7 +6,6 @@ import com.javastudy.coworkings.dao.jdbc.JdbcCoworkingDao;
 import com.javastudy.coworkings.util.PropertyReader;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
