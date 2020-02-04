@@ -8,4 +8,6 @@ public interface CoworkingDao {
     public Coworking getById(long id);
 
     public List<Coworking> getTopEight();
+  
+    public List<Coworking> searchByName(String name);
 }

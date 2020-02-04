@@ -8,4 +8,6 @@ public interface CoworkingService {
     public Coworking getById(long id);
 
     public List<Coworking> getTopEight();
+  
+    public List<Coworking> searchByName(String name);
 }
