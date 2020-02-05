@@ -9,17 +9,15 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 
 import static com.javastudy.coworkings.util.DataSourceLoader.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class JdbcUserDaoTest {
-
-    private UserDao userDao = new JdbcUserDao(getDataSource());
+    private UserDao userDao = ServiceLocator.getService(UserDao.class);
 
     @BeforeAll
     static void before() throws IOException, URISyntaxException {

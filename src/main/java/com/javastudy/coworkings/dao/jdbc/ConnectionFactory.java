@@ -2,10 +2,11 @@ package com.javastudy.coworkings.dao.jdbc;
 
 import org.apache.commons.dbcp.BasicDataSource;
 
+import javax.sql.DataSource;
 import java.util.Properties;
 
 public class ConnectionFactory {
-    public static BasicDataSource getDataSource(Properties properties) {
+    public static DataSource getDataSource(Properties properties) {
         String url = properties.getProperty("jdbc.url");
         String user = properties.getProperty("jdbc.user");
         String password = properties.getProperty("jdbc.password");
