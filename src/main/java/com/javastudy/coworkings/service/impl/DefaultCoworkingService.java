@@ -12,6 +12,7 @@ public class DefaultCoworkingService implements CoworkingService {
     public DefaultCoworkingService(CoworkingDao coworkingDao) {
         this.coworkingDao = coworkingDao;
     }
+  
     @Override
     public Coworking getById(long id) {
         return coworkingDao.getById(id);
@@ -20,5 +21,10 @@ public class DefaultCoworkingService implements CoworkingService {
     @Override
     public List<Coworking> getTopEight() {
         return coworkingDao.getTopEight();
+    }
+  
+    @Override
+    public List<Coworking> searchByName(String name) {
+        return coworkingDao.searchByName(name);
     }
 }
