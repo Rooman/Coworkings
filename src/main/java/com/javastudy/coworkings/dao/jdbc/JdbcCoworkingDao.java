@@ -4,6 +4,8 @@ import com.javastudy.coworkings.ServiceLocator;
 import com.javastudy.coworkings.dao.CoworkingDao;
 import com.javastudy.coworkings.dao.jdbc.mapper.CoworkingRowMapper;
 import com.javastudy.coworkings.entity.Coworking;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -12,10 +14,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class JdbcCoworkingDao implements CoworkingDao {
-    private static final Logger logger = Logger.getLogger(JdbcCoworkingDao.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(JdbcCoworkingDao.class.getName());
 
     private static final String GET_COWORKING_BY_ID = "SELECT id, name, mainimage, overview," +
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours" +
@@ -65,10 +66,8 @@ public class JdbcCoworkingDao implements CoworkingDao {
                 return topEight;
             }
         } catch (SQLException e) {
-            logger.info("Error happened while getting eight top-rated Coworkings: " + e);
+            logger.error("Error happened while trying to get data from DB with this query: ", GET_TOP_EIGHT);
 
-            // If I don't throw an exception here, idea warns error about not having return statement here.
-            // Should I return null, for example?
             throw new RuntimeException("Error happened while getting eight top-rated Coworkings: " + e);
         }
     }
