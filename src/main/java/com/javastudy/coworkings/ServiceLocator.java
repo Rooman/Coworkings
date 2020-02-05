@@ -1,8 +1,12 @@
 package com.javastudy.coworkings;
 
 import com.javastudy.coworkings.dao.CoworkingDao;
+import com.javastudy.coworkings.dao.UserDao;
 import com.javastudy.coworkings.dao.jdbc.ConnectionFactory;
 import com.javastudy.coworkings.dao.jdbc.JdbcCoworkingDao;
+import com.javastudy.coworkings.dao.jdbc.JdbcUserDao;
+import com.javastudy.coworkings.security.DefaultSecurityService;
+import com.javastudy.coworkings.security.SecurityService;
 import com.javastudy.coworkings.util.PropertyReader;
 
 import javax.sql.DataSource;
@@ -21,6 +25,12 @@ public class ServiceLocator {
 
         CoworkingDao coworkingDao = new JdbcCoworkingDao(myDataSource);
         register(coworkingDao.getClass(), coworkingDao);
+
+        UserDao userDao = new JdbcUserDao(myDataSource);
+        register(userDao.getClass(), userDao);
+
+        SecurityService securityService = new DefaultSecurityService();
+        register(securityService.getClass(), securityService);
     }
 
     public static void register(Class<?> serviceClass, Object service) {

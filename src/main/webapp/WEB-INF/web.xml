@@ -14,26 +14,25 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
-    <!--<filter>
-        <filter-name>UserRoleFilter</filter-name>
-        <filter-class>com.nomarch.onlineshop.web.filter.UserSecurityFilter</filter-class>
+    <filter>
+        <filter-name>GuestRoleFilter</filter-name>
+        <filter-class>com.javastudy.coworkings.web.filter.GuestSecurityFilter</filter-class>
     </filter>
     <filter>
-        <filter-name>AdminRoleFilter</filter-name>
-        <filter-class>com.nomarch.onlineshop.web.filter.AdminSecurityFilter</filter-class>
+        <filter-name>UserRoleFilter</filter-name>
+        <filter-class>com.javastudy.coworkings.web.filter.UserSecurityFilter</filter-class>
     </filter>
 
     <filter-mapping>
-        <filter-name>UserRoleFilter</filter-name>
+        <filter-name>GuestRoleFilter</filter-name>
         <url-pattern>/</url-pattern>
-        <url-pattern>/products/*</url-pattern>
-        <url-pattern>/product</url-pattern>
-        <url-pattern>/access_denied</url-pattern>
+        <url-pattern>/login</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter-mapping>
-        <filter-name>AdminRoleFilter</filter-name>
-        <url-pattern>/admin/*</url-pattern>
+        <filter-name>UserRoleFilter</filter-name>
+        <url-pattern>/</url-pattern>
+        <url-pattern>/login</url-pattern>
         <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>-->
+    </filter-mapping>
 </web-app>
