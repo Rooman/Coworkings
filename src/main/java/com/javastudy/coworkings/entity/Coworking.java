@@ -1,5 +1,15 @@
 package com.javastudy.coworkings.entity;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Coworking {
     private long id;
     private String name;
@@ -17,7 +27,7 @@ public class Coworking {
     private boolean containsOffice;
     private boolean containsMeetingRoom;
 
-    private Coworking(){}
+    /*private Coworking(){}
 
     public static CoworkingBuilder newCoworkingBuilder() {
         return new Coworking().new CoworkingBuilder();
@@ -227,5 +237,5 @@ public class Coworking {
 
     public void setContainsMeetingRoom(boolean containsMeetingRoom) {
         this.containsMeetingRoom = containsMeetingRoom;
-    }
+    }*/
 }

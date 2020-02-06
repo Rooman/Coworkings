@@ -1,17 +1,27 @@
 package com.javastudy.coworkings.entity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class User {
     private long id;
     private String username;
     private String password;
     private String fullName;
-    private UserRole role;
+    private UserRole userRole;
     private String tel;
     private String email;
     private String city;
     private String sole;
 
-    private User() {
+    /*private User() {
     }
 
     public long getId() {
@@ -79,8 +89,8 @@ public class User {
             return this;
         }
 
-        public UserBuilder setRole(UserRole role) {
-            User.this.role = role;
+        public UserBuilder setUserRole(UserRole userRole) {
+            User.this.userRole = userRole;
             return this;
         }
 
@@ -107,5 +117,5 @@ public class User {
         public User build() {
             return User.this;
         }
-    }
+    }*/
 }
