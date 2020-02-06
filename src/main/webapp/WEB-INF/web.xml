@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>com.javastudy.coworkings.web.servlet.security.LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <!--<filter>
+        <filter-name>UserRoleFilter</filter-name>
+        <filter-class>com.nomarch.onlineshop.web.filter.UserSecurityFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AdminRoleFilter</filter-name>
+        <filter-class>com.nomarch.onlineshop.web.filter.AdminSecurityFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>UserRoleFilter</filter-name>
+        <url-pattern>/</url-pattern>
+        <url-pattern>/products/*</url-pattern>
+        <url-pattern>/product</url-pattern>
+        <url-pattern>/access_denied</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminRoleFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>-->
+</web-app>
