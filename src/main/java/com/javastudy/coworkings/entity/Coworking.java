@@ -1,15 +1,10 @@
 package com.javastudy.coworkings.entity;
 
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-@Getter
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
+@Setter(AccessLevel.NONE)
 public class Coworking {
     private long id;
     private String name;

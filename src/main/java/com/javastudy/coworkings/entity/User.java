@@ -1,14 +1,10 @@
 package com.javastudy.coworkings.entity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
+import lombok.*;
 
-@Getter
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
+@Setter(AccessLevel.NONE)
 public class User {
     private long id;
     private String username;
