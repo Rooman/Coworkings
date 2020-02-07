@@ -1,0 +1,98 @@
+body {
+    font-family: Istok Web, sans-serif;
+}
+
+.header {
+    height: 882px;
+    background-image: url("../img/home-bg-img.jpg");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+.navbar-block {
+    height: 155px;
+    background: rgba(235, 87, 87, 0.8);
+}
+
+.menu {
+    margin: 0 0 0 auto;
+}
+
+.link-menu:hover {
+    color: white;
+}
+
+.link-menu {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: white;
+}
+
+.dropdown-wrapper {
+    background-color: transparent;
+    left: -24%;
+    text-align: center;
+    border: 0;
+    top: 70%;
+}
+
+.dropdown-city {
+    background-color: white;
+    margin: 5px 0 2px 0;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: capitalize;
+    width: 90px;
+    color: #000000;
+}
+
+.link-dropdown {
+    color: #000000;
+}
+
+.link-dropdown:hover {
+    color: #fff;
+    background-color: rgba(235, 87, 87, 0.8);;
+}
+
+.sign-up {
+    margin-right: 100px;
+}
+
+.sign-up-button {
+    width: 100px;
+    height: 40px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #EB5757;
+}
+
+.menu-item {
+    margin-right: 56px;
+}
+
+.navbar-brand {
+    margin-left: 32px;
+}
+
+
+nav.navbar .dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.footer {
+    height: 186px;
+    line-height: 186px;
+    background: #EB5757;
+    text-align: center;
+    color: #fff;
+}

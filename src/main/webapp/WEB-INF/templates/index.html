@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Istok+Web:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/common.css">
+    <link rel="stylesheet" href="/assets/css/home.css">
+    <title>Coworking</title>
+</head>
+<body>
+<header class="header">
+    <nav class="navbar navbar-block navbar-expand-lg">
+        <a class="navbar-brand" href="#"> <img src="/assets/img/logo.png" alt=""> </a>
+        <ul class="navbar-nav menu">
+            <li class="nav-item menu-item">
+                <a class="nav-link link-menu" href="#">home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item menu-item dropdown">
+                <a class="nav-link link-menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    cities
+                </a>
+                <div class="dropdown-menu dropdown-wrapper transparent" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu-item dropdown-city"><a class="nav-link link-dropdown" href="#">Kyiv</a>
+                    </div>
+                    <div class="dropdown-menu-item dropdown-city"><a class="nav-link link-dropdown" href="#">Dnipro</a>
+                    </div>
+                    <div class="dropdown-menu-item dropdown-city"><a class="nav-link link-dropdown" href="#">Lviv</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item menu-item">
+                <a class="nav-link link-menu" href="#" tabindex="-1" aria-disabled="true">login</a>
+            </li>
+        </ul>
+        <!--  TODO: This should be link <a> to the page, not a button   -->
+        <div class="sign-up">
+            <button class="btn sign-up-button" type="button">sign up</button>
+        </div>
+    </nav>
+
+    <section class="home-search">
+        <div class="search-title">A new look at the workspace</div>
+        <div class="search-paragraph">If you already have an established business, or you have just begun to develop
+            your project,
+            discover work spaces that can inspire your employees to work fruitfully.
+        </div>
+        <form class="search-form">
+            <fieldset class="search-fieldset">
+                <label class="search-label">Find workspace</label>
+                <input type="search" class="search-input" placeholder="&#xf002; Type name">
+                <button class="btn search-button" type="button">Search</button>
+            </fieldset>
+        </form>
+
+
+    </section>
+</header>
+<main>
+    <section class="cities">
+        <img class="cities-item" src="/assets/img/Kyiv.jpg" alt="">
+        <img class="cities-item" src="/assets/img/Dnipro.jpg" alt="">
+        <img class="cities-item" src="/assets/img/Lviv.jpg" alt="">
+    </section>
+
+    <section class="top-coworkings">
+        <div class="top-coworkings-title">highest <span>rated</span></div>
+        <div class="top-coworkings-items">
+            <!--/*@thymesVar id="coworking" type="com.javastudy.coworkings.entity.Coworking"*/-->
+            <div class="top-coworkings-item" th:each="coworking : ${coworkings}">
+                <div class="top-coworking-img-item">
+                    <div class="top-coworkings-price" th:text="'UAH ' + ${coworking.getDayPrice()}+'/day'">UAH 150/day</div>
+                    <img class="top-coworkings-img" src="/assets/img/coworking-img.png"
+                         th:src="${coworking.getMainImage() != null ? coworking.getMainImage() : '/assets/img/coworking-img.png' }"
+                         alt="Пiздець всiм сподiванням :(">
+                </div>
+                <div class="top-coworkings-overview">
+                    <p class="top-coworkings-name" th:text="${coworking.getName()}">ronda coworking-<br> recoleta</p>
+                    <p class="top-coworkings-adress"><i class="fas fa-map-marker-alt"></i><span
+                            th:text="${coworking.getLocation()}">54 Petliury, Kyiv</span></p>
+                    <p class="top-coworkings-reviews"><i class="fas fa-star star-color"></i>
+                        <i class="fas fa-star star-color"></i>
+                        <i class="fas fa-star star-color"></i>
+                        <i class="fas fa-star star-color"></i>
+                        <i class="fas fa-star star-color"></i> <span th:text="${coworking.getReviewsCount()}">150</span>
+                        Reviews</p>
+                    <p class="top-coworkings-verify"><i class="far fa-check-circle"></i> Verify</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    Колись порядок був нахуй, не те шо сейчас!..
+</footer>
+
+<script src="https://kit.fontawesome.com/5d1afe754b.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>

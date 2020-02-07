@@ -20,9 +20,11 @@ public class JdbcCoworkingDao implements CoworkingDao {
     private static final String GET_COWORKING_BY_ID = "SELECT id, name, mainimage, overview," +
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
             "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE id=?;";
+
     private static final String GET_TOP_EIGHT = "SELECT id, name, mainimage, overview, location, reviewscount, " +
             "city, dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, " +
-            "containsmeetingroom FROM coworkings ORDER BY rating DESC FETCH FIRST 8 ROWS ONLY;";
+            "containsmeetingroom FROM coworkings ORDER BY rating DESC FETCH FIRST ? ROWS ONLY;";
+
     private static final String SEARCH_COWORKINGS_BY_NAME = "SELECT id, name, mainimage, overview," +
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
             "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE lower(name) like lower(?);";
@@ -63,25 +65,25 @@ public class JdbcCoworkingDao implements CoworkingDao {
     public List<Coworking> getTop(int count) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(GET_TOP_EIGHT)) {
+            statement.setInt(1, count);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-
                 if (!resultSet.next()) {
                     logger.info("Error happened while getting top-rated Coworkings. Do not have expected data in the ResultSet.");
                 }
 
-                List<Coworking> topEight = new ArrayList<>();
+                List<Coworking> top = new ArrayList<>();
 
                 while (resultSet.next()) {
                     Coworking coworking = COWORKING_ROW_MAPPER.rowMap(resultSet);
-                    topEight.add(coworking);
+                    top.add(coworking);
                 }
 
-                return topEight;
+                return top;
             }
         } catch (SQLException e) {
             logger.error("SQL Failed: {}", GET_TOP_EIGHT);
-            throw new RuntimeException("Error happened while getting eight top-rated Coworkings: " + e);
+            throw new RuntimeException("Error happened while getting eight top-rated Coworkings: ", e);
         }
     }
 
@@ -109,33 +111,6 @@ public class JdbcCoworkingDao implements CoworkingDao {
         } catch (SQLException e) {
             logger.error("SQL Failed: {}", SEARCH_COWORKINGS_BY_NAME);
             throw new RuntimeException("Connection to database is not available . It is not possible to search users by name" + name, e);
-        }
-    }
-
-
-    public List<Coworking> getTopEight() {
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(GET_TOP_EIGHT)) {
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (!resultSet.next()) {
-                    throw new RuntimeException("Error happened while getting eight top-rated Coworkings");
-                }
-
-                List<Coworking> topEight = new ArrayList<>();
-                int i = 0;
-
-                while (resultSet.next()) {
-                    Coworking coworking = coworkingRowMapper.rowMap(resultSet);
-                    topEight.add(coworking);
-                    i++;
-                    if (i >= 8) {
-                        throw new RuntimeException("Found more than eight results of top-rated Coworkings, error happened;");
-                    }
-                }
-                return topEight;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Error happened while tried to get eight top-rated Coworkings;");
         }
     }
 }
