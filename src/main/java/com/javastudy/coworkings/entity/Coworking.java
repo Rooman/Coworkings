@@ -13,6 +13,7 @@ public class Coworking {
     private String location;
     private long reviewsCount;
     private String city;
+//    TODO: What should be price format for coworking? 100.00 or 50 ?
     private double dayPrice;
     private double weekPrice;
     private double monthPrice;
