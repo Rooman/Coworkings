@@ -2,22 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="~{fragments/meta-head :: meta}" th:with="pageTitle=@{Login}, pageCSS=@{../assets/css/login.css}"></head>
 
-<!--<head>
-    &lt;!&ndash; Required meta tags &ndash;&gt;
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    &lt;!&ndash; Bootstrap CSS &ndash;&gt;
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    &lt;!&ndash; Custom CSS &ndash;&gt;
-    &lt;!&ndash;Doesn't work with Tomcat+Thymeleaf. Tried different ways to specify the path to css, none of them worked.
-    At the moment all the css is just added with 'style' tag (that's the only way I can see changes on the page)&ndash;&gt;
-    <link rel="stylesheet" href="/assets/css/login.css">
-    &lt;!&ndash; Font &ndash;&gt;
-    <link href="https://fonts.googleapis.com/css?family=Istok+Web:400,700&display=swap" rel="stylesheet">
-
-    <title>Login Page</title>
-</head>-->
 <body>
 <div class="login-page">
     <div th:insert="~{fragments/navbar :: navigation}"></div>
