@@ -21,7 +21,7 @@ public class ThymeleafTemplater {
 
     }
 
-    public static void configureNewInstance(ServletContext servletContext) {
+    public synchronized static void configureNewInstance(ServletContext servletContext) {
         if (isCreated) {
             return;
         }

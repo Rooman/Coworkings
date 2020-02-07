@@ -10,7 +10,7 @@
     <!-- Custom CSS -->
     <!--Doesn't work with Tomcat+Thymeleaf. Tried different ways to specify the path to css, none of them worked.
     At the moment all the css is just added with 'style' tag (that's the only way I can see changes on the page)-->
-    <link rel="stylesheet" href="../assets/css/style.css" th:href="@{../assets/css/style.css}">
+    <link rel="stylesheet" href="/assets/css/login.css">
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Istok+Web:400,700&display=swap" rel="stylesheet">
 
@@ -20,22 +20,20 @@
 <main class="mt-5 pt-4">
     <div class="container dark-grey-text mt-5">
         <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-4 col-md-4 card-login">
                 <div class="card text-center">
-                    <div class="card-header header-custom" style="background-color: #E5E5E5;
-                opacity: 0.5; border-bottom: 7px solid #EB5757;">
-                        <p class="card-title m-2" style="font-style: normal; font-weight: normal; font-size: 24px;
-                    line-height: 25px; color: #000000;">Sign In</p>
+                    <div class="card-header card-header-login">
+                        <p class="card-title m-2 card-title-font" style="">Sign In</p>
                     </div>
                     <div class="card-body">
-                        <form action="/login" method="POST" class="border border-light p-5">
+                        <form action="/login" method="POST" class="border border-light">
                             <!-- old variant
                             <input name="login" type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Username">
 
                             <input name="password" type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">-->
 
                             <label class="sr-only" for="usernameInputGroup">Username</label>
-                            <div class="input-group mb-2">
+                            <div class="input-group mb-2 card-ui-element">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="far fa-user" aria-hidden="true"></i>
@@ -45,7 +43,7 @@
                             </div>
 
                             <label class="sr-only" for="passwordInputGroup">Password</label>
-                            <div class="input-group mb-2">
+                            <div class="input-group mb-2 card-ui-element">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="fas fa-lock" aria-hidden="true"></i>
@@ -54,17 +52,14 @@
                                 <input name="password" type="password" class="form-control" id="passwordInputGroup" placeholder="Password">
                             </div>
 
-                            <input class="btn btn-info btn-block" type="submit" value="Sign In" style="background: #EB5757;
+                            <input class="btn btn-info btn-block card-ui-element" type="submit" value="Sign In" style="background: #EB5757;
                         border-radius: 10px;">
                         </form>
                     </div>
-                    <div class="card-footer" style="background-color: #E5E5E5;
-                        opacity: 0.5; border-bottom: 7px solid #EB5757;">
-                        <p class="m-2" style="font-style: normal; font-weight: normal; font-size: 15px;
-                            line-height: 25px; color: #000000;">
+                    <div class="card-footer card-footer-login">
+                        <p class="m-2 card-footer-font">
                             Not registered?
-                            <a href="#" style="font-style: normal; font-weight: bold; font-size: 12px;
-                        line-height: 12px; color: #EB5757;">Sign Up</a>
+                            <a href="#" class="card-footer-link">Sign Up</a>
                         </p>
                     </div>
                 </div>

@@ -1,0 +1,39 @@
+.card-header-login, .card-footer-login {
+    color: #E5E5E5;
+    opacity: 0.5;
+    border-bottom: 7px solid #EB5757;
+}
+
+.card-title-font {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 50px;
+    color: #000000;
+}
+
+.card-ui-element {
+    width: 75%;
+}
+
+.card-footer-font {
+    font-family: Istok Web;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 50px;
+    color: #000000;
+}
+
+.card-footer-link {
+    font-family: Istok Web;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 24px;
+    color: #EB5757;
+}
+
+.card-login {
+    width: 38.5%;
+}
