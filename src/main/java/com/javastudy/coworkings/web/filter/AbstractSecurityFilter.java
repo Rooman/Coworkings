@@ -33,7 +33,7 @@ public abstract class AbstractSecurityFilter implements Filter {
                     String token = cookie.getValue();
                     Session session = securityService.getSession(token);
                     if (session != null) {
-                        userRole = session.getUser().getRole();
+                        userRole = session.getUser().getUserRole();
                         if (getAcceptedRoles().contains(userRole)) {
                             isAuth = true;
                             req.setAttribute("session", session);
