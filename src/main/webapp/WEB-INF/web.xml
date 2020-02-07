@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <web-app>
     <listener>
-        <listener-class>com.javastudy.coworkings.listener.ThymeleafInitializerListener</listener-class>
+        <listener-class>com.javastudy.coworkings.web.listener.ApplicationInitializer</listener-class>
     </listener>
 
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>com.javastudy.coworkings.web.servlet.security.LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>HomePageServlet</servlet-name>
+        <servlet-class>com.javastudy.coworkings.web.servlet.HomePageServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -35,4 +40,9 @@
         <url-pattern>/login</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>-->
+    <servlet-mapping>
+        <servlet-name>HomePageServlet</servlet-name>
+        <!--  mapping for only /root  -->
+        <url-pattern></url-pattern>
+    </servlet-mapping>
 </web-app>

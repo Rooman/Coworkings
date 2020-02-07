@@ -37,7 +37,7 @@ class UserMapperTest {
         assertEquals("testUser", actual.getUsername());
         assertEquals("testPassword", actual.getPassword());
         assertEquals("Name Surname", actual.getFullName());
-        assertEquals(UserRole.USER, actual.getRole());
+        assertEquals(UserRole.USER, actual.getUserRole());
         assertEquals("095332222", actual.getTel());
         assertEquals("email@mailbox.net", actual.getEmail());
         assertEquals("Kyiv", actual.getCity());

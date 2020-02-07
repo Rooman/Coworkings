@@ -66,9 +66,6 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <url>http://localhost:8080</url>
-                    <port>8080</port>
-                    <server>TomcatServer</server>
                     <path>/</path>
                 </configuration>
             </plugin>
@@ -93,7 +90,6 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- Servlets -->
@@ -110,6 +106,15 @@
             <artifactId>thymeleaf</artifactId>
             <version>3.0.11.RELEASE</version>
         </dependency>
+
+        <!-- Lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+            <scope>provided</scope>
+        </dependency>
+
 
         <!--For tests-->
         <dependency>

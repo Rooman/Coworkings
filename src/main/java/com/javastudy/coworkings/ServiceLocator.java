@@ -7,6 +7,7 @@ import com.javastudy.coworkings.dao.jdbc.JdbcCoworkingDao;
 import com.javastudy.coworkings.dao.jdbc.JdbcUserDao;
 import com.javastudy.coworkings.security.DefaultSecurityService;
 import com.javastudy.coworkings.security.SecurityService;
+import com.javastudy.coworkings.service.impl.DefaultCoworkingService;
 import com.javastudy.coworkings.util.PropertyReader;
 
 import javax.sql.DataSource;
@@ -16,7 +17,7 @@ import java.util.Properties;
 
 public class ServiceLocator {
     private static final Map<Class<?>, Object> SERVICES = new HashMap<>();
-    private static final String PROPERTIES_FILE_LOCATION = "src/main/resources/application.properties";
+    private static final String PROPERTIES_FILE_LOCATION = "application.properties";
 
     static {
         PropertyReader propertyReader = new PropertyReader(PROPERTIES_FILE_LOCATION);
@@ -31,6 +32,11 @@ public class ServiceLocator {
 
         SecurityService securityService = new DefaultSecurityService();
         register(securityService.getClass(), securityService);
+
+        Integer topCoworkingsCount = propertyReader.getInt("top.coworkings.count");
+        DefaultCoworkingService defaultCoworkingService = new DefaultCoworkingService(coworkingDao, topCoworkingsCount);
+        register(DefaultCoworkingService.class, defaultCoworkingService);
+        register(PropertyReader.class, propertyReader);
     }
 
     public static void register(Class<?> serviceClass, Object service) {

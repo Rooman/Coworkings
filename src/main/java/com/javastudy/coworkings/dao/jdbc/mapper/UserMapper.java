@@ -20,16 +20,16 @@ public class UserMapper {
             String city = resultSet.getString("city");
             String sole = resultSet.getString("sole");
 
-            User user = User.newBuilder()
-                    .setId(id)
-                    .setUsername(username)
-                    .setPassword(password)
-                    .setFullName(fullName)
-                    .setRole(userRole)
-                    .setTel(tel)
-                    .setEmail(email)
-                    .setCity(city)
-                    .setSole(sole)
+            User user = User.builder()
+                    .id(id)
+                    .username(username)
+                    .password(password)
+                    .fullName(fullName)
+                    .userRole(userRole)
+                    .tel(tel)
+                    .email(email)
+                    .city(city)
+                    .sole(sole)
                     .build();
 
             return user;
