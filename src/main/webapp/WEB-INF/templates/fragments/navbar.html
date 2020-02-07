@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<nav th:fragment="navigation">
+    <nav class="navbar navbar-block navbar-expand-lg">
+        <a class="navbar-brand" href="/home"> <img src="/assets/img/logo.png" alt=""> </a>
+        <ul class="navbar-nav menu">
+            <li class="nav-item menu-item">
+                <a class="nav-link link-menu" href="/home">home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item menu-item dropdown">
+                <a class="nav-link link-menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    cities
+                </a>
+                <div class="dropdown-menu dropdown-wrapper transparent" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu-item dropdown-city"><a class="nav-link link-dropdown" href="#">Kyiv</a>
+                    </div>
+                    <div class="dropdown-menu-item dropdown-city"><a class="nav-link link-dropdown" href="#">Dnipro</a>
+                    </div>
+                    <div class="dropdown-menu-item dropdown-city"><a class="nav-link link-dropdown" href="#">Lviv</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item menu-item">
+                <a class="nav-link link-menu" href="/login" tabindex="-1" aria-disabled="true">login</a>
+            </li>
+        </ul>
+        <!--  TODO: This should be link <a> to the page, not a button   -->
+        <div class="sign-up">
+            <button class="btn sign-up-button" type="button">sign up</button>
+        </div>
+    </nav>
+</nav>
+
+</body>
+</html>

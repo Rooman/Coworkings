@@ -1,39 +1,50 @@
+body {
+    height: 100%;
+    background-image: url("../img/login-bg-image.png");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+}
+
 .card-header-login, .card-footer-login {
-    color: #E5E5E5;
-    opacity: 0.5;
-    border-bottom: 7px solid #EB5757;
+    background: rgba(229, 229, 229, 0.5);
+    border-bottom: 5px solid #EB5757;
 }
 
 .card-title-font {
     font-style: normal;
     font-weight: normal;
-    font-size: 48px;
-    line-height: 50px;
+    font-size: 24px;
+    line-height: 25px;
     color: #000000;
+    opacity: 0.6;
 }
 
-.card-ui-element {
-    width: 75%;
+.login-form-element {
+    width: 90%;
 }
 
 .card-footer-font {
-    font-family: Istok Web;
     font-style: normal;
     font-weight: normal;
-    font-size: 30px;
-    line-height: 50px;
+    font-size: 15px;
+    line-height: 25px;
     color: #000000;
 }
 
 .card-footer-link {
-    font-family: Istok Web;
     font-style: normal;
     font-weight: bold;
-    font-size: 24px;
-    line-height: 24px;
+    font-size: 12px;
+    line-height: 12px;
     color: #EB5757;
 }
 
 .card-login {
     width: 38.5%;
+}
+
+.btn-sign-in {
+    background: #EB5757;
+    border-radius: 10px;
 }

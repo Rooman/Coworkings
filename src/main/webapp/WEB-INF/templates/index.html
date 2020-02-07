@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <link href="https://fonts.googleapis.com/css?family=Istok+Web:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/css/common.css">
-    <link rel="stylesheet" href="/assets/css/home.css">
-    <title>Coworking</title>
-</head>
+<head th:insert="~{fragments/meta-head :: meta}" th:with="pageTitle=@{Coworkings}, pageCSS=@{../assets/css/home.css}"></head>
+
 <body>
 <header class="header">
-    <nav class="navbar navbar-block navbar-expand-lg">
+    <!--<nav class="navbar navbar-block navbar-expand-lg">
         <a class="navbar-brand" href="#"> <img src="/assets/img/logo.png" alt=""> </a>
         <ul class="navbar-nav menu">
             <li class="nav-item menu-item">
@@ -35,11 +28,12 @@
                 <a class="nav-link link-menu" href="#" tabindex="-1" aria-disabled="true">login</a>
             </li>
         </ul>
-        <!--  TODO: This should be link <a> to the page, not a button   -->
+        &lt;!&ndash;  TODO: This should be link <a> to the page, not a button   &ndash;&gt;
         <div class="sign-up">
             <button class="btn sign-up-button" type="button">sign up</button>
         </div>
-    </nav>
+    </nav>-->
+    <div th:insert="~{fragments/navbar :: navigation}"></div>
 
     <section class="home-search">
         <div class="search-title">A new look at the workspace</div>
@@ -93,19 +87,9 @@
     </section>
 </main>
 
-<footer class="footer">
-    Колись порядок був нахуй, не те шо сейчас!..
-</footer>
 
-<script src="https://kit.fontawesome.com/5d1afe754b.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+<p th:insert="~{fragments/footer :: footer}"></p>
+<p th:insert="~{fragments/footer :: scripts}"></p>
+
 </body>
 </html>
