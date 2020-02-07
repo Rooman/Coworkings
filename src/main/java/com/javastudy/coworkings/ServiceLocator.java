@@ -1,8 +1,10 @@
 package com.javastudy.coworkings;
 
 import com.javastudy.coworkings.dao.CoworkingDao;
+import com.javastudy.coworkings.dao.ReviewDao;
 import com.javastudy.coworkings.dao.jdbc.ConnectionFactory;
 import com.javastudy.coworkings.dao.jdbc.JdbcCoworkingDao;
+import com.javastudy.coworkings.dao.jdbc.JdbcReviewDao;
 import com.javastudy.coworkings.util.PropertyReader;
 
 import javax.sql.DataSource;

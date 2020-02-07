@@ -107,7 +107,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
             }
         } catch (SQLException e) {
             logger.error("SQL Failed: {}", SEARCH_COWORKINGS_BY_NAME);
-            throw new RuntimeException("Connection to database is not available . It is not possible to search users by name" + name, e);
+            throw new RuntimeException("Connection to database is not available . It is not possible to search users by name: " + name, e);
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.javastudy.coworkings.dao;
+package com.javastudy.coworkings.dao.jdbc.mapper;
 
 import com.javastudy.coworkings.dao.jdbc.mapper.CoworkingRowMapper;
 import com.javastudy.coworkings.entity.Coworking;
