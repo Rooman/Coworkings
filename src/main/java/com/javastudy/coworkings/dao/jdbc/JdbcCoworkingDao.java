@@ -34,6 +34,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
         this.dataSource = dataSource;
     }
 
+
     @Override
     public Coworking getById(long id) {
         try (Connection connection = dataSource.getConnection();
@@ -110,4 +111,32 @@ public class JdbcCoworkingDao implements CoworkingDao {
             throw new RuntimeException("Connection to database is not available . It is not possible to search users by name" + name, e);
         }
     }
+
+
+    public List<Coworking> getTopEight() {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_TOP_EIGHT)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (!resultSet.next()) {
+                    throw new RuntimeException("Error happened while getting eight top-rated Coworkings");
+                }
+
+                List<Coworking> topEight = new ArrayList<>();
+                int i = 0;
+
+                while (resultSet.next()) {
+                    Coworking coworking = coworkingRowMapper.rowMap(resultSet);
+                    topEight.add(coworking);
+                    i++;
+                    if (i >= 8) {
+                        throw new RuntimeException("Found more than eight results of top-rated Coworkings, error happened;");
+                    }
+                }
+                return topEight;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error happened while tried to get eight top-rated Coworkings;");
+        }
+    }
 }
+

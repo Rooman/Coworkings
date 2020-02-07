@@ -7,14 +7,14 @@
   <title>Coworking</title>
 </head>
 <body>
-    <div class="home-bg-img">
-      <nav class="navbar navbar-block navbar-expand-lg navbar-light ">
+    <div class="header">
+      <nav class="navbar navbar-block navbar-expand-lg">
         <a class="navbar-brand" href="#"> <img src="img/logo.png" alt=""> </a>
-          <ul class="navbar-nav menu-align">
-            <li class="nav-item nav-item-align">
+          <ul class="navbar-nav menu">
+            <li class="nav-item menu-item">
               <a class="nav-link link-menu" href="#">home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item nav-item-align dropdown">
+            <li class="nav-item menu-item dropdown">
               <a class="nav-link link-menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 cities
               </a>
@@ -24,23 +24,24 @@
                 <div class="dropdown-menu-item dropdown-city"><a class="nav-link link-dropdown" href="#">Lviv</a></div>
               </div>
             </li>
-            <li class="nav-item nav-item-align">
+            <li class="nav-item menu-item">
               <a class="nav-link link-menu" href="#" tabindex="-1" aria-disabled="true">login</a>
             </li>
           </ul>
+          <div class="sign-up">
+          <button class="btn button-menu" type="button" id="button-addon2">sign up</button>
+        </div>
       </nav>
 
       <div class="home-search">
         <div class="search-title">A new look at the workspace</div>
         <div class="search-paragraph">If you already have an established business, or you have just begun to develop your project,
           discover work spaces that can inspire your employees to work fruitfully.</div>
-        <form>
+        <form class="search-form">
           <fieldset>
             <legend class="search-legend">Find workspace</legend>
-            <input type="search" class="form-control search-input search-input-block" placeholder="&#xf002;Type name">
-            <div class="search-button-block">
-            <button class="btn button" type="button" id="button-addon2">Search</button>
-          </div>
+            <input type="search" class="search-input" placeholder=" &#xf002; Type name">
+            <button class="btn search-button" type="button" id="button-addon2">Search</button>
         </fieldset>
         </form>
       </div>
@@ -55,9 +56,9 @@
     <div class="top-coworkings">
       <div class="highest-rated">highest <span class="rated-word-color">rated</span></div>
       <div class="top-coworkings-items">
-        <div class="top-coworkings-item">
+        <div class="top-coworkings-item" th:each="coworking : ${coworkings}">
           <div class="top-coworking-img-item">
-            <p class="top-coworkings-price">UAH 150/day</p>
+            <p class="top-coworkings-price" th:text="'UAH' + ${coworking.getDayPrice()}+'/day'">UAH 150/day</p>
             <img class="top-coworkings-img" src="img/coworking-img.png" alt="">
           </div>
           <div class="top-coworkings-overview">
@@ -195,12 +196,8 @@
           </div>
         </div>
 
-
-
-
-
     </div>
-
+</div>
   </main>
 
   <footer class="footer">

@@ -1,3 +1,4 @@
+
 package com.javastudy.coworkings.dao;
 
 import com.javastudy.coworkings.entity.Coworking;
@@ -11,3 +12,4 @@ public interface CoworkingDao {
   
     List<Coworking> searchByName(String name);
 }
+
