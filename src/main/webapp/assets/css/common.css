@@ -89,6 +89,20 @@ nav.navbar .dropdown:hover > .dropdown-menu {
     display: block;
 }
 
+.button {
+    text-align: center;
+    border: 1px solid transparent;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 26px;
+    color: #FFFFFF;
+    width: 359px;
+    height: 60px;
+    background: #EB5757;
+    border-radius: 10px;
+}
+
 .footer {
     height: 186px;
     line-height: 186px;
