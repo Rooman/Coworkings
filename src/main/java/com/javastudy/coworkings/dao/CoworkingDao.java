@@ -1,3 +1,4 @@
+
 package com.javastudy.coworkings.dao;
 
 import com.javastudy.coworkings.entity.Coworking;
@@ -5,9 +6,10 @@ import com.javastudy.coworkings.entity.Coworking;
 import java.util.List;
 
 public interface CoworkingDao {
-    public Coworking getById(long id);
+    Coworking getById(long id);
 
-    public List<Coworking> getTopEight();
+    List<Coworking> getTop(int count);
   
-    public List<Coworking> searchByName(String name);
+    List<Coworking> searchByName(String name);
 }
+

@@ -8,22 +8,24 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CoworkingBuilderTest {
     @Test
     public void newCoworkingBuilderTest() {
-        Coworking coworking = Coworking.newCoworkingBuilder().setCity("Kiev")
-                .setContainsDesk(true)
-                .setContainsMeetingRoom(false)
-                .setContainsOffice(true)
-                .setName("CoworkingName")
-                .setDayPrice(250)
-                .setId(1)
-                .setLocation("Khreshatyk St., 15")
-                .setMainImage("imagePath")
-                .setMonthPrice(5000)
-                .setOpeningHours("10.00-21.00")
-                .setOverview("Overview")
-                .setRating(9.8)
-                .setReviewsCount(52)
-                .setWeekPrice(1400)
-                .buildCoworking();
+
+        Coworking coworking = Coworking.builder()
+                .city("Kiev")
+                .containsDesk(true)
+                .containsMeetingRoom(false)
+                .containsOffice(true)
+                .name("CoworkingName")
+                .dayPrice(250)
+                .id(1)
+                .location("Khreshatyk St., 15")
+                .mainImage("imagePath")
+                .monthPrice(5000)
+                .openingHours("10.00-21.00")
+                .overview("Overview")
+                .rating(9.8)
+                .reviewsCount(52)
+                .weekPrice(1400)
+                .build();
 
         assertEquals("Kiev", coworking.getCity());
         assertTrue(coworking.isContainsDesk());
