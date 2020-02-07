@@ -4,8 +4,7 @@ body{
 }
 
 
-.home-bg-img{
-  width: 1440px;
+.header{
   height: 882px;
   background-image: url("../img/home-bg-img.jpg");
   background-position: center; /* Center the image */
@@ -14,23 +13,25 @@ body{
 }
 
 .navbar-block{
-  position: relative;
-  width: 1440px;
   height: 155px;
   background: rgba(235, 87, 87, 0.8);
 
 }
 
-.menu-align{
-  margin: 65px 255px 65px 739px;
+.menu{
+  margin: 0 0 0 auto;
+
 }
+.menu a:hover {
+    color: white;
+   }
 
 .link-menu {
   font-weight: bold;
   font-size: 16px;
   line-height: 24px;
   text-transform: capitalize;
-  color: white !important;
+  color: white;
 }
 
 .dropdown-wrapper{
@@ -44,7 +45,6 @@ body{
 .dropdown-city{
   background-color: white;
   margin: 5px 0 2.5px 0;
-
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -52,8 +52,6 @@ body{
   text-transform: capitalize;
   width: 90px;
   height: 30px;
-  left: 1021px;
-  top: 99px;
   color: #000000;
 
 }
@@ -62,7 +60,23 @@ body{
   color: #000000 !important;
 }
 
-.nav-item-align{
+.sign-up{
+  margin-right: 100px;
+}
+
+.button-menu{
+  width: 100px;
+  height: 40px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+  text-transform: capitalize;
+  color: #EB5757;
+}
+
+.menu-item{
   margin-right: 56px;
 }
 
@@ -76,22 +90,16 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 }
 
 .home-search{
-  position:relative;
+  margin-top: 150px;
+  margin-left: 100px;
   color: black;
   background-color: white;
   width: 448px;
   height: 477px;
-  left: 100px;
-  top: 150px;
-
+  padding: 50px 43px 18px 43px;
 }
 
 .search-title{
-  position: absolute;
-  width: 362px;
-  height: 110px;
-  left: 43px;
-  top: 50px;
   font-weight: bold;
   font-size: 48px;
   line-height: 62px;
@@ -99,37 +107,23 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 }
 
 .search-paragraph{
-  position: absolute;
-  width: 359px;
-  height: 95.6px;
-  left: 44px;
-  top: 180px;
   font-size: 16px;
   line-height: 24px;
   color: #000000;
+  margin-top: 20px;
 
 }
 
 
-.search-input-block{
-  position: absolute;
-  width: 359px;
-  height: 59.75px;
-  left: 44px;
-  top: 320px;
-  background: #FFFFFF;
-  opacity: 0.2;
-  border: 1px solid #000000;
-  box-sizing: border-box;
-  border-radius: 10px;
-
+.search-form{
+  margin-top:29px;
 }
 .search-legend{
   position: absolute;
+  top:617px;
+  left:168px;
   width: 89px;
   height: 18px;
-  left: 68px;
-  top: 312px;
   font-weight: bold;
   font-size: 12px;
   line-height: 18px;
@@ -138,38 +132,31 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 }
 
 .search-input {
+  width: 359px;
+  height: 59.75px;
+  background: #FFFFFF;
+  opacity: 0.2;
+  border: 1px solid #000000;
+  border-radius: 10px;
   font-family: FontAwesome;
 }
 
-.search-button-block{
-  position: absolute;
-  width: 359px;
-  height: 59.75px;
-  left: 44px;
-  top: 400px;
-  background: #EB5757;
-  border-radius: 10px;
-}
-
-.form-control{
-  border-radius: 7px;
-}
-.button{
-  background-color: rgba(235, 87, 87, 0.8);
-  color: white;
-  font-style: normal;
+.search-button{
   font-weight: bold;
   font-size: 18px;
-  width: 100%;
-  border-radius: 7px;
-  padding: 3.5%;
+  line-height: 26px;
+  color: #FFFFFF;
+  width: 359px;
+  height: 59.75px;
+  background: #EB5757;
+  border-radius: 10px;
+  margin-top: 20px;
+
 }
 
 .cities{
-  position: relative;
-  left: 100px;
-  top: 100px;
-
+  margin-top: 100px;
+  margin-left: 100px;
 }
 
 .cities-item{
@@ -177,23 +164,17 @@ nav.navbar .dropdown:hover > .dropdown-menu {
   display: inline-block;
   background: #DE6969;
   border: 1px solid #FFFFFF;
-  box-sizing: border-box;
   width: 400px;
   height: 400px;
 }
 
 .top-coworkings{
-  position: relative;
-  left: 102px;
-  top: 195px;
 
 }
 
 .highest-rated{
-  position: relative;
-  left: 517px;
-  width: 202px;
-  height: 45px;
+  margin-top: 100px;
+  margin-left: 619px;
   font-weight: bold;
   font-size: 30px;
   line-height: 45px;
@@ -208,8 +189,8 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 
 
 .top-coworkings-items{
-  position: relative;
-  top:50px;
+  margin-top: 50px;
+  margin-left: 102px;
   display: flex;
   flex-wrap: wrap;
   width: 1240px;
@@ -219,6 +200,7 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 }
 .top-coworkings-item{
   position: relative;
+
   display: inline-block;
   width: 294px;
   height: 339px;
@@ -226,7 +208,7 @@ nav.navbar .dropdown:hover > .dropdown-menu {
   padding-bottom: 20px;
 }
 .top-coworking-img-item{
-    position: relative;
+
 }
 
 
@@ -288,9 +270,7 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 }
 
 .footer{
-  position: relative;
-  width: 1440px;
+  margin-top: 150px;
   height: 186px;
-  top: 489px;
   background: #EB5757;
 }
