@@ -10,4 +10,6 @@ public interface SecurityService {
     Session getSession(String token);
 
     String hashPassword(String password, String sole) throws NoSuchAlgorithmException;
+
+    void setExpireDays(int expireDays);
 }

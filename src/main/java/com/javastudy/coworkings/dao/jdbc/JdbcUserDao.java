@@ -15,8 +15,8 @@ import java.sql.SQLException;
 public class JdbcUserDao implements UserDao {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private static final String GET_BY_ID = "SELECT id, username, password, fullName, role, tel, email, city, sole FROM users WHERE id = ?";
-    private static final String GET_BY_USERNAME = "SELECT id, username, password, fullName, role, tel, email, city, sole FROM users WHERE username = ?";
+    private static final String GET_BY_ID = "SELECT id, username, password, fullname, role, tel, email, city, sole FROM users WHERE id = ?";
+    private static final String GET_BY_USERNAME = "SELECT id, username, password, fullname, role, tel, email, city, sole FROM users WHERE username = ?";
 
     private static final UserMapper USER_MAPPER = new UserMapper();
     private DataSource dataSource;

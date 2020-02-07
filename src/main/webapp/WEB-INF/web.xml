@@ -19,7 +19,14 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
-    <!--<filter>
+    <servlet-mapping>
+        <servlet-name>HomePageServlet</servlet-name>
+        <!--  mapping for only /root  -->
+        <url-pattern></url-pattern>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+
+    <filter>
         <filter-name>GuestRoleFilter</filter-name>
         <filter-class>com.javastudy.coworkings.web.filter.GuestSecurityFilter</filter-class>
     </filter>
@@ -30,19 +37,12 @@
 
     <filter-mapping>
         <filter-name>GuestRoleFilter</filter-name>
-        <url-pattern>/</url-pattern>
         <url-pattern>/login</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter-mapping>
         <filter-name>UserRoleFilter</filter-name>
-        <url-pattern>/</url-pattern>
-        <url-pattern>/login</url-pattern>
+        <url-pattern>/home</url-pattern>
         <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>-->
-    <servlet-mapping>
-        <servlet-name>HomePageServlet</servlet-name>
-        <!--  mapping for only /root  -->
-        <url-pattern></url-pattern>
-    </servlet-mapping>
+    </filter-mapping>
 </web-app>

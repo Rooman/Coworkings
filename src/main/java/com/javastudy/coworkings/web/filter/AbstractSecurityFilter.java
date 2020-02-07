@@ -2,6 +2,7 @@ package com.javastudy.coworkings.web.filter;
 
 import com.javastudy.coworkings.ServiceLocator;
 import com.javastudy.coworkings.entity.UserRole;
+import com.javastudy.coworkings.security.DefaultSecurityService;
 import com.javastudy.coworkings.security.SecurityService;
 import com.javastudy.coworkings.security.Session;
 
@@ -16,7 +17,7 @@ public abstract class AbstractSecurityFilter implements Filter {
     private SecurityService securityService;
 
     public AbstractSecurityFilter() {
-        securityService = ServiceLocator.getService(SecurityService.class);
+        securityService = ServiceLocator.getService(DefaultSecurityService.class);
     }
 
     @Override
@@ -46,13 +47,10 @@ public abstract class AbstractSecurityFilter implements Filter {
 
         if (isAuth) {
             chain.doFilter(request, response);
-        } /*else if (userRole == UserRole.USER){
-            try {
-                resp.sendRedirect("/access_denied");
-            } catch (IOException e) {
-                throw new RuntimeException("Unable to redirect to /login page", e);
-            }
-        } else {
+        } else if (userRole == UserRole.GUEST) {
+            // this is a bit unfinished part
+            chain.doFilter(request, response);
+        } /*else {
             try {
                 resp.sendRedirect("/login");
             } catch (IOException e) {
