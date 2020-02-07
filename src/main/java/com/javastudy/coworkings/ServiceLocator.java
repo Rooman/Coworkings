@@ -7,7 +7,9 @@ import com.javastudy.coworkings.dao.jdbc.JdbcCoworkingDao;
 import com.javastudy.coworkings.dao.jdbc.JdbcUserDao;
 import com.javastudy.coworkings.security.DefaultSecurityService;
 import com.javastudy.coworkings.security.SecurityService;
+import com.javastudy.coworkings.service.UserService;
 import com.javastudy.coworkings.service.impl.DefaultCoworkingService;
+import com.javastudy.coworkings.service.impl.DefaultUserService;
 import com.javastudy.coworkings.util.PropertyReader;
 
 import javax.sql.DataSource;
@@ -22,15 +24,18 @@ public class ServiceLocator {
     static {
         PropertyReader propertyReader = new PropertyReader(PROPERTIES_FILE_LOCATION);
         Properties applicationProperties = propertyReader.getProperties();
-        DataSource myDataSource = ConnectionFactory.getDataSource(applicationProperties);
+        DataSource dataSource = ConnectionFactory.getDataSource(applicationProperties);
 
-        CoworkingDao coworkingDao = new JdbcCoworkingDao(myDataSource);
+        CoworkingDao coworkingDao = new JdbcCoworkingDao(dataSource);
         register(coworkingDao.getClass(), coworkingDao);
 
-        UserDao userDao = new JdbcUserDao(myDataSource);
+        UserDao userDao = new JdbcUserDao(dataSource);
         register(userDao.getClass(), userDao);
 
-        SecurityService securityService = new DefaultSecurityService();
+        UserService userService = new DefaultUserService(userDao);
+        register(userService.getClass(), userService);
+
+        SecurityService securityService = new DefaultSecurityService(userService);
         register(securityService.getClass(), securityService);
 
         Integer topCoworkingsCount = propertyReader.getInt("top.coworkings.count");

@@ -16,6 +16,7 @@ public class JdbcUserDao implements UserDao {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private static final String GET_BY_ID = "SELECT id, username, password, fullName, role, tel, email, city, sole FROM users WHERE id = ?";
+    private static final String GET_BY_USERNAME = "SELECT id, username, password, fullName, role, tel, email, city, sole FROM users WHERE username = ?";
 
     private static final UserMapper USER_MAPPER = new UserMapper();
     private DataSource dataSource;
@@ -47,6 +48,32 @@ public class JdbcUserDao implements UserDao {
         } catch (SQLException e) {
             logger.error("SQL Failed: {}", GET_BY_ID);
             throw new RuntimeException("Error happened while trying to find a user with id: " + id + " in DB ", e);
+        }
+    }
+
+    @Override
+    public User getByUsername(String username) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_BY_USERNAME)) {
+
+            preparedStatement.setString(1, username);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (!resultSet.next()) {
+                    logger.warn("ResultSet was empty for user with username: {}", username);
+                }
+
+                User user = USER_MAPPER.mapRow(resultSet);
+
+                if (resultSet.next()) {
+                    logger.warn("Found more than one User with same username: {}", username);
+                }
+
+                return user;
+            }
+        } catch (SQLException e) {
+            logger.error("SQL Failed: {}", GET_BY_USERNAME);
+            throw new RuntimeException("Error happened while trying to find a user with username: " + username + " in DB ", e);
         }
     }
 }

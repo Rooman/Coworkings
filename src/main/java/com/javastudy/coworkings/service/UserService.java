@@ -4,4 +4,6 @@ import com.javastudy.coworkings.entity.User;
 
 public interface UserService {
     public User getById(long id);
+
+    public User getByUsername(String username);
 }
