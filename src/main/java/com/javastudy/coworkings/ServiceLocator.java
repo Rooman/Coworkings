@@ -13,15 +13,21 @@ import java.util.Properties;
 
 public class ServiceLocator {
     private static final Map<Class<?>, Object> SERVICES = new HashMap<>();
-    private static final String PROPERTIES_FILE_LOCATION = "src/main/resources/application.properties";
+    private static final String PROPERTIES_FILE_LOCATION = "application.properties";
 
     static {
         PropertyReader propertyReader = new PropertyReader(PROPERTIES_FILE_LOCATION);
         Properties applicationProperties = propertyReader.getProperties();
-        DataSource myDataSource = ConnectionFactory.getDataSource(applicationProperties);
 
-        CoworkingDao coworkingDao = new JdbcCoworkingDao(myDataSource);
+        DataSource dataSource = ConnectionFactory.getDataSource(applicationProperties);
+
+        CoworkingDao coworkingDao = new JdbcCoworkingDao(dataSource);
         register(coworkingDao.getClass(), coworkingDao);
+
+        Integer topCoworkingsCount = propertyReader.getInt("top.coworkings.count");
+        DefaultCoworkingService defaultCoworkingService = new DefaultCoworkingService(coworkingDao, topCoworkingsCount);
+        register(DefaultCoworkingService.class, defaultCoworkingService);
+        register(PropertyReader.class, propertyReader);
     }
 
     public static void register(Class<?> serviceClass, Object service) {
