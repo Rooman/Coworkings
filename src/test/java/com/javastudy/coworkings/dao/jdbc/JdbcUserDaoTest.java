@@ -37,16 +37,17 @@ class JdbcUserDaoTest {
 
     @Test
     void getById() {
-        User actualUser = User.newBuilder()
-                .setId((long) 1)
-                .setCity("Kiev")
-                .setFullName("First User")
-                .setRole(UserRole.USER)
-                .setEmail("first.user@gmail.com")
-                .setSole("sole123")
-                .setPassword("pass123")
-                .setTel("+380630636363")
-                .setUsername("firstUser")
+
+        User actualUser = User.builder()
+                .id((long) 1)
+                .city("Kiev")
+                .fullName("First User")
+                .userRole(UserRole.USER)
+                .email("first.user@gmail.com")
+                .sole("sole123")
+                .password("pass123")
+                .tel("+380630636363")
+                .username("firstUser")
                 .build();
 
         User factUser = userDao.getById(1);
@@ -56,7 +57,7 @@ class JdbcUserDaoTest {
         assertEquals(actualUser.getEmail(), factUser.getEmail());
         assertEquals(actualUser.getFullName(), factUser.getFullName());
         assertEquals(actualUser.getPassword(), factUser.getPassword());
-        assertEquals(actualUser.getRole(), factUser.getRole());
+        assertEquals(actualUser.getUserRole(), factUser.getUserRole());
         assertEquals(actualUser.getTel(), factUser.getTel());
         assertEquals(actualUser.getUsername(), factUser.getUsername());
     }

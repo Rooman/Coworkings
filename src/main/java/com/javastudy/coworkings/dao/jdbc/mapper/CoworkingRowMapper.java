@@ -7,23 +7,26 @@ import java.sql.SQLException;
 
 public class CoworkingRowMapper {
     public Coworking rowMap(ResultSet resultSet) throws SQLException {
-        Coworking coworking = Coworking.newCoworkingBuilder()
-                .setId(resultSet.getLong("id"))
-                .setName(resultSet.getString("name"))
-                .setMainImage(resultSet.getString("mainimage"))
-                .setOverview(resultSet.getString("overview"))
-                .setLocation(resultSet.getString("location"))
-                .setReviewsCount(resultSet.getLong("reviewscount"))
-                .setCity(resultSet.getString("city"))
-                .setDayPrice(resultSet.getDouble("dayprice"))
-                .setWeekPrice(resultSet.getDouble("weekprice"))
-                .setMonthPrice(resultSet.getDouble("monthprice"))
-                .setRating(resultSet.getDouble("rating"))
-                .setOpeningHours(resultSet.getString("openinghours"))
-                .setContainsDesk(resultSet.getBoolean("containsdesk"))
-                .setContainsOffice(resultSet.getBoolean("containsoffice"))
-                .setContainsMeetingRoom(resultSet.getBoolean("containsmeetingroom"))
-                .buildCoworking();
+
+        Coworking coworking = Coworking.builder()
+                .id(resultSet.getLong("id"))
+                .name(resultSet.getString("name"))
+                .mainImage(resultSet.getString("mainimage"))
+                .overview(resultSet.getString("overview"))
+                .location(resultSet.getString("location"))
+                .reviewsCount(resultSet.getLong("reviewscount"))
+                .city(resultSet.getString("city"))
+                .dayPrice(resultSet.getDouble("dayprice"))
+                .weekPrice(resultSet.getDouble("weekprice"))
+                .monthPrice(resultSet.getDouble("monthprice"))
+                .rating(resultSet.getDouble("rating"))
+                .openingHours(resultSet.getString("openinghours"))
+                .containsDesk(resultSet.getBoolean("containsdesk"))
+                .containsOffice(resultSet.getBoolean("containsoffice"))
+                .containsMeetingRoom(resultSet.getBoolean("containsmeetingroom"))
+                .build();
+
+
         return coworking;
     }
 }
