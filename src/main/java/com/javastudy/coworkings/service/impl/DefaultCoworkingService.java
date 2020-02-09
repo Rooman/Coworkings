@@ -22,7 +22,7 @@ public class DefaultCoworkingService implements CoworkingService {
 
     @Override
     public List<Coworking> getTop() {
-        return coworkingDao.getTop(topCoworkingsCount+1);
+        return coworkingDao.getTop(topCoworkingsCount);
     }
 
     @Override
