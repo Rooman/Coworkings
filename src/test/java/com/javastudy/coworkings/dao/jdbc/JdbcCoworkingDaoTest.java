@@ -19,26 +19,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JdbcCoworkingDaoTest {
     private CoworkingDao coworkingDao = ServiceLocator.getService(CoworkingDao.class);
+    private static Coworking actualCoworking;
 
     @BeforeAll
     static void before() throws IOException, URISyntaxException {
         init("db/dml_db_data.sql");
         ServiceLocator.register(CoworkingDao.class, new JdbcCoworkingDao(getDataSource()));
-    }
-
-    @BeforeEach
-    void setUp() throws SQLException {
-        reloadData();
-    }
-
-    @AfterEach
-    void tearDown() throws SQLException {
-        cleanSchema();
-    }
-
-    @Test
-    public void testSearchByName() {
-        Coworking actualCoworking = Coworking.builder()
+        actualCoworking = Coworking.builder()
                 .id((long) 1)
                 .name ("TestName")
                 .mainImage ("http://testlink")
@@ -55,6 +42,20 @@ public class JdbcCoworkingDaoTest {
                 .containsOffice (true)
                 .containsMeetingRoom (true)
                 .build();
+    }
+
+    @BeforeEach
+    void setUp() throws SQLException {
+        reloadData();
+    }
+
+    @AfterEach
+    void tearDown() throws SQLException {
+        cleanSchema();
+    }
+
+    @Test
+    public void testSearchByName() {
 
         List<Coworking> factCoworking = coworkingDao.searchByName("test");
 
@@ -74,5 +75,32 @@ public class JdbcCoworkingDaoTest {
         assertEquals(actualCoworking.isContainsDesk(), factCoworking.get(0).isContainsDesk());
         assertEquals(actualCoworking.isContainsOffice(), factCoworking.get(0).isContainsOffice());
         assertEquals(actualCoworking.isContainsMeetingRoom(), factCoworking.get(0).isContainsMeetingRoom());
+    }
+
+    @Test
+    public void testGetByCity() {
+
+        List<Coworking> factCoworking = coworkingDao.getByCity("Kiev");
+
+        assertEquals(1, factCoworking.size());
+        assertEquals(actualCoworking.getId(), factCoworking.get(0).getId());
+        assertEquals(actualCoworking.getName(), factCoworking.get(0).getName());
+        assertEquals(actualCoworking.getMainImage(), factCoworking.get(0).getMainImage());
+        assertEquals(actualCoworking.getOverview(), factCoworking.get(0).getOverview());
+        assertEquals(actualCoworking.getLocation(), factCoworking.get(0).getLocation());
+        assertEquals(actualCoworking.getReviewsCount(), factCoworking.get(0).getReviewsCount());
+        assertEquals(actualCoworking.getCity(), factCoworking.get(0).getCity());
+        assertEquals(actualCoworking.getDayPrice(), factCoworking.get(0).getDayPrice());
+        assertEquals(actualCoworking.getWeekPrice(), factCoworking.get(0).getWeekPrice());
+        assertEquals(actualCoworking.getMonthPrice(), factCoworking.get(0).getMonthPrice());
+        assertEquals(actualCoworking.getRating(), factCoworking.get(0).getRating());
+        assertEquals(actualCoworking.getOpeningHours(), factCoworking.get(0).getOpeningHours());
+        assertEquals(actualCoworking.isContainsDesk(), factCoworking.get(0).isContainsDesk());
+        assertEquals(actualCoworking.isContainsOffice(), factCoworking.get(0).isContainsOffice());
+        assertEquals(actualCoworking.isContainsMeetingRoom(), factCoworking.get(0).isContainsMeetingRoom());
+
+        factCoworking = coworkingDao.getByCity("Lviv");
+
+        assertEquals(2, factCoworking.size());
     }
 }

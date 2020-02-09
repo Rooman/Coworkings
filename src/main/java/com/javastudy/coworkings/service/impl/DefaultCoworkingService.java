@@ -21,6 +21,11 @@ public class DefaultCoworkingService implements CoworkingService {
     }
 
     @Override
+    public List<Coworking> getByCity(String city) {
+        return coworkingDao.getByCity(city);
+    }
+
+    @Override
     public List<Coworking> getTop() {
         List<Coworking> top = coworkingDao.getTop(topCoworkingsCount);
         if (top.size() < topCoworkingsCount) {
