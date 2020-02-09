@@ -14,3 +14,6 @@ insert into coworkings (id, name, mainimage, overview, location, reviewscount, c
 dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, containsmeetingroom)
 values (2, 'AnotherName', 'http://testlink2', 'TestOverview2', 'TestLocation2', 2, 'Lviv', 4, 5, 6, 8, 'TestOpeningHours2', false, false, false);
 
+insert into coworkings (id, name, mainimage, overview, location, reviewscount, city,
+dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, containsmeetingroom)
+values (3, 'AnotherName2', 'http://testlink3', 'TestOverview3', 'TestLocation3', 1, 'Lviv', 7, 8, 9, 11, 'TestOpeningHours3', false, true, true);
