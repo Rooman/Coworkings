@@ -45,18 +45,16 @@ public abstract class AbstractSecurityFilter implements Filter {
             }
         }
 
-        if (isAuth) {
+        /*if (isAuth) {
             chain.doFilter(request, response);
         } else if (userRole == UserRole.GUEST) {
-            // this is a bit unfinished part
             chain.doFilter(request, response);
-        } /*else {
-            try {
-                resp.sendRedirect("/login");
-            } catch (IOException e) {
-                throw new RuntimeException("Unable to redirect to /login page", e);
-            }
         }*/
+        //Since currently both USER and GUEST both can access main & login pages, there no need create any special
+        //redirect or extra conditions:
+        //TODO: add redirection for pages where GUEST or USER don't have access (after more pages and ADMIN users added). Nomarch
+
+        chain.doFilter(request, response);
     }
 
     abstract Set<UserRole> getAcceptedRoles();

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 public class LoginServlet extends HttpServlet {
     private SecurityService securityService;
@@ -37,7 +39,8 @@ public class LoginServlet extends HttpServlet {
         if (session != null) {
             Cookie cookie = new Cookie("user-token", session.getToken());
             //One day in seconds:
-            cookie.setMaxAge(60 * 60 * 24);
+            int secondsBeforeExpire = (int) (session.getExpiryTime().toEpochSecond(ZoneOffset.UTC) - LocalDateTime.now().toEpochSecond(ZoneOffset.UTC));
+            cookie.setMaxAge(secondsBeforeExpire);
             resp.addCookie(cookie);
             resp.sendRedirect("/home");
             req.setAttribute("session", session);

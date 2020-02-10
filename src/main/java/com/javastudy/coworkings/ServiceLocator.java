@@ -36,6 +36,7 @@ public class ServiceLocator {
         register(userService.getClass(), userService);
 
         SecurityService securityService = new DefaultSecurityService(userService);
+        securityService.setExpireDays(Integer.parseInt(applicationProperties.getProperty("session.expire.days")));
         register(securityService.getClass(), securityService);
 
         Integer topCoworkingsCount = propertyReader.getInt("top.coworkings.count");
