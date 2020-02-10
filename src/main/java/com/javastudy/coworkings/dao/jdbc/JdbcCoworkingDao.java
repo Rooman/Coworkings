@@ -45,7 +45,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
-                if (!resultSet.next()) {
+                if (!resultSet.isBeforeFirst()) {
                     throw new RuntimeException("Coworking with id: " + id + " isn't found");
                 }
                 Coworking coworking = COWORKING_ROW_MAPPER.rowMap(resultSet);
