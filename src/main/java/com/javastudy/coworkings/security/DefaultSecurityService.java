@@ -66,8 +66,7 @@ public class DefaultSecurityService implements SecurityService {
         return null;
     }
 
-    @Override
-    public String hashPassword(String password, String sole){
+    private String hashPassword(String password, String sole){
         String passNSole = password + sole;
 
         MessageDigest md = null;
@@ -85,8 +84,7 @@ public class DefaultSecurityService implements SecurityService {
         return hashedPass;
     }
 
-    @Override
     public void setExpireDays(int expireDays) {
-
+        this.expireDays = expireDays;
     }
 }

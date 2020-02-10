@@ -35,7 +35,7 @@ public class ServiceLocator {
         UserService userService = new DefaultUserService(userDao);
         register(userService.getClass(), userService);
 
-        SecurityService securityService = new DefaultSecurityService(userService);
+        DefaultSecurityService securityService = new DefaultSecurityService(userService);
         securityService.setExpireDays(Integer.parseInt(applicationProperties.getProperty("session.expire.days")));
         register(securityService.getClass(), securityService);
 
