@@ -17,7 +17,7 @@ public abstract class AbstractSecurityFilter implements Filter {
     private SecurityService securityService;
 
     public AbstractSecurityFilter() {
-        securityService = ServiceLocator.getService(DefaultSecurityService.class);
+        securityService = ServiceLocator.getService(SecurityService.class);
     }
 
     @Override

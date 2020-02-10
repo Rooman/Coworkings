@@ -15,7 +15,7 @@ public class LogoutServlet extends HttpServlet {
     private SecurityService securityService;
 
     public LogoutServlet() {
-        securityService = ServiceLocator.getService(DefaultSecurityService.class);
+        securityService = ServiceLocator.getService(SecurityService.class);
     }
 
 

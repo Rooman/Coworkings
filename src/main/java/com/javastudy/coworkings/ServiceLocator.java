@@ -27,17 +27,18 @@ public class ServiceLocator {
         DataSource dataSource = ConnectionFactory.getDataSource(applicationProperties);
 
         CoworkingDao coworkingDao = new JdbcCoworkingDao(dataSource);
-        register(coworkingDao.getClass(), coworkingDao);
+        register(CoworkingDao.class, coworkingDao);
 
         UserDao userDao = new JdbcUserDao(dataSource);
-        register(userDao.getClass(), userDao);
+        register(UserDao.class, userDao);
 
         UserService userService = new DefaultUserService(userDao);
-        register(userService.getClass(), userService);
+        register(UserService.class, userService);
 
-        DefaultSecurityService securityService = new DefaultSecurityService(userService);
-        securityService.setExpireDays(Integer.parseInt(applicationProperties.getProperty("session.expire.days")));
-        register(securityService.getClass(), securityService);
+        int expireDays = Integer.parseInt(applicationProperties.getProperty("session.expire.days"));
+        SecurityService securityService = new DefaultSecurityService(userService, expireDays);
+
+        register(SecurityService.class, securityService);
 
         Integer topCoworkingsCount = propertyReader.getInt("top.coworkings.count");
         DefaultCoworkingService defaultCoworkingService = new DefaultCoworkingService(coworkingDao, topCoworkingsCount);

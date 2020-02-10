@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet {
     private SecurityService securityService;
 
     public LoginServlet() {
-        securityService = ServiceLocator.getService(DefaultSecurityService.class);
+        securityService = ServiceLocator.getService(SecurityService.class);
     }
 
     @Override
@@ -38,7 +38,6 @@ public class LoginServlet extends HttpServlet {
         Session session = securityService.login(login, password);
         if (session != null) {
             Cookie cookie = new Cookie("user-token", session.getToken());
-            //One day in seconds:
             int secondsBeforeExpire = (int) (session.getExpiryTime().toEpochSecond(ZoneOffset.UTC) - LocalDateTime.now().toEpochSecond(ZoneOffset.UTC));
             cookie.setMaxAge(secondsBeforeExpire);
             resp.addCookie(cookie);

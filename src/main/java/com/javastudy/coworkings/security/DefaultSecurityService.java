@@ -17,14 +17,14 @@ import java.util.UUID;
 public class DefaultSecurityService implements SecurityService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private static final int DEFAULT_EXPIRE_DAYS = 1;
     private int expireDays;
     private List<Session> sessions = new ArrayList<>();
     private UserService userService;
 
-    public DefaultSecurityService(UserService userService) {
+
+    public DefaultSecurityService(UserService userService, int expireDays) {
         this.userService = userService;
-        expireDays = DEFAULT_EXPIRE_DAYS;
+        this.expireDays = expireDays;
     }
 
     @Override
@@ -82,9 +82,5 @@ public class DefaultSecurityService implements SecurityService {
         String hashedPass = bigInt.toString(16);
 
         return hashedPass;
-    }
-
-    public void setExpireDays(int expireDays) {
-        this.expireDays = expireDays;
     }
 }
