@@ -22,13 +22,7 @@ public class DefaultCoworkingService implements CoworkingService {
 
     @Override
     public List<Coworking> getTop() {
-        List<Coworking> top = coworkingDao.getTop(topCoworkingsCount);
-        if (top.size() < topCoworkingsCount) {
-            int left = topCoworkingsCount - top.size();
-            int startIndex = (int) (Math.random() * left);
-            top.addAll(top.subList(startIndex, startIndex + left));
-        }
-        return top;
+        return coworkingDao.getTop(topCoworkingsCount);
     }
 
     @Override

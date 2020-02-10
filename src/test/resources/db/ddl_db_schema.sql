@@ -12,3 +12,12 @@ create table users
 	sole varchar(50) not null,
 	password varchar(50) not null
 );
+
+create table reviews
+(
+	id bigint primary key,
+	description varchar(100) not null,
+	status varchar (20) not null constraint status_value check (status = 'new' OR status = 'approved' OR status = 'rejected'),
+	coworkingid bigint not null,
+	userid bigint not null references users (id)
+);
