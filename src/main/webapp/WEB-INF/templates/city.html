@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/meta-head :: meta}" th:with="pageTitle=@{Coworkings in $city}, pageCSS=@{../assets/css/city.css}"></head>
+
+<body>
+<header class="header">
+    <div th:insert="~{fragments/navbar :: navigation}"></div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            First left side column
+        </div>
+        <div class="col-9">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3" th:each="coworking : ${coworkings}">
+                        <p th:text="${coworking.getName()}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p th:insert="~{fragments/footer :: footer}"></p>
+<p th:insert="~{fragments/footer :: scripts}"></p>
+
+</body>
+</html>

@@ -9,4 +9,5 @@ public interface CoworkingService {
     Coworking getById(long id);
     List<Coworking> getTop();
     List<Coworking> searchByName(String name);
+    List<Coworking> searchByCity(String city);
 }

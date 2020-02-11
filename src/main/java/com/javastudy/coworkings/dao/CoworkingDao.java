@@ -9,5 +9,6 @@ public interface CoworkingDao {
     Coworking getById(long id);
     List<Coworking> getTop(int count);
     List<Coworking> searchByName(String name);
+    List<Coworking> searchByCity(String city);
 }
 

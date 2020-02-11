@@ -25,6 +25,10 @@ public class JdbcCoworkingDao implements CoworkingDao {
             "city, dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, " +
             "containsmeetingroom FROM coworkings ORDER BY rating LIMIT ?;";
 
+    private static final String GET_BY_CITY = "SELECT id, name, mainimage, overview, location, reviewscount, " +
+            "city, dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, " +
+            "containsmeetingroom FROM coworkings WHERE city=?;";
+
     private static final String SEARCH_COWORKINGS_BY_NAME = "SELECT id, name, mainimage, overview," +
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
             "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE lower(name) like lower(?);";
@@ -111,6 +115,32 @@ public class JdbcCoworkingDao implements CoworkingDao {
         } catch (SQLException e) {
             logger.error("SQL Failed: {}", SEARCH_COWORKINGS_BY_NAME);
             throw new RuntimeException("Connection to database is not available . It is not possible to search users by name: " + name, e);
+        }
+    }
+
+    @Override
+    public List<Coworking> searchByCity(String city) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_BY_CITY)) {
+            statement.setString(1, city);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (!resultSet.isBeforeFirst()) {
+                    logger.info("Error happened while getting Coworkings by city {}. Do not have expected data in the ResultSet.", city);
+                }
+
+                List<Coworking> coworkings = new ArrayList<>();
+
+                while (resultSet.next()) {
+                    Coworking coworking = COWORKING_ROW_MAPPER.rowMap(resultSet);
+                    coworkings.add(coworking);
+                }
+
+                return coworkings;
+            }
+        } catch (SQLException e) {
+            logger.error("SQL Failed: {}", GET_BY_CITY);
+            throw new RuntimeException("Error happened while getting Coworkings by city: " + city, e);
         }
     }
 }
