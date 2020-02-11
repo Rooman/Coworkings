@@ -13,7 +13,7 @@ public class UserMapper {
             Long id = resultSet.getLong("id");
             String username = resultSet.getString("username");
             String password = resultSet.getString("password");
-            String fullName = resultSet.getString("fullName");
+            String fullName = resultSet.getString("fullname");
             UserRole userRole = UserRole.getByName(resultSet.getString("role"));
             String tel = resultSet.getString("tel");
             String email = resultSet.getString("email");

@@ -8,6 +8,10 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>com.javastudy.coworkings.web.servlet.security.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.javastudy.coworkings.web.servlet.security.LogoutServlet</servlet-class>
+    </servlet>
 
     <servlet>
         <servlet-name>HomePageServlet</servlet-name>
@@ -20,9 +24,34 @@
     </servlet-mapping>
 
     <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
         <servlet-name>HomePageServlet</servlet-name>
         <!--  mapping for only /root  -->
         <url-pattern></url-pattern>
+        <url-pattern>/home</url-pattern>
     </servlet-mapping>
 
+    <filter>
+        <filter-name>GuestRoleFilter</filter-name>
+        <filter-class>com.javastudy.coworkings.web.filter.GuestSecurityFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>UserRoleFilter</filter-name>
+        <filter-class>com.javastudy.coworkings.web.filter.UserSecurityFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>GuestRoleFilter</filter-name>
+        <url-pattern>/login</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UserRoleFilter</filter-name>
+        <url-pattern>/home</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
 </web-app>

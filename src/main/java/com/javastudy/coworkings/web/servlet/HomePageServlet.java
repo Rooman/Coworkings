@@ -2,6 +2,8 @@ package com.javastudy.coworkings.web.servlet;
 
 import com.javastudy.coworkings.ServiceLocator;
 import com.javastudy.coworkings.entity.Coworking;
+import com.javastudy.coworkings.entity.User;
+import com.javastudy.coworkings.entity.Session;
 import com.javastudy.coworkings.service.impl.DefaultCoworkingService;
 import com.javastudy.coworkings.web.templater.ThymeleafTemplater;
 import org.slf4j.Logger;
@@ -21,8 +23,17 @@ public class HomePageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
-        List<Coworking> coworkings = coworkingService.getTop();
         Map<String, Object> parameters = new HashMap<>();
+
+        Session session = (Session) req.getAttribute("session");
+        User user = null;
+        if (session != null) {
+            user = session.getUser();
+        }
+        parameters.put("user", user);
+        logger.debug("User {}", user);
+
+        List<Coworking> coworkings = coworkingService.getTop();
         parameters.put("coworkings", coworkings);
         logger.debug("Coworkings {}", coworkings);
 

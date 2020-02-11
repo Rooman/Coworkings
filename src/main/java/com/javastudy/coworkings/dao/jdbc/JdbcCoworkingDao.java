@@ -27,7 +27,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
 
     private static final String GET_TOP_EIGHT = "SELECT id, name, mainimage, overview, location, reviewscount, " +
             "city, dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, " +
-            "containsmeetingroom FROM coworkings ORDER BY rating DESC FETCH FIRST ? ROWS ONLY;";
+            "containsmeetingroom FROM coworkings ORDER BY rating LIMIT ?;";
 
     private static final String SEARCH_COWORKINGS_BY_NAME = "SELECT id, name, mainimage, overview," +
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
@@ -49,9 +49,11 @@ public class JdbcCoworkingDao implements CoworkingDao {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
-                if (!resultSet.next()) {
-                    throw new RuntimeException("Co-working with id: " + id + " isn't found");
+
+                if (!resultSet.isBeforeFirst()) {
+                    throw new RuntimeException("Coworking with id: " + id + " isn't found");
                 }
+              
                 Coworking coworking = COWORKING_ROW_MAPPER.rowMap(resultSet);
 
                 if (resultSet.next()) {
@@ -101,7 +103,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
             statement.setInt(1, count);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                if (!resultSet.next()) {
+                if (!resultSet.isBeforeFirst()) {
                     logger.info("Error happened while getting top-rated Coworkings. Do not have expected data in the ResultSet.");
                 }
 
