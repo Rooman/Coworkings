@@ -33,7 +33,7 @@ public class JdbcUserDao implements UserDao {
             preparedStatement.setLong(1, id);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (!resultSet.isBeforeFirst()) {
+                if (!resultSet.next()) {
                     logger.warn("ResultSet was empty for user with id: {}", id);
                 }
 
@@ -59,7 +59,7 @@ public class JdbcUserDao implements UserDao {
             preparedStatement.setString(1, username);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (!resultSet.isBeforeFirst()) {
+                if (!resultSet.next()) {
                     logger.warn("ResultSet was empty for user with username: {}", username);
                 }
 
