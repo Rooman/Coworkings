@@ -20,38 +20,65 @@
             </fieldset>
         </form>
 
-
     </section>
 </header>
 <main>
     <section class="cities">
-        <img class="cities-item" src="/assets/img/Kyiv.jpg" alt="">
+        <div class="row">
+            <div class="col-4 container">
+                <a th:href="@{../city?cityName=Kyiv}">
+                    <img class="cities-item overlay-effect" src="/assets/img/Kyiv.jpg" alt="Kyiv">
+                    <div class="city-name-text">
+                        <p>Kyiv</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-4 container">
+                <a th:href="@{../city?cityName=Dnipro}">
+                    <img class="cities-item overlay-effect" src="/assets/img/Dnipro.jpg" alt="Dnipro">
+                    <div class="city-name-text">
+                        <p>Dnipro</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-4 container">
+                <a th:href="@{../city?cityName=Lviv}">
+                    <img class="cities-item overlay-effect" src="/assets/img/Lviv.jpg" alt="Lviv">
+                    <div class="city-name-text">
+                        <p>Lviv</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!--<img class="cities-item" src="/assets/img/Kyiv.jpg" alt="">
         <img class="cities-item" src="/assets/img/Dnipro.jpg" alt="">
-        <img class="cities-item" src="/assets/img/Lviv.jpg" alt="">
+        <img class="cities-item" src="/assets/img/Lviv.jpg" alt="">-->
     </section>
 
     <section class="top-coworkings">
         <div class="top-coworkings-title">highest <span>rated</span></div>
         <div class="top-coworkings-items">
             <!--/*@thymesVar id="coworking" type="com.javastudy.coworkings.entity.Coworking"*/-->
-            <div class="top-coworkings-item" th:each="coworking : ${coworkings}">
-                <div class="top-coworking-img-item">
-                    <div class="top-coworkings-price" th:text="'UAH ' + ${coworking.getDayPrice()}+'/day'">UAH 150/day</div>
-                    <img class="top-coworkings-img" src="/assets/img/coworking-img.png"
-                         th:src="${coworking.getMainImage() != null ? coworking.getMainImage() : '/assets/img/coworking-img.png' }"
-                         alt="Пiздець всiм сподiванням :(">
-                </div>
-                <div class="top-coworkings-overview">
-                    <p class="top-coworkings-name" th:text="${coworking.getName()}">ronda coworking-<br> recoleta</p>
-                    <p class="top-coworkings-adress"><i class="fas fa-map-marker-alt"></i><span
-                            th:text="${coworking.getLocation()}">54 Petliury, Kyiv</span></p>
-                    <p class="top-coworkings-reviews"><i class="fas fa-star star-color"></i>
-                        <i class="fas fa-star star-color"></i>
-                        <i class="fas fa-star star-color"></i>
-                        <i class="fas fa-star star-color"></i>
-                        <i class="fas fa-star star-color"></i> <span th:text="${coworking.getReviewsCount()}">150</span>
-                        Reviews</p>
-                    <p class="top-coworkings-verify"><i class="far fa-check-circle"></i> Verify</p>
+            <div class="row m-5">
+                <div class="col-3 m-0 top-coworkings-item" th:each="coworking : ${coworkings}">
+                    <div class="top-coworking-img-item">
+                        <div class="top-coworkings-price" th:text="'UAH ' + ${coworking.getDayPrice()}+'/day'">UAH 150/day</div>
+                        <img class="top-coworkings-img" src="/assets/img/coworking-img.png"
+                             th:src="${coworking.getMainImage() != null ? coworking.getMainImage() : '/assets/img/coworking-img.png' }"
+                             alt="Пiздець всiм сподiванням :(">
+                    </div>
+                    <div class="top-coworkings-overview">
+                        <p class="top-coworkings-name" th:text="${coworking.getName()}">ronda coworking-<br> recoleta</p>
+                        <p class="top-coworkings-adress"><i class="fas fa-map-marker-alt"></i><span
+                                th:text="${coworking.getLocation()}">54 Petliury, Kyiv</span></p>
+                        <p class="top-coworkings-reviews"><i class="fas fa-star star-color"></i>
+                            <i class="fas fa-star star-color"></i>
+                            <i class="fas fa-star star-color"></i>
+                            <i class="fas fa-star star-color"></i>
+                            <i class="fas fa-star star-color"></i> <span th:text="${coworking.getReviewsCount()}">150</span>
+                            Reviews</p>
+                        <p class="top-coworkings-verify"><i class="far fa-check-circle"></i> Verify</p>
+                    </div>
                 </div>
             </div>
         </div>
