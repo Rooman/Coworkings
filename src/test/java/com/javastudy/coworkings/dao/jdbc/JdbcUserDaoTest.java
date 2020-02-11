@@ -38,7 +38,7 @@ class JdbcUserDaoTest {
     @Test
     void getById() {
 
-        User actualUser = User.builder()
+        User expectedUser = User.builder()
                 .id((long) 1)
                 .city("Kiev")
                 .fullName("First User")
@@ -50,15 +50,15 @@ class JdbcUserDaoTest {
                 .username("firstUser")
                 .build();
 
-        User factUser = userDao.getById(1);
+        User actualUser = userDao.getById(1);
 
-        assertEquals(actualUser.getId(), factUser.getId());
-        assertEquals(actualUser.getCity(), factUser.getCity());
-        assertEquals(actualUser.getEmail(), factUser.getEmail());
-        assertEquals(actualUser.getFullName(), factUser.getFullName());
-        assertEquals(actualUser.getPassword(), factUser.getPassword());
-        assertEquals(actualUser.getUserRole(), factUser.getUserRole());
-        assertEquals(actualUser.getTel(), factUser.getTel());
-        assertEquals(actualUser.getUsername(), factUser.getUsername());
+        assertEquals(expectedUser.getId(), actualUser.getId());
+        assertEquals(expectedUser.getCity(), actualUser.getCity());
+        assertEquals(expectedUser.getEmail(), actualUser.getEmail());
+        assertEquals(expectedUser.getFullName(), actualUser.getFullName());
+        assertEquals(expectedUser.getPassword(), actualUser.getPassword());
+        assertEquals(expectedUser.getUserRole(), actualUser.getUserRole());
+        assertEquals(expectedUser.getTel(), actualUser.getTel());
+        assertEquals(expectedUser.getUsername(), actualUser.getUsername());
     }
 }

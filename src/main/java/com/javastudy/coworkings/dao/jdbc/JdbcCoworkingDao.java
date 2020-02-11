@@ -70,10 +70,10 @@ public class JdbcCoworkingDao implements CoworkingDao {
     public List<Coworking> getByCity(String city){
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(GET_COWORKING_BY_CITY)) {
-            List<Coworking> coworkings = new ArrayList<>();
             preparedStatement.setString(1, city);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                List<Coworking> coworkings = new ArrayList<>();
 
                 while (resultSet.next()) {
                     Coworking coworking = COWORKING_ROW_MAPPER.rowMap(resultSet);
@@ -81,16 +81,16 @@ public class JdbcCoworkingDao implements CoworkingDao {
                 }
 
                 if (coworkings.size() == 0) {
-                    logger.warn("No co-workings are found for the city \"{}\"", city);
+                    logger.info("No co-workings were found for the city: {}", city);
                 } else {
-                    logger.info("{} coworkings were found for the city \"{}\"", coworkings.size(), city);
+                    logger.info("{} co-workings were found for the city {}", coworkings.size(), city);
                 }
 
                 return coworkings;
             }
         } catch (SQLException e) {
-            logger.error("SQL Failed: {}", GET_COWORKING_BY_CITY);
-            throw new RuntimeException("Connection to database is not available . It is not possible to search co-working by city: " + city, e);
+            logger.error("Exception occurred while getting co-workings for city: {}", city, e);
+            throw new RuntimeException("Failed to execute query", e);
         }
     }
 
@@ -115,8 +115,8 @@ public class JdbcCoworkingDao implements CoworkingDao {
                 return top;
             }
         } catch (SQLException e) {
-            logger.error("SQL Failed: {}", GET_TOP_EIGHT);
-            throw new RuntimeException("Error happened while getting eight top-rated Coworkings: ", e);
+            logger.error("Exception occurred while getting top {} co-workings", count, e);
+            throw new RuntimeException("Failed to execute query", e);
         }
     }
 
@@ -134,16 +134,16 @@ public class JdbcCoworkingDao implements CoworkingDao {
                 }
 
                 if (coworkings.size() == 0) {
-                    logger.warn("No co-workings are found by following name of part of name \"{}\"", name);
+                    logger.warn("No co-workings are found by following name of part of name {}", name);
                 } else {
-                    logger.info("{} co-workings were found by name of part of name \"{}\"", coworkings.size(), name);
+                    logger.info("{} co-workings were found by name of part of name {}", coworkings.size(), name);
                 }
 
                 return coworkings;
             }
         } catch (SQLException e) {
-            logger.error("SQL Failed: {}", SEARCH_COWORKINGS_BY_NAME);
-            throw new RuntimeException("Connection to database is not available . It is not possible to search coworkings by name: " + name, e);
+            logger.error("Exception occurred while getting co-working by name: {}", name, e);
+            throw new RuntimeException("Failed to execute query", e);
         }
     }
 }
