@@ -1,9 +1,8 @@
 package com.javastudy.coworkings.web.servlet.security;
 
 import com.javastudy.coworkings.ServiceLocator;
-import com.javastudy.coworkings.security.DefaultSecurityService;
-import com.javastudy.coworkings.security.SecurityService;
-import com.javastudy.coworkings.security.Session;
+import com.javastudy.coworkings.service.security.SecurityService;
+import com.javastudy.coworkings.entity.Session;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +16,6 @@ public class LogoutServlet extends HttpServlet {
     public LogoutServlet() {
         securityService = ServiceLocator.getService(SecurityService.class);
     }
-
 
     @Override
     public void doGet(HttpServletRequest req,

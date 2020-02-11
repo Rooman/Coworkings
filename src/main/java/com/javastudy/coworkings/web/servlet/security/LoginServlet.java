@@ -1,9 +1,8 @@
 package com.javastudy.coworkings.web.servlet.security;
 
 import com.javastudy.coworkings.ServiceLocator;
-import com.javastudy.coworkings.security.DefaultSecurityService;
-import com.javastudy.coworkings.security.SecurityService;
-import com.javastudy.coworkings.security.Session;
+import com.javastudy.coworkings.service.security.SecurityService;
+import com.javastudy.coworkings.entity.Session;
 import com.javastudy.coworkings.web.templater.ThymeleafTemplater;
 
 import javax.servlet.http.Cookie;

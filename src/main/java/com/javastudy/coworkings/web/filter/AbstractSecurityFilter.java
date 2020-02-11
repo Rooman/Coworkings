@@ -2,9 +2,8 @@ package com.javastudy.coworkings.web.filter;
 
 import com.javastudy.coworkings.ServiceLocator;
 import com.javastudy.coworkings.entity.UserRole;
-import com.javastudy.coworkings.security.DefaultSecurityService;
-import com.javastudy.coworkings.security.SecurityService;
-import com.javastudy.coworkings.security.Session;
+import com.javastudy.coworkings.service.security.SecurityService;
+import com.javastudy.coworkings.entity.Session;
 
 import javax.servlet.*;
 import javax.servlet.http.Cookie;

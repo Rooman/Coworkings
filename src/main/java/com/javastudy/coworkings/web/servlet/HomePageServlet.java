@@ -3,7 +3,7 @@ package com.javastudy.coworkings.web.servlet;
 import com.javastudy.coworkings.ServiceLocator;
 import com.javastudy.coworkings.entity.Coworking;
 import com.javastudy.coworkings.entity.User;
-import com.javastudy.coworkings.security.Session;
+import com.javastudy.coworkings.entity.Session;
 import com.javastudy.coworkings.service.impl.DefaultCoworkingService;
 import com.javastudy.coworkings.web.templater.ThymeleafTemplater;
 import org.slf4j.Logger;

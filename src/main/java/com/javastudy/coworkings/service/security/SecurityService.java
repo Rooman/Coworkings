@@ -1,6 +1,6 @@
-package com.javastudy.coworkings.security;
+package com.javastudy.coworkings.service.security;
 
-import java.security.NoSuchAlgorithmException;
+import com.javastudy.coworkings.entity.Session;
 
 public interface SecurityService {
     Session login(String name, String password);

@@ -1,5 +1,6 @@
-package com.javastudy.coworkings.security;
+package com.javastudy.coworkings.service.security;
 
+import com.javastudy.coworkings.entity.Session;
 import com.javastudy.coworkings.entity.User;
 import com.javastudy.coworkings.service.UserService;
 import org.slf4j.Logger;
@@ -9,16 +10,13 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class DefaultSecurityService implements SecurityService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private int expireDays;
-    private List<Session> sessions = new ArrayList<>();
+    private List<Session> sessions = Collections.synchronizedList(new ArrayList<>());
     private UserService userService;
 
 
