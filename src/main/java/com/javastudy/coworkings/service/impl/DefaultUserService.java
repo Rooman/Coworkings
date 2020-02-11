@@ -22,4 +22,11 @@ public class DefaultUserService implements UserService {
         logger.info("Got user with id: {} from db", id);
         return user;
     }
+
+    @Override
+    public User getByUsername(String username) {
+        User user = userdao.getByUsername(username);
+        logger.info("Got user with username: {} from db", username);
+        return user;
+    }
 }

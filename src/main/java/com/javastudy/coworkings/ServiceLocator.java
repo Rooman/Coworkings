@@ -1,9 +1,15 @@
 package com.javastudy.coworkings;
 
 import com.javastudy.coworkings.dao.CoworkingDao;
+import com.javastudy.coworkings.dao.UserDao;
 import com.javastudy.coworkings.dao.jdbc.ConnectionFactory;
 import com.javastudy.coworkings.dao.jdbc.JdbcCoworkingDao;
+import com.javastudy.coworkings.dao.jdbc.JdbcUserDao;
+import com.javastudy.coworkings.service.security.DefaultSecurityService;
+import com.javastudy.coworkings.service.security.SecurityService;
+import com.javastudy.coworkings.service.UserService;
 import com.javastudy.coworkings.service.impl.DefaultCoworkingService;
+import com.javastudy.coworkings.service.impl.DefaultUserService;
 import com.javastudy.coworkings.util.PropertyReader;
 
 import javax.sql.DataSource;
@@ -18,11 +24,21 @@ public class ServiceLocator {
     static {
         PropertyReader propertyReader = new PropertyReader(PROPERTIES_FILE_LOCATION);
         Properties applicationProperties = propertyReader.getProperties();
-
         DataSource dataSource = ConnectionFactory.getDataSource(applicationProperties);
 
         CoworkingDao coworkingDao = new JdbcCoworkingDao(dataSource);
-        register(coworkingDao.getClass(), coworkingDao);
+        register(CoworkingDao.class, coworkingDao);
+
+        UserDao userDao = new JdbcUserDao(dataSource);
+        register(UserDao.class, userDao);
+
+        UserService userService = new DefaultUserService(userDao);
+        register(UserService.class, userService);
+
+        int expireDays = Integer.parseInt(applicationProperties.getProperty("session.expire.days"));
+        SecurityService securityService = new DefaultSecurityService(userService, expireDays);
+
+        register(SecurityService.class, securityService);
 
         Integer topCoworkingsCount = propertyReader.getInt("top.coworkings.count");
         DefaultCoworkingService defaultCoworkingService = new DefaultCoworkingService(coworkingDao, topCoworkingsCount);
