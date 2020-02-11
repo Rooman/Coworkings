@@ -1,22 +1,138 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="~{fragments/meta-head :: meta}" th:with="pageTitle=@{Coworkings in $city}, pageCSS=@{../assets/css/city.css}"></head>
+<head th:insert="~{fragments/meta-head :: meta}" th:with="pageTitle=${'Coworkings in ' + city}, pageCSS=@{../assets/css/city.css}"></head>
 
 <body>
-<header class="header">
+<header class="header mb-5">
     <div th:insert="~{fragments/navbar :: navigation}"></div>
+    <p class="city-name-title mt-5 pt-5 text-center" th:text="${city}"></p>
 </header>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-3">
-            First left side column
+        <div class="col-3 pl-5 pr-5">
+            <hr>
+            <form action="/city" method="GET">
+                <div>
+                    <p class="filter-title mb-3">Filters</p>
+                    <label class="container">
+                        <p class="filter-text">Desk</p>
+                        <input type="checkbox" value="true" name="desk">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">
+                        <p class="filter-text">Private Office</p>
+                        <input type="checkbox" value="true" name="privateOffice">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">
+                        <p class="filter-text">Meeting Room</p>
+                        <input type="checkbox" value="true" name="meetingRoom">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <hr>
+                <div>
+                    <p class="filter-title mb-3">Price</p>
+                    <label class="container">
+                        <p class="filter-text">100-200</p>
+                        <input type="checkbox" value="true" name="below200">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">
+                        <p class="filter-text">200-300</p>
+                        <input type="checkbox" value="true" name="below300">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">
+                        <p class="filter-text">300+</p>
+                        <input type="checkbox" value="true" name="above300">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <hr>
+                <div>
+                    <p class="filter-title mb-3">Rating</p>
+                    <label class="container">
+                        <p class="filter-text">From high to low</p>
+                        <input type="checkbox" value="true" name="highToLow">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">
+                        <p class="filter-text">From low to high</p>
+                        <input type="checkbox" value="true" name="lowToHigh">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <hr>
+                <div>
+                    <p class="filter-title mb-3">Equipment</p>
+                    <label class="container">
+                        <p class="filter-text">Single Monitors</p>
+                        <input type="checkbox" value="true" name="singleMonitors">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">
+                        <p class="filter-text">Dual Monitors</p>
+                        <input type="checkbox" value="true" name="dualMonitors">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">
+                        <p class="filter-text">Video recording</p>
+                        <input type="checkbox" value="true" name="videoRec">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">
+                        <p class="filter-text">Printer</p>
+                        <input type="checkbox" value="true" name="printer">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">
+                        <p class="filter-text">Scanner</p>
+                        <input type="checkbox" value="true" name="scanner">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">
+                        <p class="filter-text">Projector</p>
+                        <input type="checkbox" value="true" name="projector">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">
+                        <p class="filter-text">Microphone</p>
+                        <input type="checkbox" value="true" name="microphone">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-filters btn-filters-apply" name="cityName" th:value="${city}">Apply</button>
+                    <a class="btn btn-outline-dark btn-filters" th:href="@{../city(cityName=${city})}">Discard</a>
+                </div>
+            </form>
+
+
         </div>
         <div class="col-9">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-3" th:each="coworking : ${coworkings}">
-                        <p th:text="${coworking.getName()}"></p>
+                    <div class="col-4 top-coworkings-item mb-2" th:each="coworking : ${coworkings}">
+                        <div class="top-coworking-img-item">
+                            <div class="top-coworkings-price" th:text="'UAH ' + ${coworking.getDayPrice()}+'/day'">UAH 150/day</div>
+                            <img class="top-coworkings-img" src="/assets/img/coworking-img.png"
+                                 th:src="${coworking.getMainImage() != null ? coworking.getMainImage() : '/assets/img/coworking-img.png' }"
+                                 alt="Пiздець всiм сподiванням :(">
+                        </div>
+                        <div class="top-coworkings-overview">
+                            <p class="top-coworkings-name" th:text="${coworking.getName()}">ronda coworking-<br> recoleta</p>
+                            <p class="top-coworkings-adress"><i class="fas fa-map-marker-alt"></i><span
+                                    th:text="${coworking.getLocation()}">54 Petliury, Kyiv</span></p>
+                            <p class="top-coworkings-reviews"><i class="fas fa-star star-color"></i>
+                                <i class="fas fa-star star-color"></i>
+                                <i class="fas fa-star star-color"></i>
+                                <i class="fas fa-star star-color"></i>
+                                <i class="fas fa-star star-color"></i> <span th:text="${coworking.getReviewsCount()}">150</span>
+                                Reviews</p>
+                            <p class="top-coworkings-verify pb-3"><i class="far fa-check-circle"></i> Verify</p>
+                        </div>
                     </div>
                 </div>
             </div>
