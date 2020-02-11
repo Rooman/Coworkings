@@ -14,7 +14,7 @@ public class JdbcCoworkingDaoTest {
 
     @Test
     public void testSearchByName() {
-        CoworkingDao coworkingDao = ServiceLocator.getService(JdbcCoworkingDao.class);
+        CoworkingDao coworkingDao = ServiceLocator.getService(CoworkingDao.class);
         List<Coworking> listOfCoworkings = coworkingDao.searchByName("Crea");
         assertEquals(4, listOfCoworkings.size());
     }
