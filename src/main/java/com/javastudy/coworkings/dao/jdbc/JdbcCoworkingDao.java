@@ -49,7 +49,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
-                if (!resultSet.isBeforeFirst()) {
+                if (!resultSet.next()) {
                     throw new RuntimeException("Coworking with id: " + id + " isn't found");
                 }
                 Coworking coworking = COWORKING_ROW_MAPPER.rowMap(resultSet);
@@ -72,7 +72,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
             statement.setInt(1, count);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                if (!resultSet.isBeforeFirst()) {
+                if (!resultSet.next()) {
                     logger.info("Error happened while getting top-rated Coworkings. Do not have expected data in the ResultSet.");
                 }
 
