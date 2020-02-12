@@ -19,7 +19,6 @@
                         <label class="container">
                             <p class="filter-text">Desk</p>
                             <input type="checkbox" value="true" name="desk" th:checked="${hasDesk}">
-                            <!--th:utext="${hasDesk == true ? 'checked' : ''}"-->
                             <span class="checkmark"></span>
                         </label>
                         <label class="container">
@@ -120,12 +119,14 @@
                     <div class="row">
                         <div class="col-6 top-coworkings-item mb-2" th:each="coworking : ${coworkings}">
                             <div class="top-coworking-img-item">
-                                <div class="top-coworkings-price" th:text="'UAH ' + ${coworking.getDayPrice()}+'/day'">
-                                    UAH 150/day
-                                </div>
-                                <img class="top-coworkings-img" src="/assets/img/coworking-img.png"
-                                     th:src="${coworking.getMainImage() != null ? coworking.getMainImage() : '/assets/img/coworking-img.png' }"
-                                     alt="Пiздець всiм сподiванням :(">
+                                <a th:href="@{../coworking(id=${coworking.getId()})}">
+                                    <div class="top-coworkings-price" th:text="'UAH ' + ${coworking.getDayPrice()}+'/day'">
+                                        UAH 150/day
+                                    </div>
+                                    <img class="top-coworkings-img" src="/assets/img/coworking-img.png"
+                                         th:src="${coworking.getMainImage() != null ? coworking.getMainImage() : '/assets/img/coworking-img.png' }"
+                                         alt="Пiздець всiм сподiванням :(">
+                                </a>
                             </div>
                             <div class="top-coworkings-overview">
                                 <p class="top-coworkings-name" th:text="${coworking.getName()}">ronda coworking-<br>
