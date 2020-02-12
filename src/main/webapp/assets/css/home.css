@@ -84,8 +84,8 @@
 }
 
 .cities-item {
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
 }
 
 .city-name-text {
@@ -134,7 +134,7 @@
     justify-content: space-between;
 }
 
-top-coworkings-item {
+.top-coworkings-item {
     width: 294px;
     height: 339px;
 }
@@ -142,8 +142,8 @@ top-coworkings-item {
 .top-coworking-img-item {
     position: relative;
     display: block;
-    width: 294px;
-    height: 182px;
+    height: 160px;
+    width: 257px;
 }
 
 .top-coworkings-price {
@@ -171,6 +171,11 @@ top-coworkings-item {
     margin-top: 15px;
     margin-bottom: 0px;
     text-transform: capitalize;
+}
+
+.top-coworkings-img {
+    height: 160px;
+    width: 257px;
 }
 
 .top-coworkings-adress {

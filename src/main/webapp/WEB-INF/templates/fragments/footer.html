@@ -1,12 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-
-<p th:fragment="footer">
-    <footer class="footer">
-        Колись порядок був нахуй, не те шо сейчас!..
-    </footer>
-</p>
+<div class="container">
+    <p th:fragment="footer">
+        <footer class="footer">
+            <nav class="navbar navbar-block navbar-expand-lg">
+                <div class="container">
+                    <ul class="navbar-nav menu-bottom">
+                        <li class="nav-item menu-item">
+                            <a class="nav-link link-menu" href="/home">ABOUT US <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item menu-item">
+                            <a class="nav-link link-menu" href="/home">CONTACTS <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item menu-item">
+                            <a class="nav-link link-menu" href="/home">CITIES <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item menu-item">
+                            <a class="nav-link link-menu" href="/home">FACEBOOK <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item menu-item">
+                            <a class="nav-link link-menu" href="/home">INSTAGRAM <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </footer>
+    </p>
+</div>
 
 <p th:fragment="scripts">
     <script src="https://kit.fontawesome.com/5d1afe754b.js"></script>
