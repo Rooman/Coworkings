@@ -26,11 +26,11 @@ public class CityPageServlet extends HttpServlet {
         Map<String, Object> parameters = new HashMap<>();
         String city = req.getParameter("cityName");
 
-        boolean hasDesk = "true".equalsIgnoreCase(req.getParameter("desk"));
+        boolean hasDesk = Boolean.parseBoolean(req.getParameter("desk"));
         parameters.put("hasDesk", hasDesk);
-        boolean hasPrivateOffice = "true".equalsIgnoreCase(req.getParameter("privateOffice"));
+        boolean hasPrivateOffice = Boolean.parseBoolean(req.getParameter("privateOffice"));
         parameters.put("hasPrivateOffice", hasPrivateOffice);
-        boolean hasMeetingRoom = "true".equalsIgnoreCase(req.getParameter("meetingRoom"));
+        boolean hasMeetingRoom = Boolean.parseBoolean(req.getParameter("meetingRoom"));
         parameters.put("hasMeetingRoom", hasMeetingRoom);
 
         parameters.put("city", city);
