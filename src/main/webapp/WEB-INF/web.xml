@@ -18,6 +18,11 @@
         <servlet-class>com.javastudy.coworkings.web.servlet.HomePageServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>CityPageServlet</servlet-name>
+        <servlet-class>com.javastudy.coworkings.web.servlet.CityPageServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -33,6 +38,11 @@
         <!--  mapping for only /root  -->
         <url-pattern></url-pattern>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>CityPageServlet</servlet-name>
+        <url-pattern>/city</url-pattern>
     </servlet-mapping>
 
     <filter>
