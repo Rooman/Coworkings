@@ -3,6 +3,7 @@ package com.javastudy.coworkings.dao.jdbc;
 import com.javastudy.coworkings.dao.CoworkingDao;
 import com.javastudy.coworkings.dao.jdbc.mapper.CoworkingRowMapper;
 import com.javastudy.coworkings.entity.Coworking;
+import com.javastudy.coworkings.entity.CoworkingFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -111,6 +112,44 @@ public class JdbcCoworkingDao implements CoworkingDao {
         } catch (SQLException e) {
             logger.error("SQL Failed: {}", SEARCH_COWORKINGS_BY_NAME);
             throw new RuntimeException("Connection to database is not available . It is not possible to search users by name: " + name, e);
+        }
+    }
+
+    public List<Coworking> getFiltered(CoworkingFilter filters){
+
+        String GET_FILTERED_COWORKINGS = "SELECT id, name, mainimage, overview," +
+                "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
+                "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE lower(city) like lower(?)";
+
+        for (String filter: filters.getFilters()) {
+            String result = " AND " + filter + " = true";
+            GET_FILTERED_COWORKINGS += result;
+        }
+        GET_FILTERED_COWORKINGS += ";";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_FILTERED_COWORKINGS)) {
+            String city = filters.getCity();
+            preparedStatement.setString(1, city);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                List<Coworking> coworkings = new ArrayList<>();
+                while (resultSet.next()) {
+                    Coworking coworking = COWORKING_ROW_MAPPER.rowMap(resultSet);
+                    coworkings.add(coworking);
+                }
+
+                if (coworkings.size() == 0) {
+                    logger.warn("No co-workings are found");
+                } else {
+                    logger.info("{} coworkings were found", coworkings.size());
+                }
+
+                return coworkings;
+            }
+        } catch (SQLException e) {
+            logger.error("SQL Failed: {}", GET_FILTERED_COWORKINGS);
+            throw new RuntimeException("Connection to database is not available . It is not possible to search coworkings", e);
         }
     }
 }

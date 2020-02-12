@@ -21,3 +21,22 @@ create table reviews
 	coworkingid bigint not null,
 	userid bigint not null references users (id)
 );
+
+create table coworkings
+(
+	id bigint primary key,
+	name varchar(50) not null,
+	mainimage text not null,
+	overview text not null,
+	location text not null,
+	reviewscount bigint not null,
+    city varchar(20) not null,
+    dayprice numeric not null,
+    weekprice numeric not null,
+    monthprice numeric not null,
+    rating numeric not null,
+    openinghours text not null,
+    containsdesk boolean not null,
+    containsoffice boolean not null,
+    containsmeetingroom boolean not null
+);
