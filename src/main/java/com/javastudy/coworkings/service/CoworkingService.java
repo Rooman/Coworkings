@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface CoworkingService {
     Coworking getById(long id);
-    List<Coworking> getByCity(String city);
     List<Coworking> getTop();
     List<Coworking> searchByName(String name);
     List<Coworking> searchByCity(String city);
