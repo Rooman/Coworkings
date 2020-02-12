@@ -43,7 +43,7 @@ public class CityPageServlet extends HttpServlet {
         parameters.put("user", user);
         logger.debug("User {}", user);
 
-        List<Coworking> coworkings = coworkingService.searchByCity(city);
+        List<Coworking> coworkings = coworkingService.getByCity(city);
         parameters.put("coworkings", coworkings);
         logger.debug("Coworkings {}", coworkings);
 

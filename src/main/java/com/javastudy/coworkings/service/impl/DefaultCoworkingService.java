@@ -34,10 +34,5 @@ public class DefaultCoworkingService implements CoworkingService {
     public List<Coworking> searchByName(String name) {
         return coworkingDao.searchByName(name);
     }
-
-    @Override
-    public List<Coworking> searchByCity(String city) {
-        return coworkingDao.searchByCity(city);
-    }
 }
 
