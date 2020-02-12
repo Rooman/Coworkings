@@ -21,13 +21,13 @@ public class JdbcCoworkingDao implements CoworkingDao {
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
             "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE id=?;";
 
-    private static final String GET_COWORKING_BY_CITY = "SELECT id, name, mainimage, overview," +
-            "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
-            "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE city like ?;";
-
     private static final String GET_TOP_EIGHT = "SELECT id, name, mainimage, overview, location, reviewscount, " +
             "city, dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, " +
             "containsmeetingroom FROM coworkings ORDER BY rating LIMIT ?;";
+
+    private static final String GET_BY_CITY = "SELECT id, name, mainimage, overview, location, reviewscount, " +
+            "city, dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, " +
+            "containsmeetingroom FROM coworkings WHERE city=?;";
 
     private static final String SEARCH_COWORKINGS_BY_NAME = "SELECT id, name, mainimage, overview," +
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
@@ -49,11 +49,9 @@ public class JdbcCoworkingDao implements CoworkingDao {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
-
-                if (!resultSet.isBeforeFirst()) {
+                if (!resultSet.next()) {
                     throw new RuntimeException("Coworking with id: " + id + " isn't found");
                 }
-              
                 Coworking coworking = COWORKING_ROW_MAPPER.rowMap(resultSet);
 
                 if (resultSet.next()) {
@@ -68,35 +66,6 @@ public class JdbcCoworkingDao implements CoworkingDao {
         }
     }
 
-    @Override
-    public List<Coworking> getByCity(String city){
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(GET_COWORKING_BY_CITY)) {
-            preparedStatement.setString(1, city);
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                List<Coworking> coworkings = new ArrayList<>();
-
-                while (resultSet.next()) {
-                    Coworking coworking = COWORKING_ROW_MAPPER.rowMap(resultSet);
-                    coworkings.add(coworking);
-                }
-
-                if (coworkings.size() == 0) {
-                    logger.info("No co-workings were found for the city: {}", city);
-                } else {
-                    logger.info("{} co-workings were found for the city {}", coworkings.size(), city);
-                }
-
-                return coworkings;
-            }
-        } catch (SQLException e) {
-            logger.error("Exception occurred while getting co-workings for city: {}", city, e);
-            throw new RuntimeException("Failed to execute query", e);
-        }
-    }
-
-    @Override
     public List<Coworking> getTop(int count) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(GET_TOP_EIGHT)) {
@@ -146,6 +115,32 @@ public class JdbcCoworkingDao implements CoworkingDao {
         } catch (SQLException e) {
             logger.error("Exception occurred while getting co-working by name: {}", name, e);
             throw new RuntimeException("Failed to execute query", e);
+        }
+    }
+
+    @Override
+    public List<Coworking> getByCity(String city) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_BY_CITY)) {
+            statement.setString(1, city);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (!resultSet.isBeforeFirst()) {
+                    logger.info("Error happened while getting Coworkings by city {}. Do not have expected data in the ResultSet.", city);
+                }
+
+                List<Coworking> coworkings = new ArrayList<>();
+
+                while (resultSet.next()) {
+                    Coworking coworking = COWORKING_ROW_MAPPER.rowMap(resultSet);
+                    coworkings.add(coworking);
+                }
+
+                return coworkings;
+            }
+        } catch (SQLException e) {
+            logger.error("SQL Failed: {}", GET_BY_CITY);
+            throw new RuntimeException("Error happened while getting Coworkings by city: " + city, e);
         }
     }
 }
