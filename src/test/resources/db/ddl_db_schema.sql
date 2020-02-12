@@ -16,8 +16,8 @@ create table users
 create table reviews
 (
 	id bigint primary key,
-	description varchar(100) not null,
-	status varchar (20) not null constraint status_value check (status = 'new' OR status = 'approved' OR status = 'rejected'),
+	description text not null,
+	status text not null constraint status_value check (status = 'new' OR status = 'approved' OR status = 'rejected'),
 	coworkingid bigint not null,
 	userid bigint not null references users (id)
 );

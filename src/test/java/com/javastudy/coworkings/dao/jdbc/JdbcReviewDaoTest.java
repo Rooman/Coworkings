@@ -39,7 +39,7 @@ class JdbcReviewDaoTest {
 
     @Test
     public void testSearchAllReviewsByCoworkingId() {
-        Review actualReview = Review.builder()
+        Review expectedReview = Review.builder()
                 .id((long) 4)
                 .description("All is fine, but too loud")
                 .reviewStatus(ReviewStatus.NEW)
@@ -47,12 +47,12 @@ class JdbcReviewDaoTest {
                 .userId((long) 1)
                 .build();
 
-        List<Review> factReview = reviewDao.getAllReviewsByCoworkingId(2);
+        List<Review> actualReview = reviewDao.getAllReviewsByCoworkingId(2);
 
-        assertEquals(actualReview.getId(), factReview.get(0).getId());
-        assertEquals(actualReview.getDescription(), factReview.get(0).getDescription());
-        assertEquals(actualReview.getReviewStatus(), factReview.get(0).getReviewStatus());
-        assertEquals(actualReview.getCoworkingId(), factReview.get(0).getCoworkingId());
-        assertEquals(actualReview.getUserId(), factReview.get(0).getUserId());
+        assertEquals(expectedReview.getId(), actualReview.get(0).getId());
+        assertEquals(expectedReview.getDescription(), actualReview.get(0).getDescription());
+        assertEquals(expectedReview.getReviewStatus(), actualReview.get(0).getReviewStatus());
+        assertEquals(expectedReview.getCoworkingId(), actualReview.get(0).getCoworkingId());
+        assertEquals(expectedReview.getUserId(), actualReview.get(0).getUserId());
     }
 }

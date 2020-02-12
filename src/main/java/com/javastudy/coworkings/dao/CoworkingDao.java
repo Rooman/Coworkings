@@ -11,5 +11,6 @@ public interface CoworkingDao {
     List<Coworking> getTop(int count);
     List<Coworking> searchByName(String name);
     List<Coworking> getFiltered (CoworkingFilter filters);
+    List<Coworking> getByCity(String city);
 }
 
