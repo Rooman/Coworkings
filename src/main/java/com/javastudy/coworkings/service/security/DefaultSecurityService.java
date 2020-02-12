@@ -11,12 +11,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class DefaultSecurityService implements SecurityService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private int expireDays;
-    private List<Session> sessions = Collections.synchronizedList(new ArrayList<>());
+    private List<Session> sessions = new CopyOnWriteArrayList<>();
     private UserService userService;
 
 

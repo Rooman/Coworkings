@@ -55,14 +55,14 @@ public class JdbcCoworkingDao implements CoworkingDao {
                 Coworking coworking = COWORKING_ROW_MAPPER.rowMap(resultSet);
 
                 if (resultSet.next()) {
-                    throw new RuntimeException("Coworking's with id: " + id + " are several");
+                    throw new RuntimeException("Co-working's with id: " + id + " are several");
                 }
 
                 return coworking;
             }
         } catch (SQLException e) {
             logger.error("SQL Failed: {}", GET_COWORKING_BY_ID);
-            throw new RuntimeException("Coworking with id: " + id + "wasn't found", e);
+            throw new RuntimeException("Co-working with id: " + id + "wasn't found", e);
         }
     }
 
@@ -72,7 +72,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
             statement.setInt(1, count);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                if (!resultSet.next()) {
+                if (!resultSet.isBeforeFirst()) {
                     logger.info("Error happened while getting top-rated Coworkings. Do not have expected data in the ResultSet.");
                 }
 
@@ -86,8 +86,8 @@ public class JdbcCoworkingDao implements CoworkingDao {
                 return top;
             }
         } catch (SQLException e) {
-            logger.error("SQL Failed: {}", GET_TOP_EIGHT);
-            throw new RuntimeException("Error happened while getting eight top-rated Coworkings: ", e);
+            logger.error("Exception occurred while getting top {} co-workings", count, e);
+            throw new RuntimeException("Failed to execute query", e);
         }
     }
 
@@ -105,16 +105,16 @@ public class JdbcCoworkingDao implements CoworkingDao {
                 }
 
                 if (coworkings.size() == 0) {
-                    logger.warn("No co-workings are found by following name of part of name \"{}\"", name);
+                    logger.warn("No co-workings are found by following name of part of name {}", name);
                 } else {
-                    logger.info("{} coworkings were found by name of part of name \"{}\"", coworkings.size(), name);
+                    logger.info("{} co-workings were found by name of part of name {}", coworkings.size(), name);
                 }
 
                 return coworkings;
             }
         } catch (SQLException e) {
-            logger.error("SQL Failed: {}", SEARCH_COWORKINGS_BY_NAME);
-            throw new RuntimeException("Connection to database is not available . It is not possible to search users by name: " + name, e);
+            logger.error("Exception occurred while getting co-working by name: {}", name, e);
+            throw new RuntimeException("Failed to execute query", e);
         }
     }
 
