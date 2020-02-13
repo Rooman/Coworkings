@@ -5,6 +5,7 @@ import com.javastudy.coworkings.dao.UserDao;
 import com.javastudy.coworkings.dao.jdbc.ConnectionFactory;
 import com.javastudy.coworkings.dao.jdbc.JdbcCoworkingDao;
 import com.javastudy.coworkings.dao.jdbc.JdbcUserDao;
+import com.javastudy.coworkings.service.CoworkingService;
 import com.javastudy.coworkings.service.security.DefaultSecurityService;
 import com.javastudy.coworkings.service.security.SecurityService;
 import com.javastudy.coworkings.service.UserService;
@@ -41,8 +42,8 @@ public class ServiceLocator {
         register(SecurityService.class, securityService);
 
         Integer topCoworkingsCount = propertyReader.getInt("top.coworkings.count");
-        DefaultCoworkingService defaultCoworkingService = new DefaultCoworkingService(coworkingDao, topCoworkingsCount);
-        register(DefaultCoworkingService.class, defaultCoworkingService);
+        CoworkingService coworkingService = new DefaultCoworkingService(coworkingDao, topCoworkingsCount);
+        register(CoworkingService.class, coworkingService);
         register(PropertyReader.class, propertyReader);
     }
 

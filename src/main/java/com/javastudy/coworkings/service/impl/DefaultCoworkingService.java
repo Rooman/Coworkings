@@ -10,7 +10,6 @@ import java.util.List;
 public class DefaultCoworkingService implements CoworkingService {
     private CoworkingDao coworkingDao;
     private int topCoworkingsCount;
-    private CoworkingFilter coworkingFilter;
 
     public DefaultCoworkingService(CoworkingDao coworkingDao, int topCoworkingsCount) {
         this.coworkingDao = coworkingDao;
@@ -39,7 +38,7 @@ public class DefaultCoworkingService implements CoworkingService {
 
     @Override
     public List<Coworking> getFiltered(CoworkingFilter filters) {
-        return coworkingDao.getFiltered(coworkingFilter);
+        return coworkingDao.getFiltered(filters);
     }
 }
 

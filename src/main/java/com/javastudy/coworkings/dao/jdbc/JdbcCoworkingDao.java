@@ -40,11 +40,6 @@ public class JdbcCoworkingDao implements CoworkingDao {
             "containsdesk, containsoffice, containsmeetingroom, hasSingleMonitors, hasDualMonitors, " +
             "hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone FROM Coworkings WHERE lower(name) like lower(?);";
 
-    private static String get_filtered_coworkings = "SELECT id, name, mainimage, overview, " +
-            "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
-            "containsdesk, containsoffice, containsmeetingroom, hasSingleMonitors, hasDualMonitors, " +
-            "hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone FROM Coworkings WHERE lower(city) like lower(?)";
-
     private static final CoworkingRowMapper COWORKING_ROW_MAPPER = new CoworkingRowMapper();
     private DataSource dataSource;
 
@@ -157,22 +152,24 @@ public class JdbcCoworkingDao implements CoworkingDao {
     }
 
     public List<Coworking> getFiltered(CoworkingFilter filters) {
+        String baseRequestString = "SELECT id, name, mainimage, overview, " +
+                "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
+                "containsdesk, containsoffice, containsmeetingroom, hasSingleMonitors, hasDualMonitors, " +
+                "hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone FROM Coworkings WHERE lower(city) like lower(?)";
 
         if (filters.getFilters() != null) {
             for (String filter : filters.getFilters()) {
                 String result = " AND " + filter + " = true";
-                get_filtered_coworkings += result;
+                baseRequestString += result;
             }
         }
 
         if (filters.getEquipment() != null) {
             for (String equipment : filters.getEquipment()) {
                 String result = " AND " + equipment + " = true";
-                get_filtered_coworkings += result;
+                baseRequestString += result;
             }
         }
-
-
 
         if (filters.getPrice() != null) {
             int count = 0;
@@ -201,26 +198,26 @@ public class JdbcCoworkingDao implements CoworkingDao {
                 } else if (!maxPrice.equals("")) {
                     result += " dayprice < " + maxPrice;
                 }
-                get_filtered_coworkings += result;
+                baseRequestString += result;
                 count++;
             }
-            get_filtered_coworkings += ")";
+            baseRequestString += ")";
         }
 
         if (filters.getRating() != null) {
             Map<String, RatingOrder> rating = filters.getRating();
             RatingOrder ratingOrder = rating.get("ratingOrder");
             if (ratingOrder.equals(RatingOrder.HIGH_TO_LOW)) {
-                get_filtered_coworkings += " ORDER BY rating desc";
+                baseRequestString += " ORDER BY rating desc";
             } else {
-                get_filtered_coworkings += " order by rating asc";
+                baseRequestString += " order by rating asc";
             }
         }
 
-        get_filtered_coworkings += ";";
+        baseRequestString += ";";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(get_filtered_coworkings)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(baseRequestString)) {
             String city = filters.getCity();
             preparedStatement.setString(1, city);
 
@@ -240,7 +237,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
                 return coworkings;
             }
         } catch (SQLException e) {
-            logger.error("SQL Failed: {}", get_filtered_coworkings);
+            logger.error("SQL Failed: {}", baseRequestString);
             throw new RuntimeException("Connection to database is not available . It is not possible to search coworkings", e);
         }
     }

@@ -28,7 +28,6 @@ public class JdbcCoworkingDaoTest {
     private CoworkingDao coworkingDao = ServiceLocator.getService(CoworkingDao.class);
     private static Coworking expectedCoworking;
     private static Coworking expectedCoworkingForFiltersTest;
-    private DefaultCoworkingService coworkingService = ServiceLocator.getService(DefaultCoworkingService.class);
 
     @BeforeAll
     static void before() throws IOException, URISyntaxException {
@@ -106,8 +105,6 @@ public class JdbcCoworkingDaoTest {
         coworkingFilter.setCity("Lviv");
         List<Coworking> factCoworking = coworkingDao.getFiltered(coworkingFilter);
 
-        //List<Coworking> factCoworking = coworkingService.getFiltered(coworkingFilter);
-
         assertEquals(1, factCoworking.size());
         assertEquals(expectedCoworkingForFiltersTest.getId(), factCoworking.get(0).getId());
         assertEquals(expectedCoworkingForFiltersTest.getName(), factCoworking.get(0).getName());
@@ -115,7 +112,6 @@ public class JdbcCoworkingDaoTest {
         assertEquals(expectedCoworkingForFiltersTest.isContainsOffice(), factCoworking.get(0).isContainsOffice());
         assertEquals(expectedCoworkingForFiltersTest.isContainsMeetingRoom(), factCoworking.get(0).isContainsMeetingRoom());
     }
-
 
     @Test
     public void testGetFilteredEquipmentOnly() {
@@ -281,7 +277,7 @@ public class JdbcCoworkingDaoTest {
     @Test
     public void testGetByCity() {
 
-        List<Coworking> actualCoworking = coworkingDao.getByCity("Kiev");
+        List<Coworking> actualCoworking = coworkingDao.getByCity("Kyiv");
 
         assertEquals(1, actualCoworking.size());
         assertEquals(expectedCoworking.getId(), actualCoworking.get(0).getId());
