@@ -7,13 +7,19 @@ values (4, 'All is fine, but too loud', 'new', 2, 1);
 
 
 insert into coworkings (id, name, mainimage, overview, location, reviewscount, city,
-dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, containsmeetingroom)
-values (1, 'TestName', 'http://testlink', 'TestOverview', 'TestLocation', 1, 'Kiev', 1, 2, 3, 5, 'TestOpeningHours', true, true, true);
+dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, containsmeetingroom,
+hasSingleMonitors, hasDualMonitors, hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone)
+values (1, 'TestName', 'http://testlink', 'TestOverview', 'TestLocation', 1, 'Kiev', 1, 2, 3, 5, 'TestOpeningHours', true, true, true,
+true, true, true, true, true, true, true);
 
 insert into coworkings (id, name, mainimage, overview, location, reviewscount, city,
-dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, containsmeetingroom)
-values (2, 'AnotherName', 'http://testlink2', 'TestOverview2', 'TestLocation2', 2, 'Lviv', 4, 5, 6, 8, 'TestOpeningHours2', false, false, false);
+dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, containsmeetingroom,
+hasSingleMonitors, hasDualMonitors, hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone)
+values (2, 'AnotherName', 'http://testlink2', 'TestOverview2', 'TestLocation2', 2, 'Lviv', 4, 5, 6, 8, 'TestOpeningHours2', false, false, false,
+false, false, false, false, false, false, false);
 
 insert into coworkings (id, name, mainimage, overview, location, reviewscount, city,
-dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, containsmeetingroom)
-values (3, 'AnotherName2', 'http://testlink3', 'TestOverview3', 'TestLocation3', 1, 'Lviv', 7, 8, 9, 11, 'TestOpeningHours3', false, true, true);
+dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, containsmeetingroom,
+hasSingleMonitors, hasDualMonitors, hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone)
+values (3, 'AnotherName2', 'http://testlink3', 'TestOverview3', 'TestLocation3', 1, 'Lviv', 7, 8, 9, 11, 'TestOpeningHours3', false, true, true,
+false, false, false, false, true, true, true);
