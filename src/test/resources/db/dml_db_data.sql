@@ -2,10 +2,13 @@
 insert into users (id, username, fullName, role, tel, email, city, sole, password)
 values (1, 'firstUser', 'First User', 'USER', '+380630636363', 'first.user@gmail.com', 'Kiev', 'sole123', 'pass123');
 
+
+--review table
 insert into reviews (id, description, status, coworkingid, userid)
 values (4, 'All is fine, but too loud', 'new', 2, 1);
 
 
+--coworking table
 insert into coworkings (id, name, mainimage, overview, location, reviewscount, city,
 dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, containsmeetingroom,
 hasSingleMonitors, hasDualMonitors, hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone)
