@@ -22,4 +22,11 @@ public class Coworking {
     private boolean containsDesk;
     private boolean containsOffice;
     private boolean containsMeetingRoom;
+    private boolean hasSingleMonitors;
+    private boolean hasDualMonitors;
+    private boolean hasVideoRec;
+    private boolean hasPrinter;
+    private boolean hasScanner;
+    private boolean hasProjector;
+    private boolean hasMicrophone;
 }
