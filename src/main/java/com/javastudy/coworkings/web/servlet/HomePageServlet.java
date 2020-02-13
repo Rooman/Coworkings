@@ -33,9 +33,21 @@ public class HomePageServlet extends HttpServlet {
         parameters.put("user", user);
         logger.debug("User {}", user);
 
-        List<Coworking> coworkings = coworkingService.getTop();
-        parameters.put("coworkings", coworkings);
-        logger.debug("Coworkings {}", coworkings);
+        String searchRequest = req.getParameter("searchRequest");
+        List<Coworking> coworkingsSearched = null;
+        if (searchRequest != null) {
+            coworkingsSearched = coworkingService.searchByName(searchRequest);
+        }
+
+
+        if (coworkingsSearched != null && coworkingsSearched.size() > 0) {
+            parameters.put("coworkings", coworkingsSearched);
+            logger.debug("Coworkings {}", coworkingsSearched);
+        } else {
+            List<Coworking> coworkingsTop = coworkingService.getTop();
+            parameters.put("coworkings", coworkingsTop);
+            logger.debug("Coworkings {}", coworkingsTop);
+        }
 
         response.setContentType("text/html; charset=utf-8");
         ThymeleafTemplater.process("index", parameters,  response.getWriter());
