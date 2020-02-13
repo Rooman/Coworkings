@@ -24,6 +24,13 @@ public class CoworkingRowMapper {
                 .containsDesk(resultSet.getBoolean("containsdesk"))
                 .containsOffice(resultSet.getBoolean("containsoffice"))
                 .containsMeetingRoom(resultSet.getBoolean("containsmeetingroom"))
+                .hasSingleMonitors(resultSet.getBoolean("hassinglemonitors"))
+                .hasDualMonitors(resultSet.getBoolean("hasdualmonitors"))
+                .hasVideoRec(resultSet.getBoolean("hasvideorec"))
+                .hasPrinter(resultSet.getBoolean("hasprinter"))
+                .hasScanner(resultSet.getBoolean("hasscanner"))
+                .hasProjector(resultSet.getBoolean("hasprojector"))
+                .hasMicrophone(resultSet.getBoolean("hasmicrophone"))
                 .build();
 
 

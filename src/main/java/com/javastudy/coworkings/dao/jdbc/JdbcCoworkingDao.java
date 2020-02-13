@@ -22,23 +22,28 @@ public class JdbcCoworkingDao implements CoworkingDao {
 
     private static final String GET_COWORKING_BY_ID = "SELECT id, name, mainimage, overview," +
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
-            "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE id=?;";
+            "containsdesk, containsoffice, containsmeetingroom, hasSingleMonitors, hasDualMonitors, " +
+            "hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone FROM Coworkings WHERE id=?;";
 
     private static final String GET_TOP_EIGHT = "SELECT id, name, mainimage, overview, location, reviewscount, " +
             "city, dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, " +
-            "containsmeetingroom FROM coworkings ORDER BY rating LIMIT ?;";
+            "containsmeetingroom, hasSingleMonitors, hasDualMonitors, " +
+            "hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone FROM coworkings ORDER BY rating LIMIT ?;";
 
     private static final String GET_BY_CITY = "SELECT id, name, mainimage, overview, location, reviewscount, " +
             "city, dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, " +
-            "containsmeetingroom FROM coworkings WHERE city=?;";
+            "containsmeetingroom, hasSingleMonitors, hasDualMonitors, " +
+            "hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone FROM coworkings WHERE city=?;";
 
-    private static final String SEARCH_COWORKINGS_BY_NAME = "SELECT id, name, mainimage, overview," +
+    private static final String SEARCH_COWORKINGS_BY_NAME = "SELECT id, name, mainimage, overview, " +
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
-            "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE lower(name) like lower(?);";
+            "containsdesk, containsoffice, containsmeetingroom, hasSingleMonitors, hasDualMonitors, " +
+            "hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone FROM Coworkings WHERE lower(name) like lower(?);";
 
-    private static String get_filtered_coworkings = "SELECT id, name, mainimage, overview," +
+    private static String get_filtered_coworkings = "SELECT id, name, mainimage, overview, " +
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
-            "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE lower(city) like lower(?)";
+            "containsdesk, containsoffice, containsmeetingroom, hasSingleMonitors, hasDualMonitors, " +
+            "hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone FROM Coworkings WHERE lower(city) like lower(?)";
 
     private static final CoworkingRowMapper COWORKING_ROW_MAPPER = new CoworkingRowMapper();
     private DataSource dataSource;
@@ -167,15 +172,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
             }
         }
 
-        if (filters.getRating() != null) {
-            Map<String, RatingOrder> rating = filters.getRating();
-            RatingOrder ratingOrder = rating.get("ratingOrder");
-            if (ratingOrder.equals(RatingOrder.HIGH_TO_LOW)) {
-                get_filtered_coworkings += " ORDER BY rating desc";
-            } else {
-                get_filtered_coworkings += " order by rating asc";
-            }
-        }
+
 
         if (filters.getPrice() != null) {
             int count = 0;
@@ -208,6 +205,16 @@ public class JdbcCoworkingDao implements CoworkingDao {
                 count++;
             }
             get_filtered_coworkings += ")";
+        }
+
+        if (filters.getRating() != null) {
+            Map<String, RatingOrder> rating = filters.getRating();
+            RatingOrder ratingOrder = rating.get("ratingOrder");
+            if (ratingOrder.equals(RatingOrder.HIGH_TO_LOW)) {
+                get_filtered_coworkings += " ORDER BY rating desc";
+            } else {
+                get_filtered_coworkings += " order by rating asc";
+            }
         }
 
         get_filtered_coworkings += ";";

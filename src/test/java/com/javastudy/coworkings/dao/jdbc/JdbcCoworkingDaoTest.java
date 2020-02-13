@@ -6,6 +6,8 @@ import com.javastudy.coworkings.entity.Coworking;
 import com.javastudy.coworkings.entity.CoworkingFilter;
 
 import com.javastudy.coworkings.entity.RatingOrder;
+import com.javastudy.coworkings.service.CoworkingService;
+import com.javastudy.coworkings.service.impl.DefaultCoworkingService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +28,7 @@ public class JdbcCoworkingDaoTest {
     private CoworkingDao coworkingDao = ServiceLocator.getService(CoworkingDao.class);
     private static Coworking expectedCoworking;
     private static Coworking expectedCoworkingForFiltersTest;
+    private DefaultCoworkingService coworkingService = ServiceLocator.getService(DefaultCoworkingService.class);
 
     @BeforeAll
     static void before() throws IOException, URISyntaxException {
@@ -39,14 +42,21 @@ public class JdbcCoworkingDaoTest {
                 .location("TestLocation")
                 .reviewsCount((long) 1)
                 .city("Kyiv")
-                .dayPrice(1)
-                .weekPrice(2)
-                .monthPrice(3)
+                .dayPrice(350)
+                .weekPrice(1700)
+                .monthPrice(6500)
                 .rating(5)
                 .openingHours("TestOpeningHours")
                 .containsDesk(true)
                 .containsOffice(true)
                 .containsMeetingRoom(true)
+                .hasSingleMonitors(true)
+                .hasDualMonitors(true)
+                .hasVideoRec(true)
+                .hasPrinter(true)
+                .hasScanner(true)
+                .hasProjector(true)
+                .hasMicrophone(true)
                 .build();
 
 
@@ -66,6 +76,13 @@ public class JdbcCoworkingDaoTest {
                 .containsDesk(true)
                 .containsOffice(false)
                 .containsMeetingRoom(true)
+                .hasSingleMonitors(true)
+                .hasDualMonitors(true)
+                .hasVideoRec(true)
+                .hasPrinter(true)
+                .hasScanner(true)
+                .hasProjector(true)
+                .hasMicrophone(true)
                 .build();
     }
 
@@ -89,12 +106,31 @@ public class JdbcCoworkingDaoTest {
         coworkingFilter.setCity("Lviv");
         List<Coworking> factCoworking = coworkingDao.getFiltered(coworkingFilter);
 
+        //List<Coworking> factCoworking = coworkingService.getFiltered(coworkingFilter);
+
         assertEquals(1, factCoworking.size());
         assertEquals(expectedCoworkingForFiltersTest.getId(), factCoworking.get(0).getId());
         assertEquals(expectedCoworkingForFiltersTest.getName(), factCoworking.get(0).getName());
         assertEquals(expectedCoworkingForFiltersTest.isContainsDesk(), factCoworking.get(0).isContainsDesk());
         assertEquals(expectedCoworkingForFiltersTest.isContainsOffice(), factCoworking.get(0).isContainsOffice());
         assertEquals(expectedCoworkingForFiltersTest.isContainsMeetingRoom(), factCoworking.get(0).isContainsMeetingRoom());
+    }
+
+
+    @Test
+    public void testGetFilteredEquipmentOnly() {
+        CoworkingFilter coworkingFilter = new CoworkingFilter();
+        List<String> equipment = new ArrayList<>();
+        equipment.add("hasprojector");
+        equipment.add("hasmicrophone");
+        coworkingFilter.setEquipment(equipment);
+        coworkingFilter.setCity("Lviv");
+        List<Coworking> factCoworking = coworkingDao.getFiltered(coworkingFilter);
+
+        assertEquals(2, factCoworking.size());
+        assertEquals(3, factCoworking.get(0).getId());
+        assertEquals(4, factCoworking.get(1).getId());
+
     }
 
     @Test
@@ -106,10 +142,11 @@ public class JdbcCoworkingDaoTest {
         coworkingFilter.setRating(ratingOrder);
 
         List<Coworking> factCoworking = coworkingDao.getFiltered(coworkingFilter);
-        assertEquals(3, factCoworking.size());
+        assertEquals(4, factCoworking.size());
         assertEquals(3, factCoworking.get(0).getId());
-        assertEquals(4, factCoworking.get(1).getId());
-        assertEquals(2, factCoworking.get(2).getId());
+        assertEquals(5, factCoworking.get(1).getId());
+        assertEquals(4, factCoworking.get(2).getId());
+        assertEquals(2, factCoworking.get(3).getId());
     }
 
     @Test
@@ -121,10 +158,11 @@ public class JdbcCoworkingDaoTest {
         coworkingFilter.setRating(ratingOrder);
 
         List<Coworking> factCoworking = coworkingDao.getFiltered(coworkingFilter);
-        assertEquals(3, factCoworking.size());
+        assertEquals(4, factCoworking.size());
         assertEquals(2, factCoworking.get(0).getId());
         assertEquals(4, factCoworking.get(1).getId());
-        assertEquals(3, factCoworking.get(2).getId());
+        assertEquals(5, factCoworking.get(2).getId());
+        assertEquals(3, factCoworking.get(3).getId());
     }
 
     @Test
@@ -178,6 +216,7 @@ public class JdbcCoworkingDaoTest {
         price.add("above300");
         coworkingFilter.setPrice(price);
         coworkingFilter.setCity("Lviv");
+
         List<Coworking> factCoworking = coworkingDao.getFiltered(coworkingFilter);
 
         assertEquals(3, factCoworking.size());
@@ -186,52 +225,82 @@ public class JdbcCoworkingDaoTest {
         assertEquals(5, factCoworking.get(2).getId());*/
     }
 
-        @Test
-        public void testSearchByName(){
+    @Test
+    public void testGetFilteredSomeFilters() {
+        CoworkingFilter coworkingFilter = new CoworkingFilter();
+        List<String> price = new ArrayList<>();
+        price.add("100-200");
+        price.add("200-300");
+        price.add("above300");
+        coworkingFilter.setPrice(price);
 
-            List<Coworking> actualCoworking = coworkingDao.searchByName("test");
+        coworkingFilter.setCity("Lviv");
 
-            assertEquals(1, actualCoworking.size());
-            assertEquals(expectedCoworking.getId(), actualCoworking.get(0).getId());
-            assertEquals(expectedCoworking.getName(), actualCoworking.get(0).getName());
-            assertEquals(expectedCoworking.getMainImage(), actualCoworking.get(0).getMainImage());
-            assertEquals(expectedCoworking.getOverview(), actualCoworking.get(0).getOverview());
-            assertEquals(expectedCoworking.getLocation(), actualCoworking.get(0).getLocation());
-            assertEquals(expectedCoworking.getReviewsCount(), actualCoworking.get(0).getReviewsCount());
-            assertEquals(expectedCoworking.getCity(), actualCoworking.get(0).getCity());
-            assertEquals(expectedCoworking.getDayPrice(), actualCoworking.get(0).getDayPrice());
-            assertEquals(expectedCoworking.getWeekPrice(), actualCoworking.get(0).getWeekPrice());
-            assertEquals(expectedCoworking.getMonthPrice(), actualCoworking.get(0).getMonthPrice());
-            assertEquals(expectedCoworking.getRating(), actualCoworking.get(0).getRating());
-            assertEquals(expectedCoworking.getOpeningHours(), actualCoworking.get(0).getOpeningHours());
-            assertEquals(expectedCoworking.isContainsDesk(), actualCoworking.get(0).isContainsDesk());
-            assertEquals(expectedCoworking.isContainsOffice(), actualCoworking.get(0).isContainsOffice());
-            assertEquals(expectedCoworking.isContainsMeetingRoom(), actualCoworking.get(0).isContainsMeetingRoom());
-        }
+        List<String> equipment = new ArrayList<>();
+        equipment.add("hasScanner");
+        coworkingFilter.setEquipment(equipment);
 
-        @Test
-        public void testGetByCity () {
+        List<String> filter = new ArrayList<>();
+        filter.add("containsdesk");
+        coworkingFilter.setFilters(filter);
 
-            List<Coworking> actualCoworking = coworkingDao.getByCity("Kiev");
+        Map<String, RatingOrder> ratingOrder = new HashMap<>();
+        ratingOrder.put("ratingOrder", RatingOrder.HIGH_TO_LOW);
+        coworkingFilter.setRating(ratingOrder);
 
-            assertEquals(1, actualCoworking.size());
-            assertEquals(expectedCoworking.getId(), actualCoworking.get(0).getId());
-            assertEquals(expectedCoworking.getName(), actualCoworking.get(0).getName());
-            assertEquals(expectedCoworking.getMainImage(), actualCoworking.get(0).getMainImage());
-            assertEquals(expectedCoworking.getOverview(), actualCoworking.get(0).getOverview());
-            assertEquals(expectedCoworking.getLocation(), actualCoworking.get(0).getLocation());
-            assertEquals(expectedCoworking.getReviewsCount(), actualCoworking.get(0).getReviewsCount());
-            assertEquals(expectedCoworking.getCity(), actualCoworking.get(0).getCity());
-            assertEquals(expectedCoworking.getDayPrice(), actualCoworking.get(0).getDayPrice());
-            assertEquals(expectedCoworking.getWeekPrice(), actualCoworking.get(0).getWeekPrice());
-            assertEquals(expectedCoworking.getMonthPrice(), actualCoworking.get(0).getMonthPrice());
-            assertEquals(expectedCoworking.getRating(), actualCoworking.get(0).getRating());
-            assertEquals(expectedCoworking.getOpeningHours(), actualCoworking.get(0).getOpeningHours());
-            assertEquals(expectedCoworking.isContainsDesk(), actualCoworking.get(0).isContainsDesk());
-            assertEquals(expectedCoworking.isContainsOffice(), actualCoworking.get(0).isContainsOffice());
-            assertEquals(expectedCoworking.isContainsMeetingRoom(), actualCoworking.get(0).isContainsMeetingRoom());
+        List<Coworking> factCoworking = coworkingDao.getFiltered(coworkingFilter);
 
-            actualCoworking = coworkingDao.getByCity("Lviv");
-            assertEquals(2, actualCoworking.size());
-        }
+        assertEquals(2, factCoworking.size());
+        assertEquals(5, factCoworking.get(0).getId()); //todo
+        assertEquals(4, factCoworking.get(1).getId());
     }
+
+    @Test
+    public void testSearchByName() {
+
+        List<Coworking> actualCoworking = coworkingDao.searchByName("test");
+
+        assertEquals(1, actualCoworking.size());
+        assertEquals(expectedCoworking.getId(), actualCoworking.get(0).getId());
+        assertEquals(expectedCoworking.getName(), actualCoworking.get(0).getName());
+        assertEquals(expectedCoworking.getMainImage(), actualCoworking.get(0).getMainImage());
+        assertEquals(expectedCoworking.getOverview(), actualCoworking.get(0).getOverview());
+        assertEquals(expectedCoworking.getLocation(), actualCoworking.get(0).getLocation());
+        assertEquals(expectedCoworking.getReviewsCount(), actualCoworking.get(0).getReviewsCount());
+        assertEquals(expectedCoworking.getCity(), actualCoworking.get(0).getCity());
+        assertEquals(expectedCoworking.getDayPrice(), actualCoworking.get(0).getDayPrice());
+        assertEquals(expectedCoworking.getWeekPrice(), actualCoworking.get(0).getWeekPrice());
+        assertEquals(expectedCoworking.getMonthPrice(), actualCoworking.get(0).getMonthPrice());
+        assertEquals(expectedCoworking.getRating(), actualCoworking.get(0).getRating());
+        assertEquals(expectedCoworking.getOpeningHours(), actualCoworking.get(0).getOpeningHours());
+        assertEquals(expectedCoworking.isContainsDesk(), actualCoworking.get(0).isContainsDesk());
+        assertEquals(expectedCoworking.isContainsOffice(), actualCoworking.get(0).isContainsOffice());
+        assertEquals(expectedCoworking.isContainsMeetingRoom(), actualCoworking.get(0).isContainsMeetingRoom());
+    }
+
+    @Test
+    public void testGetByCity() {
+
+        List<Coworking> actualCoworking = coworkingDao.getByCity("Kiev");
+
+        assertEquals(1, actualCoworking.size());
+        assertEquals(expectedCoworking.getId(), actualCoworking.get(0).getId());
+        assertEquals(expectedCoworking.getName(), actualCoworking.get(0).getName());
+        assertEquals(expectedCoworking.getMainImage(), actualCoworking.get(0).getMainImage());
+        assertEquals(expectedCoworking.getOverview(), actualCoworking.get(0).getOverview());
+        assertEquals(expectedCoworking.getLocation(), actualCoworking.get(0).getLocation());
+        assertEquals(expectedCoworking.getReviewsCount(), actualCoworking.get(0).getReviewsCount());
+        assertEquals(expectedCoworking.getCity(), actualCoworking.get(0).getCity());
+        assertEquals(expectedCoworking.getDayPrice(), actualCoworking.get(0).getDayPrice());
+        assertEquals(expectedCoworking.getWeekPrice(), actualCoworking.get(0).getWeekPrice());
+        assertEquals(expectedCoworking.getMonthPrice(), actualCoworking.get(0).getMonthPrice());
+        assertEquals(expectedCoworking.getRating(), actualCoworking.get(0).getRating());
+        assertEquals(expectedCoworking.getOpeningHours(), actualCoworking.get(0).getOpeningHours());
+        assertEquals(expectedCoworking.isContainsDesk(), actualCoworking.get(0).isContainsDesk());
+        assertEquals(expectedCoworking.isContainsOffice(), actualCoworking.get(0).isContainsOffice());
+        assertEquals(expectedCoworking.isContainsMeetingRoom(), actualCoworking.get(0).isContainsMeetingRoom());
+
+        actualCoworking = coworkingDao.getByCity("Lviv");
+        assertEquals(4, actualCoworking.size());
+    }
+}
