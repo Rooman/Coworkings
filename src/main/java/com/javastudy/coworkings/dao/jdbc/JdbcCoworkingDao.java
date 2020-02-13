@@ -4,6 +4,7 @@ import com.javastudy.coworkings.dao.CoworkingDao;
 import com.javastudy.coworkings.dao.jdbc.mapper.CoworkingRowMapper;
 import com.javastudy.coworkings.entity.Coworking;
 import com.javastudy.coworkings.entity.CoworkingFilter;
+import com.javastudy.coworkings.entity.RatingOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class JdbcCoworkingDao implements CoworkingDao {
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -33,6 +35,10 @@ public class JdbcCoworkingDao implements CoworkingDao {
     private static final String SEARCH_COWORKINGS_BY_NAME = "SELECT id, name, mainimage, overview," +
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
             "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE lower(name) like lower(?);";
+
+    private static String get_filtered_coworkings = "SELECT id, name, mainimage, overview," +
+            "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
+            "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE lower(city) like lower(?)";
 
     private static final CoworkingRowMapper COWORKING_ROW_MAPPER = new CoworkingRowMapper();
     private DataSource dataSource;
@@ -145,20 +151,69 @@ public class JdbcCoworkingDao implements CoworkingDao {
         }
     }
 
-    public List<Coworking> getFiltered(CoworkingFilter filters){
+    public List<Coworking> getFiltered(CoworkingFilter filters) {
 
-        String GET_FILTERED_COWORKINGS = "SELECT id, name, mainimage, overview," +
-                "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
-                "containsdesk, containsoffice, containsmeetingroom FROM Coworkings WHERE lower(city) like lower(?)";
-
-        for (String filter: filters.getFilters()) {
-            String result = " AND " + filter + " = true";
-            GET_FILTERED_COWORKINGS += result;
+        if (filters.getFilters() != null) {
+            for (String filter : filters.getFilters()) {
+                String result = " AND " + filter + " = true";
+                get_filtered_coworkings += result;
+            }
         }
-        GET_FILTERED_COWORKINGS += ";";
+
+        if (filters.getEquipment() != null) {
+            for (String equipment : filters.getEquipment()) {
+                String result = " AND " + equipment + " = true";
+                get_filtered_coworkings += result;
+            }
+        }
+
+        if (filters.getRating() != null) {
+            Map<String, RatingOrder> rating = filters.getRating();
+            RatingOrder ratingOrder = rating.get("ratingOrder");
+            if (ratingOrder.equals(RatingOrder.HIGH_TO_LOW)) {
+                get_filtered_coworkings += " ORDER BY rating desc";
+            } else {
+                get_filtered_coworkings += " order by rating asc";
+            }
+        }
+
+        if (filters.getPrice() != null) {
+            int count = 0;
+            for (String price : filters.getPrice()) {
+                String result;
+                if (count == 0) {
+                    result = " AND (";
+                } else {
+                    result = " OR ";
+                }
+
+                String minPrice;
+                String maxPrice = "";
+                if (price.startsWith("above")) {
+                    String[] allPrices = price.split("above");
+                    minPrice = allPrices[1];
+                } else {
+                    String[] allPrices = price.split("-");
+                    minPrice = allPrices[0];
+                    maxPrice = allPrices[1];
+                }
+                if (!minPrice.equals("") && !maxPrice.equals("")) {
+                    result += "(dayprice >= " + minPrice + " AND dayprice < " + maxPrice + ")";
+                } else if (!minPrice.equals("")) {
+                    result += "dayprice >= " + minPrice;
+                } else if (!maxPrice.equals("")) {
+                    result += " dayprice < " + maxPrice;
+                }
+                get_filtered_coworkings += result;
+                count++;
+            }
+            get_filtered_coworkings += ")";
+        }
+
+        get_filtered_coworkings += ";";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(GET_FILTERED_COWORKINGS)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(get_filtered_coworkings)) {
             String city = filters.getCity();
             preparedStatement.setString(1, city);
 
@@ -178,7 +233,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
                 return coworkings;
             }
         } catch (SQLException e) {
-            logger.error("SQL Failed: {}", GET_FILTERED_COWORKINGS);
+            logger.error("SQL Failed: {}", get_filtered_coworkings);
             throw new RuntimeException("Connection to database is not available . It is not possible to search coworkings", e);
         }
     }
