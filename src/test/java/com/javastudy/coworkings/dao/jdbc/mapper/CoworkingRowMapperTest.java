@@ -31,8 +31,15 @@ public class CoworkingRowMapperTest {
         when(mockResultSet.getDouble("rating")).thenReturn(1D);
         when(mockResultSet.getString("openinghours")).thenReturn("openinghours");
         when(mockResultSet.getBoolean("containsdesk")).thenReturn(true);
-        when(mockResultSet.getBoolean("containsoffice")).thenReturn(false);
+        when(mockResultSet.getBoolean("containsoffice")).thenReturn(true);
         when(mockResultSet.getBoolean("containsmeetingroom")).thenReturn(true);
+        when(mockResultSet.getBoolean("hassinglemonitors")).thenReturn(true);
+        when(mockResultSet.getBoolean("hasdualmonitors")).thenReturn(true);
+        when(mockResultSet.getBoolean("hasvideorec")).thenReturn(true);
+        when(mockResultSet.getBoolean("hasprinter")).thenReturn(true);
+        when(mockResultSet.getBoolean("hasscanner")).thenReturn(true);
+        when(mockResultSet.getBoolean("hasprojector")).thenReturn(true);
+        when(mockResultSet.getBoolean("hasmicrophone")).thenReturn(true);
 
         Coworking actual = coworkingRowMapper.rowMap(mockResultSet);
 
@@ -50,7 +57,14 @@ public class CoworkingRowMapperTest {
         assertEquals(1D, actual.getRating(), 0);
         assertEquals("openinghours", actual.getOpeningHours());
         assertTrue(actual.isContainsDesk());
-        assertFalse(actual.isContainsOffice());
+        assertTrue(actual.isContainsOffice());
         assertTrue(actual.isContainsMeetingRoom());
+        assertTrue(actual.isHasSingleMonitors());
+        assertTrue(actual.isHasDualMonitors());
+        assertTrue(actual.isHasVideoRec());
+        assertTrue(actual.isHasPrinter());
+        assertTrue(actual.isHasScanner());
+        assertTrue(actual.isHasProjector());
+        assertTrue(actual.isHasMicrophone());
     }
 }

@@ -13,11 +13,11 @@
                 your project,
                 discover work spaces that can inspire your employees to work fruitfully.
             </div>
-            <form class="search-form">
+            <form class="search-form" action="/home" method="get">
                 <fieldset class="search-fieldset">
                     <label class="search-label">Find workspace</label>
-                    <input type="search" class="search-input" placeholder="&#xf002; Type name">
-                    <button class="button search-button" type="button">Search</button>
+                    <input name="searchRequest" type="search" class="search-input" placeholder="&#xf002; Type name">
+                    <button class="button search-button" type="submit">Search</button>
                 </fieldset>
             </form>
 
@@ -60,7 +60,7 @@
             <div class="top-coworkings-items">
                 <!--/*@thymesVar id="coworking" type="com.javastudy.coworkings.entity.Coworking"*/-->
                 <div class="row justify-content-center">
-                    <div class="col-3 top-coworkings-item mb-2" th:each="coworking : ${coworkings}">
+                    <div class="top-coworkings-item mb-2" th:each="coworking : ${coworkings}">
                         <div class="top-coworking-img-item">
                             <a th:href="@{../coworking(id=${coworking.getId()})}">
                                 <div class="top-coworkings-price" th:text="'UAH ' + ${coworking.getDayPrice()}+'/day'">UAH

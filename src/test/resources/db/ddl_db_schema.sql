@@ -38,5 +38,12 @@ create table coworkings
     openinghours text not null,
     containsdesk boolean not null,
     containsoffice boolean not null,
-    containsmeetingroom boolean not null
+    containsmeetingroom boolean not null,
+    hasSingleMonitors boolean not null,
+    hasDualMonitors boolean not null,
+    hasVideoRec boolean not null,
+    hasPrinter boolean not null,
+    hasScanner boolean not null,
+    hasProjector boolean not null,
+    hasMicrophone boolean not null
 );

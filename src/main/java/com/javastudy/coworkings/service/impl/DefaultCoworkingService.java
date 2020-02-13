@@ -2,6 +2,7 @@ package com.javastudy.coworkings.service.impl;
 
 import com.javastudy.coworkings.dao.CoworkingDao;
 import com.javastudy.coworkings.entity.Coworking;
+import com.javastudy.coworkings.entity.CoworkingFilter;
 import com.javastudy.coworkings.service.CoworkingService;
 
 import java.util.List;
@@ -33,6 +34,11 @@ public class DefaultCoworkingService implements CoworkingService {
     @Override
     public List<Coworking> searchByName(String name) {
         return coworkingDao.searchByName(name);
+    }
+
+    @Override
+    public List<Coworking> getFiltered(CoworkingFilter filters) {
+        return coworkingDao.getFiltered(filters);
     }
 }
 
