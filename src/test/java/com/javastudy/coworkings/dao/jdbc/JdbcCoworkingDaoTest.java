@@ -130,38 +130,6 @@ public class JdbcCoworkingDaoTest {
     }
 
     @Test
-    public void testGetFilteredRatingOnlyDesc() {
-        CoworkingFilter coworkingFilter = new CoworkingFilter();
-        Map<String, RatingOrder> ratingOrder = new HashMap<>();
-        ratingOrder.put("ratingOrder", RatingOrder.HIGH_TO_LOW);
-        coworkingFilter.setCity("Lviv");
-        coworkingFilter.setRating(ratingOrder);
-
-        List<Coworking> factCoworking = coworkingDao.getFiltered(coworkingFilter);
-        assertEquals(4, factCoworking.size());
-        assertEquals(3, factCoworking.get(0).getId());
-        assertEquals(5, factCoworking.get(1).getId());
-        assertEquals(4, factCoworking.get(2).getId());
-        assertEquals(2, factCoworking.get(3).getId());
-    }
-
-    @Test
-    public void testGetFilteredRatingOnlyAsc() {
-        CoworkingFilter coworkingFilter = new CoworkingFilter();
-        Map<String, RatingOrder> ratingOrder = new HashMap<>();
-        ratingOrder.put("ratingOrder", RatingOrder.LOW_TO_HIGH);
-        coworkingFilter.setCity("Lviv");
-        coworkingFilter.setRating(ratingOrder);
-
-        List<Coworking> factCoworking = coworkingDao.getFiltered(coworkingFilter);
-        assertEquals(4, factCoworking.size());
-        assertEquals(2, factCoworking.get(0).getId());
-        assertEquals(4, factCoworking.get(1).getId());
-        assertEquals(5, factCoworking.get(2).getId());
-        assertEquals(3, factCoworking.get(3).getId());
-    }
-
-    @Test
     public void testGetFilteredPriceOnly100200() {
         CoworkingFilter coworkingFilter = new CoworkingFilter();
         List<String> price = new ArrayList<>();
@@ -219,36 +187,6 @@ public class JdbcCoworkingDaoTest {
         /*assertEquals(2, factCoworking.get(0).getId()); //todo
         assertEquals(4, factCoworking.get(1).getId());
         assertEquals(5, factCoworking.get(2).getId());*/
-    }
-
-    @Test
-    public void testGetFilteredSomeFilters() {
-        CoworkingFilter coworkingFilter = new CoworkingFilter();
-        List<String> price = new ArrayList<>();
-        price.add("100-200");
-        price.add("200-300");
-        price.add("above300");
-        coworkingFilter.setPrice(price);
-
-        coworkingFilter.setCity("Lviv");
-
-        List<String> equipment = new ArrayList<>();
-        equipment.add("hasScanner");
-        coworkingFilter.setEquipment(equipment);
-
-        List<String> filter = new ArrayList<>();
-        filter.add("containsdesk");
-        coworkingFilter.setFilters(filter);
-
-        Map<String, RatingOrder> ratingOrder = new HashMap<>();
-        ratingOrder.put("ratingOrder", RatingOrder.HIGH_TO_LOW);
-        coworkingFilter.setRating(ratingOrder);
-
-        List<Coworking> factCoworking = coworkingDao.getFiltered(coworkingFilter);
-
-        assertEquals(2, factCoworking.size());
-        assertEquals(5, factCoworking.get(0).getId()); //todo
-        assertEquals(4, factCoworking.get(1).getId());
     }
 
     @Test
