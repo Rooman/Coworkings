@@ -2,6 +2,7 @@ package com.javastudy.coworkings.web.servlet;
 
 import com.javastudy.coworkings.ServiceLocator;
 import com.javastudy.coworkings.entity.*;
+import com.javastudy.coworkings.service.CoworkingService;
 import com.javastudy.coworkings.service.impl.DefaultCoworkingService;
 import com.javastudy.coworkings.web.templater.ThymeleafTemplater;
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 public class CityPageServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    private DefaultCoworkingService coworkingService = ServiceLocator.getService(DefaultCoworkingService.class);
+    private CoworkingService coworkingService = ServiceLocator.getService(CoworkingService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
@@ -71,11 +72,18 @@ public class CityPageServlet extends HttpServlet {
         coworkingFilter.setPrice(price);
 
 
-        Map<String, RatingOrder> rating = new HashMap<>();
+        //Map<String, RatingOrder> rating = new HashMap<>();
         String ratingOrder = req.getParameter("ratingOrder");
-        parameters.put("ratingOrder", ratingOrder);
-        rating.put("ratingOrder", RatingOrder.getByName(ratingOrder));
-        coworkingFilter.setRating(rating);
+
+        //rating.put("ratingOrder", RatingOrder.getByName(ratingOrder));
+        if (ratingOrder != null) {
+            parameters.put("ratingOrder", ratingOrder);
+            coworkingFilter.setRatingOrder(RatingOrder.getByName(ratingOrder));
+        } else {
+            parameters.put("ratingOrder", "lowToHigh");
+            coworkingFilter.setRatingOrder(RatingOrder.LOW_TO_HIGH);
+        }
+
 
         List<String> equipment = new ArrayList<>();
         boolean singleMonitors = Boolean.parseBoolean(req.getParameter("singleMonitors"));

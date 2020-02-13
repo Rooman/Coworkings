@@ -49,7 +49,7 @@ input[type="radio"] {
 }
 
 /* Customize the label (the container) */
-.container {
+.container-checkbox {
   display: block;
   position: relative;
   padding-left: 35px;
@@ -64,7 +64,7 @@ input[type="radio"] {
 }
 
 /* Hide the browser's default checkbox */
-.container input {
+.container-checkbox input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -84,13 +84,13 @@ input[type="radio"] {
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.container-checkbox:hover input ~ .checkmark {
   background-color: #ccc;
   opacity: 1;
 }
 
 /* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.container-checkbox input:checked ~ .checkmark {
   background-color: #EB5757;
 }
 
@@ -102,12 +102,12 @@ input[type="radio"] {
 }
 
 /* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
+.container-checkbox input:checked ~ .checkmark:after {
   display: block;
 }
 
 /* Style the checkmark/indicator */
-.container .checkmark:after {
+.container-checkbox .checkmark:after {
   left: 9px;
   top: 5px;
   width: 5px;

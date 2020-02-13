@@ -22,23 +22,23 @@ public class JdbcCoworkingDao implements CoworkingDao {
 
     private static final String GET_COWORKING_BY_ID = "SELECT id, name, mainimage, overview," +
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
-            "containsdesk, containsoffice, containsmeetingroom, hasSingleMonitors, hasDualMonitors, " +
-            "hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone FROM Coworkings WHERE id=?;";
+            "containsdesk, containsoffice, containsmeetingroom, hassinglemonitors, hasdualmonitors, " +
+            "hasvideorec, hasprinter, hasscanner, hasprojector, hasmicrophone FROM Coworkings WHERE id=?;";
 
     private static final String GET_TOP_EIGHT = "SELECT id, name, mainimage, overview, location, reviewscount, " +
             "city, dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, " +
-            "containsmeetingroom, hasSingleMonitors, hasDualMonitors, " +
-            "hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone FROM coworkings ORDER BY rating LIMIT ?;";
+            "containsmeetingroom, hassinglemonitors, hasdualmonitors, " +
+            "hasvideorec, hasprinter, hasscanner, hasprojector, hasmicrophone FROM coworkings ORDER BY rating LIMIT ?;";
 
     private static final String GET_BY_CITY = "SELECT id, name, mainimage, overview, location, reviewscount, " +
             "city, dayprice, weekprice, monthprice, rating, openinghours, containsdesk, containsoffice, " +
-            "containsmeetingroom, hasSingleMonitors, hasDualMonitors, " +
-            "hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone FROM coworkings WHERE city=?;";
+            "containsmeetingroom, hassinglemonitors, hasdualmonitors, " +
+            "hasvideorec, hasprinter, hasscanner, hasprojector, hasmicrophone FROM coworkings WHERE city=?;";
 
     private static final String SEARCH_COWORKINGS_BY_NAME = "SELECT id, name, mainimage, overview, " +
             "location, reviewscount, city, dayprice, weekprice, monthprice, rating, openinghours, " +
-            "containsdesk, containsoffice, containsmeetingroom, hasSingleMonitors, hasDualMonitors, " +
-            "hasVideoRec, hasPrinter, hasScanner, hasProjector, hasMicrophone FROM Coworkings WHERE lower(name) like lower(?);";
+            "containsdesk, containsoffice, containsmeetingroom, hassinglemonitors, hasdualmonitors, " +
+            "hasvideorec, hasprinter, hasscanner, hasprojector, hasmicrophone FROM Coworkings WHERE lower(name) like lower(?);";
 
     private static final CoworkingRowMapper COWORKING_ROW_MAPPER = new CoworkingRowMapper();
     private DataSource dataSource;
@@ -172,6 +172,7 @@ public class JdbcCoworkingDao implements CoworkingDao {
         }
 
         if (filters.getPrice() != null) {
+            int kostylCheck = baseRequestString.length();
             int count = 0;
             for (String price : filters.getPrice()) {
                 String result;
@@ -201,12 +202,15 @@ public class JdbcCoworkingDao implements CoworkingDao {
                 baseRequestString += result;
                 count++;
             }
-            baseRequestString += ")";
+            if (kostylCheck < baseRequestString.length()) {
+                baseRequestString += ")";
+            }
         }
 
-        if (filters.getRating() != null) {
-            Map<String, RatingOrder> rating = filters.getRating();
-            RatingOrder ratingOrder = rating.get("ratingOrder");
+        if (filters.getRatingOrder() != null) {
+            /*Map<String, RatingOrder> rating = filters.getRating();
+            RatingOrder ratingOrder = rating.get("ratingOrder");*/
+            RatingOrder ratingOrder = filters.getRatingOrder();
             if (ratingOrder.equals(RatingOrder.HIGH_TO_LOW)) {
                 baseRequestString += " ORDER BY rating desc";
             } else {

@@ -9,7 +9,17 @@ public class CoworkingFilter {
     private String city;
     private List<String> filters;
     private List<String> price;
-    private Map<String, RatingOrder> rating;
+
+    public RatingOrder getRatingOrder() {
+        return ratingOrder;
+    }
+
+    public void setRatingOrder(RatingOrder ratingOrder) {
+        this.ratingOrder = ratingOrder;
+    }
+
+    private RatingOrder ratingOrder;
+    //private Map<String, RatingOrder> rating;
     private List<String> equipment;
 
     public String getCity() {
@@ -36,13 +46,13 @@ public class CoworkingFilter {
         this.price = price;
     }
 
-    public Map<String, RatingOrder> getRating() {
+    /*public Map<String, RatingOrder> getRating() {
         return rating;
     }
 
     public void setRating(Map<String, RatingOrder> rating) {
         this.rating = rating;
-    }
+    }*/
 
     public List<String> getEquipment() {
         return equipment;
