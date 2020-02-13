@@ -16,17 +16,17 @@
                 <form action="/city" method="GET">
                     <div>
                         <p class="filter-title mb-3">Filters</p>
-                        <label class="container-checkbox">
+                        <label class="container container-label">
                             <p class="filter-text">Desk</p>
                             <input type="checkbox" value="true" name="desk" th:checked="${hasDesk}">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container-checkbox">
+                        <label class="container container-label">
                             <p class="filter-text">Private Office</p>
                             <input type="checkbox" value="true" name="privateOffice" th:checked="${hasPrivateOffice}">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container-checkbox">
+                        <label class="container container-label">
                             <p class="filter-text">Meeting Room</p>
                             <input type="checkbox" value="true" name="meetingRoom" th:checked="${hasMeetingRoom}">
                             <span class="checkmark"></span>
@@ -35,17 +35,17 @@
                     <hr>
                     <div>
                         <p class="filter-title mb-3">Price</p>
-                        <label class="container-checkbox">
+                        <label class="container container-label">
                             <p class="filter-text">100-200</p>
                             <input type="checkbox" value="true" name="below200" th:checked="${below200}">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container-checkbox">
+                        <label class="container container-label">
                             <p class="filter-text">200-300</p>
                             <input type="checkbox" value="true" name="below300" th:checked="${below300}">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container-checkbox">
+                        <label class="container container-label">
                             <p class="filter-text">300+</p>
                             <input type="checkbox" value="true" name="above300" th:checked="${above300}">
                             <span class="checkmark"></span>
@@ -54,12 +54,12 @@
                     <hr>
                     <div>
                         <p class="filter-title mb-3">Rating</p>
-                        <label class="container-checkbox form-check">
+                        <label class="container container-label">
                             <p class="filter-text">From high to low</p>
                             <input type="radio" value="highToLow" name="ratingOrder">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container-checkbox form-check">
+                        <label class="container container-label">
                             <p class="filter-text">From low to high</p>
                             <input type="radio" value="lowToHigh" name="ratingOrder" checked>
                             <span class="checkmark"></span>
@@ -68,37 +68,37 @@
                     <hr>
                     <div>
                         <p class="filter-title mb-3">Equipment</p>
-                        <label class="container-checkbox">
+                        <label class="container container-label">
                             <p class="filter-text">Single Monitors</p>
                             <input type="checkbox" value="true" name="singleMonitors" th:checked="${hasSingleMonitors}">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container-checkbox">
+                        <label class="container container-label">
                             <p class="filter-text">Dual Monitors</p>
                             <input type="checkbox" value="true" name="dualMonitors" th:checked="${hasDualMonitors}">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container-checkbox">
+                        <label class="container container-label">
                             <p class="filter-text">Video recording</p>
                             <input type="checkbox" value="true" name="videoRec" th:checked="${hasVideoRec}">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container-checkbox">
+                        <label class="container container-label">
                             <p class="filter-text">Printer</p>
                             <input type="checkbox" value="true" name="printer" th:checked="${hasPrinter}">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container-checkbox">
+                        <label class="container container-label">
                             <p class="filter-text">Scanner</p>
                             <input type="checkbox" value="true" name="scanner" th:checked="${hasScanner}">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container-checkbox">
+                        <label class="container container-label">
                             <p class="filter-text">Projector</p>
                             <input type="checkbox" value="true" name="projector" th:checked="${hasProjector}">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container-checkbox">
+                        <label class="container container-label">
                             <p class="filter-text">Microphone</p>
                             <input type="checkbox" value="true" name="microphone" th:checked="${hasMicrophone}">
                             <span class="checkmark"></span>
@@ -119,12 +119,14 @@
                     <div class="row">
                         <div class="col-6 top-coworkings-item mb-2" th:each="coworking : ${coworkings}">
                             <div class="top-coworking-img-item">
-                                <div class="top-coworkings-price" th:text="'UAH ' + ${coworking.getDayPrice()}+'/day'">
-                                    UAH 150/day
-                                </div>
-                                <img class="top-coworkings-img" src="/assets/img/coworking-img.png"
-                                     th:src="${coworking.getMainImage() != null ? coworking.getMainImage() : '/assets/img/coworking-img.png' }"
-                                     alt="Пiздець всiм сподiванням :(">
+                                <a th:href="@{../coworking(id=${coworking.getId()})}">
+                                    <div class="top-coworkings-price" th:text="'UAH ' + ${coworking.getDayPrice()}+'/day'">
+                                        UAH 150/day
+                                    </div>
+                                    <img class="top-coworkings-img" src="/assets/img/coworking-img.png"
+                                         th:src="${coworking.getMainImage() != null ? coworking.getMainImage() : '/assets/img/coworking-img.png' }"
+                                         alt="Пiздець всiм сподiванням :(">
+                                </a>
                             </div>
                             <div class="top-coworkings-overview">
                                 <p class="top-coworkings-name" th:text="${coworking.getName()}">ronda coworking-<br>

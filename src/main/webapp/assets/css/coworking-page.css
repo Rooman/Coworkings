@@ -1,0 +1,139 @@
+.active-tab {
+    border-bottom: 5px;
+    border-color: #EB5757;
+    opacity: 0.8;
+    border-radius: 0px 0px 0px 10px;
+}
+
+.btn-book {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    text-transform: capitalize;
+    color: #FFFFFF;
+
+    background: #EB5757;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.card-booking {
+    border: 1px solid;
+    border-color: rgba(0,0,0, 0.2);
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.card-hours-text {
+    opacity: 0.6;
+}
+
+.card-opening-hours {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+}
+
+.card-price-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 48px;
+    color: #EB5757;
+}
+
+.card-schedule-header {
+    background: rgba(196, 196, 196, 0.6);
+    border-radius: 10px 10px 0px 0px;
+}
+.card-title-black {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+}
+
+.card-title-red {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 26px;
+    color: #EB5757;
+}
+
+
+.coworking-img {
+    margin-top: 100px;
+    margin-bottom: 70px;
+}
+
+.coworking-img img{
+    height: 400px;
+}
+
+.coworking-nav-border {
+    height: 63px;
+    border: 1px solid;
+    border-color: rgba(0,0,0, 0.2);
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.coworking-nav-item {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #000000;
+    opacity: 0.6;
+}
+
+.coworking-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 54px;
+    color: #EB5757;
+}
+
+
+.coworking-sub-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #000000;
+    opacity: 0.6;
+}
+
+.coworking-tabs-content {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    padding-right: 111px;
+    margin-top: 50px;
+}
+
+.non-bold {
+    font-weight: normal;
+}
+
+.margin-btm {
+    margin-bottom: 40px;
+}
+
+.red-colored {
+    color: #EB5757;
+}
+
+.schedule-card {
+    border-radius: 10px;
+}

@@ -16,13 +16,13 @@
                     </a>
                     <div class="dropdown-menu dropdown-wrapper transparent" aria-labelledby="navbarDropdown">
                         <div class="dropdown-menu-item dropdown-city"><a class="nav-link link-dropdown"
-                                                                         href="#">Kyiv</a>
+                                                                         th:href="@{../city?cityName=Kyiv}">Kyiv</a>
                         </div>
                         <div class="dropdown-menu-item dropdown-city"><a class="nav-link link-dropdown"
-                                                                         href="#">Dnipro</a>
+                                                                         th:href="@{../city?cityName=Dnipro}">Dnipro</a>
                         </div>
                         <div class="dropdown-menu-item dropdown-city"><a class="nav-link link-dropdown"
-                                                                         href="#">Lviv</a>
+                                                                         th:href="@{../city?cityName=Lviv}">Lviv</a>
                         </div>
                     </div>
                 </li>
@@ -32,12 +32,12 @@
                 <li class="nav-item menu-item" th:if="${user} == null">
                     <a class="nav-link link-menu" href="/login" tabindex="-1" aria-disabled="true">login</a>
                 </li>
+                <div class="sign-up">
+                    <a class="btn sign-up-button" th:if="${user} != null"
+                       th:text="'Hello, ' + ${user.getFullName()}"></a>
+                    <a class="btn sign-up-button" th:if="${user} == null">Hello, Guest</a>
+                </div>
             </ul>
-            <!--  TODO: This should be link <a> to the page, not a button   -->
-            <div class="sign-up">
-                <a class="btn sign-up-button" type="button" th:if="${user} != null" th:text="'Hello, ' + ${user.getFullName()}"></a>
-                <a class="btn sign-up-button" type="button" th:if="${user} == null">Hello, Guest</a>
-            </div>
         </div>
     </nav>
 </nav>

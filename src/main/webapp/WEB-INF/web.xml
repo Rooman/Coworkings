@@ -23,6 +23,11 @@
         <servlet-class>com.javastudy.coworkings.web.servlet.CityPageServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>CoworkingPageServlet</servlet-name>
+        <servlet-class>com.javastudy.coworkings.web.servlet.CoworkingPageServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -45,6 +50,11 @@
         <url-pattern>/city</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>CoworkingPageServlet</servlet-name>
+        <url-pattern>/coworking</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>GuestRoleFilter</filter-name>
         <filter-class>com.javastudy.coworkings.web.filter.GuestSecurityFilter</filter-class>
@@ -62,6 +72,7 @@
     <filter-mapping>
         <filter-name>UserRoleFilter</filter-name>
         <url-pattern>/home</url-pattern>
+        <url-pattern>/city</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 </web-app>
