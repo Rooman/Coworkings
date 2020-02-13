@@ -53,9 +53,6 @@
                     </a>
                 </div>
             </div>
-            <!--<img class="cities-item" src="/assets/img/Kyiv.jpg" alt="">
-            <img class="cities-item" src="/assets/img/Dnipro.jpg" alt="">
-            <img class="cities-item" src="/assets/img/Lviv.jpg" alt="">-->
         </section>
 
         <section class="top-coworkings">
@@ -65,12 +62,14 @@
                 <div class="row justify-content-center">
                     <div class="col-3 top-coworkings-item mb-2" th:each="coworking : ${coworkings}">
                         <div class="top-coworking-img-item">
-                            <div class="top-coworkings-price" th:text="'UAH ' + ${coworking.getDayPrice()}+'/day'">UAH
-                                150/day
-                            </div>
-                            <img class="top-coworkings-img" src="/assets/img/coworking-img.png"
-                                 th:src="${coworking.getMainImage() != null ? coworking.getMainImage() : '/assets/img/coworking-img.png' }"
-                                 alt="Пiздець всiм сподiванням :(">
+                            <a th:href="@{../coworking(id=${coworking.getId()})}">
+                                <div class="top-coworkings-price" th:text="'UAH ' + ${coworking.getDayPrice()}+'/day'">UAH
+                                    150/day
+                                </div>
+                                <img class="top-coworkings-img" src="/assets/img/coworking-img.png"
+                                     th:src="${coworking.getMainImage() != null ? coworking.getMainImage() : '/assets/img/coworking-img.png' }"
+                                     alt="Пiздець всiм сподiванням :(">
+                            </a>
                         </div>
                         <div class="top-coworkings-overview">
                             <p class="top-coworkings-name" th:text="${coworking.getName()}">ronda coworking-<br>
