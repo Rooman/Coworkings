@@ -32,12 +32,11 @@
                 <li class="nav-item menu-item" th:if="${user} == null">
                     <a class="nav-link link-menu" href="/login" tabindex="-1" aria-disabled="true">login</a>
                 </li>
+                <li class="nav-item menu-item menu-last-element" th:if="${user} == null">
+                    <a class="btn sign-up-button" th:if="${user} != null" th:text="'Hello, ' + ${user.getFullName()}"></a>
+                    <a class="btn sign-up-button" th:if="${user} == null">Hello, Guest</a>
+                </li>
             </ul>
-            <!--  TODO: This should be link <a> to the page, not a button   -->
-            <div class="sign-up">
-                <a class="btn sign-up-button" type="button" th:if="${user} != null" th:text="'Hello, ' + ${user.getFullName()}"></a>
-                <a class="btn sign-up-button" type="button" th:if="${user} == null">Hello, Guest</a>
-            </div>
         </div>
     </nav>
 </nav>
