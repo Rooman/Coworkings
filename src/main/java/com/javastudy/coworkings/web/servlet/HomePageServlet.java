@@ -40,7 +40,7 @@ public class HomePageServlet extends HttpServlet {
         }
 
 
-        if (coworkingsSearched != null && coworkingsSearched.size() > 0) {
+        if (coworkingsSearched != null) {
             parameters.put("coworkings", coworkingsSearched);
             logger.debug("Coworkings {}", coworkingsSearched);
         } else {
