@@ -63,7 +63,7 @@
             <div class="top-coworkings-items">
                 <!--/*@thymesVar id="coworking" type="com.javastudy.coworkings.entity.Coworking"*/-->
                 <div class="row justify-content-center">
-                    <div class="col-3 top-coworkings-item mb-2" th:each="coworking : ${coworkings}">
+                    <div class="top-coworkings-item mb-2" th:each="coworking : ${coworkings}">
                         <div class="top-coworking-img-item">
                             <div class="top-coworkings-price" th:text="'UAH ' + ${coworking.getDayPrice()}+'/day'">UAH
                                 150/day
