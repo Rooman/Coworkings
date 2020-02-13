@@ -1,3 +1,10 @@
+.active-tab {
+    border-bottom: 5px;
+    border-color: #EB5757;
+    opacity: 0.8;
+    border-radius: 0px 0px 0px 10px;
+}
+
 .btn-book {
     font-style: normal;
     font-weight: bold;
@@ -11,13 +18,15 @@
     padding: 15px;
 }
 
-.card-hours-text {
-    opacity: 0.6;
+.card-booking {
+    border: 1px solid;
+    border-color: rgba(0,0,0, 0.2);
+    box-sizing: border-box;
+    border-radius: 10px;
 }
 
-.card-schedule-header {
-    background: rgba(196, 196, 196, 0.6);
-    border-radius: 10px 10px 0px 0px;
+.card-hours-text {
+    opacity: 0.6;
 }
 
 .card-opening-hours {
@@ -28,6 +37,18 @@
     color: #000000;
 }
 
+.card-price-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 48px;
+    color: #EB5757;
+}
+
+.card-schedule-header {
+    background: rgba(196, 196, 196, 0.6);
+    border-radius: 10px 10px 0px 0px;
+}
 .card-title-black {
     font-style: normal;
     font-weight: bold;
@@ -44,13 +65,6 @@
     color: #EB5757;
 }
 
-.card-price-title {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 48px;
-    color: #EB5757;
-}
 
 .coworking-img {
     margin-top: 100px;
@@ -58,7 +72,7 @@
 }
 
 .coworking-img img{
-    height: 300px;
+    height: 400px;
 }
 
 .coworking-nav-border {
@@ -98,6 +112,16 @@
     opacity: 0.6;
 }
 
+.coworking-tabs-content {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    padding-right: 111px;
+    margin-top: 50px;
+}
+
 .non-bold {
     font-weight: normal;
 }
@@ -108,23 +132,6 @@
 
 .red-colored {
     color: #EB5757;
-}
-
-.active-tab {
-    border-bottom: 5px;
-    border-color: #EB5757;
-    opacity: 0.8;
-    border-radius: 0px 0px 0px 10px;
-}
-
-.coworking-tabs-content {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 26px;
-    color: #000000;
-    padding-right: 111px;
-    margin-top: 50px;
 }
 
 .schedule-card {

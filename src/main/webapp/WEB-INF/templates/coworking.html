@@ -5,8 +5,8 @@
 <body>
     <div th:insert="~{fragments/navbar :: navigation}"></div>
     <div class="container">
-        <div class="row justify-content-center coworking-img">
-            <div class="col d-flex justify-content-start                                                                                                                                                                                                                                                        ">
+        <div class="row coworking-img">
+            <div class="col d-flex justify-content-center">
                 <img th:src="${coworking.getMainImage() != null ? coworking.getMainImage() : '/assets/img/coworking-img.png'}">
             </div>
         </div>
@@ -14,7 +14,10 @@
         <div class="row margin-btm">
             <div class="col-6">
                 <p class="coworking-title" th:text="${coworking.getName()}"></p>
-                <p class="coworking-sub-title" th:text="${'&#xf3c5; ' + coworking.getLocation()}"></p>
+                <p class="coworking-sub-title">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span th:text="${coworking.getLocation()}"></span>
+                </p>
             </div>
             <div class="col-4 text-center">
                 <p class="coworking-title" th:text="${coworking.getReviewsCount()}"></p>
@@ -28,35 +31,53 @@
             <div class="col-9">
                 <div class="row">
                     <nav class="col-12 coworking-nav-border">
-                        <div class="nav nav-tabs coworking-nav-tabs" id="nav-tab" role="tablist">
-                            <a class="nav-item coworking-nav-item nav-link active-tab" id="nav-overview-tab" data-toggle="tab"
+                        <div class="nav nav-tabs coworking-nav-tabs nav-justified" id="nav-tab" role="tablist">
+                            <a class="nav-item coworking-nav-item nav-link p-3 active" id="nav-overview-tab" data-toggle="tab"
                                href="#nav-overview" role="tab" aria-controls="nav-home" aria-selected="true">Overview</a>
-                            <a class="nav-item coworking-nav-item nav-link" id="nav-prices-tab" data-toggle="tab"
+                            <a class="nav-item coworking-nav-item nav-link p-3" id="nav-prices-tab" data-toggle="tab"
                                href="#nav-prices" role="tab" aria-controls="nav-profile" aria-selected="false">Prices</a>
-                            <a class="nav-item coworking-nav-item nav-link" id="nav-amenities-tab" data-toggle="tab"
+                            <a class="nav-item coworking-nav-item nav-link p-3" id="nav-amenities-tab" data-toggle="tab"
                                href="#nav-amenities" role="tab" aria-controls="nav-contact" aria-selected="false">Amenities</a>
-                            <a class="nav-item coworking-nav-item nav-link" id="nav-map-tab" data-toggle="tab"
+                            <a class="nav-item coworking-nav-item nav-link p-3" id="nav-map-tab" data-toggle="tab"
                                href="#nav-map" role="tab" aria-controls="nav-contact" aria-selected="false">Map</a>
-                            <a class="nav-item coworking-nav-item nav-link" id="nav-reviews-tab" data-toggle="tab"
+                            <a class="nav-item coworking-nav-item nav-link p-3" id="nav-reviews-tab" data-toggle="tab"
                                href="#nav-reviews" role="tab" aria-controls="nav-contact" aria-selected="false">Reviews</a>
                         </div>
                     </nav>
                 </div>
-                <div class="row mt-4 mb-5">
-                    <div class="tab-content coworking-tabs-content col-8" id="nav-tabContent">
+                <div class="row mt-3 mb-5">
+                    <div class="tab-content coworking-tabs-content col-8 mt-5" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-overview" role="tabpanel" aria-labelledby="nav-overview-tab">
                             <p th:text="${coworking.getOverview()}"></p>
                         </div>
                         <div class="tab-pane fade" id="nav-prices" role="tabpanel" aria-labelledby="nav-prices-tab">
-                            <p th:text="${'Price per day: ' + coworking.getDayPrice()}"></p>
-                            <p th:text="${'Price per week: ' + coworking.getWeekPrice()}"></p>
-                            <p th:text="${'Price per month: ' + coworking.getMonthPrice()}"></p>
+                            <p>
+                                <span class="card-title-red">Price per day: </span>
+                                <span th:text="${coworking.getDayPrice()}"></span>
+                            </p>
+                            <p>
+                                <span class="card-title-red">Price per week: </span>
+                                <span th:text="${coworking.getWeekPrice()}"></span>
+                            </p>
+                            <p>
+                                <span class="card-title-red">Price per month: </span>
+                                <span th:text="${coworking.getMonthPrice()}"></span>
+                            </p>
                         </div>
-                        <div class="tab-pane fade" id="nav-amenities" role="tabpanel" aria-labelledby="nav-amenities-tab">
-                            <!--(${user.isAdmin()} ? 'Administrator' : (${user.type} ?: 'Unknown'))
-                            -->
-                           <!-- <td th:text="${teacher.active} ? 'ACTIVE' : 'RETIRED'" />-->
-                            <td th:text="${coworking.containsDesk()} ? 'yes' : 'no' "></td>
+                        <div class="tab-pane fade pl-2" id="nav-amenities" role="tabpanel" aria-labelledby="nav-amenities-tab">
+                            <p>
+                                <span class="card-title-red">Has Desk: </span>
+                                <span th:text="${coworking.isContainsDesk()} ? 'Yes' : 'No' "></span>
+                            </p>
+                            <p>
+                                <span class="card-title-red">Has Meeting Room: </span>
+                                <span th:text="${coworking.isContainsMeetingRoom()} ? 'Yes' : 'No' "></span>
+                            </p>
+                            <p>
+                                <span class="card-title-red">Has Office: </span>
+                                <span th:text="${coworking.isContainsOffice()} ? 'Yes' : 'No' "></span>
+                            </p>
+
                         </div>
                         <div class="tab-pane fade" id="nav-map" role="tabpanel" aria-labelledby="nav-map-tab">
                             <p th:text="${'Address: ' + coworking.getLocation()}"></p>
@@ -87,7 +108,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <div class="card">
+                <div class="card card-booking">
                     <div class="card-body">
                         <h5 class="card-title-black pl-1">Starting at</h5>
                         <span class="card-title card-price-title pl-1" th:text="${coworking.getDayPrice()}">300.0</span>
